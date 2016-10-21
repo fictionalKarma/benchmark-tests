@@ -6,3 +6,5 @@ and dreams behind and march on in full power to the end of time ...
 or whatever. 
 
 I see sunshine .
+
+I learn to git gud.
