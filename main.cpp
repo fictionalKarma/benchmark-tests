@@ -12,5 +12,6 @@ int main() {
 	l.printBasicLog();
 	EventQueue someEventQueue;
 	someEventQueue.addEvent(e);
+	LogHandler someLogHandler;
 	return 0;
 }

@@ -13,9 +13,8 @@
 #include "log.hpp"
 #include "error.hpp"
 	class LogHandler {
-private:
-	LogHandler(){} // forces the class to be uninitialized
 public:
+	LogHandler(){} // forces the class to be uninitialized
 	/**
 		Retrieves a log from the logs file of the system
 
