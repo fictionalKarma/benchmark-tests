@@ -1,6 +1,5 @@
 #include <iostream>
-#include "formfeed.hpp"
-#include "event.hpp"
+#include "includes.hpp"
 
 int main() {
 	std::cout<<"Hello World !\n";
@@ -9,5 +8,10 @@ int main() {
 	
 	Event e ;
 	e.basicEventInformation();
+	Log l;
+	l.printBasicLog();
+	EventQueue someEventQueue;
+	someEventQueue.addEvent(e);
+	LogHandler someLogHandler;
 	return 0;
 }

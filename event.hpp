@@ -9,7 +9,7 @@
 class Event {
 	
 private:
- 	std::stack<std::string> eventStack ;
+ 	std::string event;
 	int numbero;
 public:
 	Event();
