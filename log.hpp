@@ -18,6 +18,7 @@ private:
 	std::vector<std::string> logs; // today's logs ,each day
 									// a new log file should be created
 	std::string day , month , year ;
+	std::string today ;
 public:
 	Log(){}
 	~Log(){}
@@ -27,6 +28,9 @@ public:
 		@return Returns an error sticker pointing to whether the logs have been 
 				succesfully printed or not
 	*/
+	std::vector < std :: string > getLogs(){
+		return logs;
+	}
 	Error printCurrentLogs();
 	/**
 		Adds a log to the current list , based on an event

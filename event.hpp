@@ -13,18 +13,18 @@ private:
 	int numbero;
 public:
 	Event();
+	Event(std::string event);
 	~Event();
 
-	Error createEvent();
-	Error updateEvent();
+	Error updateEvent(std::string updateString);
 	Error stopEvent();
-	Error holdEvent();
+	std::string toString();
 	Error basicEventInformation();
 	Event& operator= (Event& other){
 
-		return *this;
+		return other;
 	}
-
+	friend std::istream& operator>> (std::istream &in , Event &e);
 
 };
 #endif
