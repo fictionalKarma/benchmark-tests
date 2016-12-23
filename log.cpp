@@ -5,3 +5,12 @@ Error Log::printBasicLog(){
 
 	return Error::BETTER;
 }
+Error Log::printCurrentLogs(){
+	for(std::vector<std::string>::iterator it = logs.begin(); it != logs.end(); it++)
+		std::cout << *it << '\n';
+	return Error::BETTER;
+}
+Error Log::addLog(Event e){
+	logs.push_back(e.toString());
+	return Error::BETTER;
+}

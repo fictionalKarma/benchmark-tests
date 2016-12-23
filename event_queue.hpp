@@ -48,6 +48,12 @@ public:
 		@return returns wheter the event ha been succesfully updated or not
 	*/
 	Error updateEvent();
+	/**
+		Holds the event to be executed
+
+		@return returs whether the event has been put on hold or not
+	*/
+	Error holdEvent();
 };
 
 #endif
