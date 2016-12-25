@@ -24,7 +24,7 @@ public:
 std::string PATH_TO_LOGS;
 
 LogHandler(){
-	PATH_TO_LOGS="/home/mirceas/Projects/Factori Benchmark/school-project/logs";
+	PATH_TO_LOGS="INSERT_PATH_HERE_BITTE";
 } // forces the class to be uninitialized
 	/**
 		Retrieves a log from the logs file of the system
