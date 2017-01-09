@@ -9,4 +9,6 @@
 #include "fileOperations.hpp"
 #include "qcustomplot.hpp"
 #include "grafice.hpp"
+#include "sqlite3ext.hpp"
+#include "sqlite3.hpp"
 #endif

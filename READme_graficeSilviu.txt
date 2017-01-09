@@ -3,9 +3,9 @@ Tot codul scris pt grafice necesita includerea in proiect a qcustomplot.h si a q
 Graficele reprezinta comparatia performantei intre doua firme. Axa y are limitele [0;135], deoarece consider ca afisarea trebuie sa decurga in felul urmator: etalonul reprezinta 100% din performanta si etalonul va fi reprezentat pe grafic cu bare de aceease "inaltime" 100; elementele pe care le vom compara vor avea afisarea prin bare care reprezinta x% din valoarea elementelor etalonului. Ex: daca pentru Criteriul_1 etalonul este 87 (nu conteaza unitatea de masura acum), iar performanta Firmei_1 pt Criteriul_1 este 65, pe grafic acestea nu vor aparea sub forma: bara etalon 87 langa bara firmei 65, ci bara etalon 100 langa bara firmei 6500/87 (x/100*87=65, x=6500/87). 
 Poate nu arata prea interesant, avand in vedere ca etalonul va aparea doar ca niste bare de inaltime 100, insa consider ca in cazul comparatiei intre doua firme, va fi bun. Ma gandesc sa adaug si valoarea acelui element plotat deasupra barei.
 
-Tot codul este scris in mainwindow.cpp si trebuie transformat intr-o clasa de sine statatoare. 
+/* Tot codul este scris in mainwindow.cpp si trebuie transformat intr-o clasa de sine statatoare. 
 
-Voi adauga si un pieChart pentru muncitori si pentru costurile lunare, daca e cu rost.
+Voi adauga si un pieChart pentru muncitori si pentru costurile lunare, daca e cu rost. */ UPDATE: FACUT
 
 In fisierul cu proiectul Qt (se termina in .pro) trebuie trecut aici:
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets 
