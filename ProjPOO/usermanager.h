@@ -14,6 +14,7 @@ private:
     static QSqlDatabase my_db;
 
 public:
+    static Error openDatabaseConn();
     static Error registerUser(QString username, QString password, QString email);
     static Error removeUser(QString username);
     static Error findUserByName(QString username);

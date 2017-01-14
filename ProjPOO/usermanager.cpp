@@ -3,15 +3,14 @@
 QSqlDatabase UserManager::my_db;
 
 Error UserManager::registerUser(QString username, QString password, QString email) {
-    if (!my_db.isOpen()) {
-        my_db.open();
+    if (!my_db.open()) {
+        openDatabaseConn();
     }
-
     QString newUser = Operations::encode(username);
     QString newPass = Operations::encode(password);
     QString newMail = Operations::encode(email);
 
-    QSqlQuery query;
+    QSqlQuery query(my_db);
     QString sql = "SELECT name FROM sqlite_master WHERE type=table AND name=USERS;";
     query.exec(sql);
     if (!query.next()) {
@@ -32,14 +31,11 @@ Error UserManager::registerUser(QString username, QString password, QString emai
 
 
 Error UserManager::findUserByName(QString name) {
-    if (!my_db.isOpen()) {
-        my_db = QSqlDatabase::addDatabase("QSQLITE");
-        my_db.setDatabaseName(DBNAME);
-        my_db.open();
+    if (!my_db.open()) {
+        openDatabaseConn();
     }
-
     name = Operations::encode(name);
-    QSqlQuery query;
+    QSqlQuery query(my_db);
     QString sql = "SELECT username FROM USERS WHERE username=(:name);";
     query.prepare(sql);
     query.bindValue(":name", name);
@@ -55,14 +51,11 @@ Error UserManager::findUserByName(QString name) {
 
 
 Error UserManager::findUserByMail(QString mail) {
-    if (!my_db.isOpen()) {
-        my_db = QSqlDatabase::addDatabase("QSQLITE");
-        my_db.setDatabaseName(DBNAME);
-        my_db.open();
+    if (!my_db.open()) {
+        openDatabaseConn();
     }
-
     mail = Operations::encode(mail);
-    QSqlQuery query;
+    QSqlQuery query(my_db);
     QString sql = "SELECT email FROM USERS WHERE email=(:mail);";
     query.prepare(sql);
     query.bindValue(":mail", mail);
@@ -77,15 +70,12 @@ Error UserManager::findUserByMail(QString mail) {
 }
 
 QString UserManager::getUserData(QString username) {
-    if (!my_db.isOpen()) {
-        my_db = QSqlDatabase::addDatabase("QSQLITE");
-        my_db.setDatabaseName(DBNAME);
-        my_db.open();
+    if (!my_db.open()) {
+        openDatabaseConn();
     }
-
     QString result = "";
     username = Operations::encode(username);
-    QSqlQuery query;
+    QSqlQuery query(my_db);
     QString sql = "SELECT username,password,email FROM USERS WHERE username=(:name);";
     query.prepare(sql);
     query.bindValue(":name", username);
@@ -96,5 +86,14 @@ QString UserManager::getUserData(QString username) {
 
         else result = "404";
     }
+
+    my_db.close();
     return result;
+}
+
+Error UserManager::openDatabaseConn() {
+    my_db = QSqlDatabase::addDatabase("QSQLITE", "userdb");
+    my_db.setDatabaseName(DBNAME);
+    my_db.open();
+    return OK;
 }
