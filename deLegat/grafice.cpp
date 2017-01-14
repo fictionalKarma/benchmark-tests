@@ -101,7 +101,6 @@ void Grafice::graficBare() {
     QVector<double> datay1 = QVector<double>() << 0.6 << 0.5 << 0.3 << 0.15;
     QVector<double> datay2 = QVector<double>() << 0.3 << 0.28 << 0.2 << 0.1;
     QVector<double> datay3 = QVector<double>() << 0.33 << 0.31 << 0.27 << 0.13;
-
     QCPBarsGroup *group1 = new QCPBarsGroup(ui->grafic);
     QCPBars *bars = new QCPBars(ui->grafic->xAxis, ui->grafic->yAxis);
     bars->setData(datax, datay1);
