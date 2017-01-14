@@ -5,6 +5,7 @@
 #include <usermanager.h>
 #include <operations.h>
 #include <QDebug>
+#include <QTimer>
 
 namespace Ui {
 class RegistrationForm;
@@ -21,6 +22,7 @@ public:
 private slots:
     void cancelButton();
     void registerUser();
+    void redirect();
 
 private:
     Ui::RegistrationForm *ui;

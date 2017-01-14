@@ -23,15 +23,24 @@ void RegistrationForm::cancelButton() {
 }
 
 void RegistrationForm::registerUser() {
+    ui->userTb->setStyleSheet("background-color: white; color: black;");
+    ui->passTb->setStyleSheet("background-color: white; color: black;");
+    ui->emailTb->setStyleSheet("background-color: white; color: black;");
+    ui->userError->setStyleSheet("color: rgba(255, 0, 0, 0);");
+    ui->passError->setStyleSheet("color: rgba(255, 0, 0, 0);");
+    ui->emError->setStyleSheet("color: rgba(255, 0, 0, 0);");
+    ui->confError->setStyleSheet("color: rgba(255, 0, 0, 0);");
+    ui->emcoError->setStyleSheet("color: rgba(255, 0, 0, 0);");
+
     if (!Operations::isValidUser(ui->userTb->text())) {
         ui->userTb->setStyleSheet("background-color:rgba(255, 150, 150, 1); color: black;");
-        ui->userError->setText("Username must have 3+ characters; alphanumerical or spaces allowed.");
+        ui->userError->setText("Username must have 3+ characters; alphanumerical allowed.");
         ui->userError->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
     else if (!Operations::isValidPassword(ui->passTb->text())) {
         ui->passTb->setStyleSheet("background-color:rgba(255, 150, 150, 1); color: black;");
-        ui->passError->setText("Password must be 3+ characters; alphanumerical and special characters.");
+        ui->passError->setText("Password must be 6+ characters; alphanumerical, minimum a digit.");
         ui->passError->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
@@ -44,6 +53,7 @@ void RegistrationForm::registerUser() {
         ui->emailTb->setStyleSheet("background-color:rgba(255, 150, 150, 1); color: black;");
         ui->emError->setText("Please insert a valid email address.");
         ui->emError->setStyleSheet("color:rgba(255, 0, 0, 1);");
+        qDebug() << "invalid mail";
     }
 
     else if (ui->emailconfTb->text() != ui->emailTb->text()) {
@@ -59,7 +69,21 @@ void RegistrationForm::registerUser() {
             ui->emError->setText("There is already a user registered with this email.");
             ui->emError->setStyleSheet("color: rgba(255, 0, 0, 1);");
         } else {
+            UserManager::openDatabaseConn();
             UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
+            QTimer *timer = new QTimer();
+            connect(timer, SIGNAL(timeout()), this, SLOT(redirect()));
+            timer->setSingleShot(false);
+            timer->start(3000);
+            ui->emcoError->setText("Registration succesful! Redirecting to starting window...");
+            ui->emcoError->setStyleSheet("color: rgba(0, 180, 0, 1);");
+            ui->regBtn->setEnabled(false);
+            ui->cancelBtn->setEnabled(false);
         }
     }
+}
+
+void RegistrationForm::redirect() {
+    startWindow->show();
+    this->close();
 }

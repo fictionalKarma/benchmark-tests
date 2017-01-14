@@ -3,7 +3,8 @@
 
 #include <QString>
 #include <QCryptographicHash>
-#include "error.h"
+#include "error.hpp"
+#include <QDebug>
 
 class Operations
 {
