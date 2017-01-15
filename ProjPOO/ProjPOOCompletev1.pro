@@ -3,7 +3,7 @@ QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ProjPoo
 TEMPLATE = app
-
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
         startingwindow.cpp \
@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     log.cpp \
     logHandler.cpp \
     formfeed.cpp \
-    fileOperations.cpp
+    fileOperations.cpp \ 
+	tree.cpp
 
 HEADERS  += startingwindow.h \
     loginform.h \
@@ -36,7 +37,8 @@ HEADERS  += startingwindow.h \
     logHandler.hpp \
     formfeed.hpp \
     fileOperations.hpp \
-    includes.hpp
+    includes.hpp \
+	tree.hpp
 
 FORMS    += startingwindow.ui \
     loginform.ui \

@@ -1,6 +1,6 @@
 #include "operations.h"
 
-bool Operations::isValidEmail(QString& mail) {
+bool Operations::isValidEmail(QString mail) {
     if (mail.length() < 10)
         return false;
     if (mail.contains(' '))
@@ -19,7 +19,7 @@ bool Operations::isValidEmail(QString& mail) {
     return true;
 }
 
-bool Operations::isValidPassword(QString& pwd) {
+bool Operations::isValidPassword(QString pwd) {
     if (pwd.length() < 6)
         return false;
     auto containsDigit = [pwd]() {
@@ -34,7 +34,7 @@ bool Operations::isValidPassword(QString& pwd) {
     return true;
 }
 
-bool Operations::isValidUser(QString& name) {
+bool Operations::isValidUser(QString name) {
     if (name.length() < 3)
         return false;
 

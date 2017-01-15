@@ -7,4 +7,5 @@
 #include "log.hpp"
 #include "loghandler.hpp"
 #include "fileOperations.hpp"
+#include "tree.hpp"
 #endif

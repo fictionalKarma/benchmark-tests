@@ -9,12 +9,37 @@ class User : public QObject {
 
 public:
     User(QString);
+    User(QString,QString);
+    User();
+    QString getUserName(){
+        return username;
+    }
+    QString getBoss(){
+        return boss;
+    }
+    void setUserName(QString q){
+        username = q;
+    }
+    void setBoss(QString q){
+        boss = q;
+    }
+    void operator= (User &other){
+        this->setBoss(other.getBoss());
+        this->setUserName(other.getUserName());
+    }
+    bool operator==(User &other){
+        int i ;
+        i =  (boss == other.getBoss()) + (username == other.getUserName());
+        if( i == 2)
+            return true;
+        return false;
+    }
 
 signals:
     void onLogin();
 
 private:
-    QString username;
+    QString username , boss;
 };
 
 #endif // USER_H

@@ -19,9 +19,7 @@ public:
     void stopEvent();
     QString toString();
     void basicEventInformation();
-    Event& operator= (Event& other){
-        return other;
-    }
+
 
     friend QTextStream& operator>> (QTextStream &in , Event &e);
 };
