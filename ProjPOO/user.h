@@ -6,6 +6,7 @@
 
 class Firma;
 class Tree;
+struct Node ;
 class User : public QObject {
     Q_OBJECT
 
@@ -33,6 +34,16 @@ public:
     Firma* getFirma(){
         return firma;
     }
+    void setFirma(Firma *f){
+        firma = f;
+    }
+
+    void setTree(Tree *k){
+        copy = k;
+    }
+    Tree* getTree(){
+        return copy;
+    }
 
     void operator= (User &other){
         this->setBoss(other.getBoss());
@@ -52,6 +63,7 @@ signals:
 protected:
     QString username , boss;
     Firma* firma;
+    Tree* copy;
     int level;
 };
 

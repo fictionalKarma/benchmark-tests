@@ -63,16 +63,25 @@ int main(int argc, char *argv[])
     f.add(eee,"Vasile");
     f.add(ddd,"GICA");
     f.add(dddd,"IOCLA");
+
+
     //qDebug() << f1.traverse("Georgica")->user.getUserName();
    // f8->getTree()->find("GICA")->user.getUserName();
-    User u7("VASILON",f8,"GICA");
+    User u7("VASILON",f8,"Georgica");
     Node *nnn = new Node;
     nnn->user = u7;
     u7.getFirma()->getTree()->add(nnn,u7.getBoss());
-    u7.getFirma()->getTree()->traverse();
+    //u7.getFirma()->getTree()->traverse();
     qDebug() << u7.getFirma()->getTree()->check("prunoiu");
     //qDebug () << u7.getFirma()->getTree()->find("VASILON")->user.getUserName();
     //qDebug() << u7.getFirma()->getTree()->check("GIGEL");
     //u7.getFirma()->getTree()->traverse();
+     u7.setTree( new Tree(u7.getFirma()->getTree()->find(u7.getUserName())));
+    u4.setFirma(f8);
+    // u4.getFirma()->getTree()->find(u4.getUserName()
+
+     u4.setTree(new Tree(u4.getFirma()->getTree()->find(u4.getUserName())));
+     u4.getTree()->traverse();
+    // u4.getTree()->traverse();
     return a.exec();
 }

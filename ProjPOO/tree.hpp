@@ -38,11 +38,13 @@ public:
 		boss = new Node ;
 		boss->user = b->user;
 		boss->father = NULL;
+        boss->children = b->children;
         marker = 1;
 	}
     Tree (Node1* b){
         boss1 = new Node1;
         boss1->user = (b->user);
+        boss1->children = b->children;
        // boss->user = b->a;
         marker = 2;
     }
@@ -62,6 +64,7 @@ public:
     void setBoss(Node *n);
     void setBoss(Node1 *n);
     std::vector<Node*> getChildren();
+
 
 };
 #endif
