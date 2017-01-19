@@ -20,7 +20,10 @@ SOURCES += main.cpp\
     logHandler.cpp \
     formfeed.cpp \
     fileOperations.cpp \ 
-	tree.cpp
+	tree.cpp \
+    firma.cpp
+
+
 
 HEADERS  += startingwindow.h \
     loginform.h \
@@ -38,7 +41,9 @@ HEADERS  += startingwindow.h \
     formfeed.hpp \
     fileOperations.hpp \
     includes.hpp \
-	tree.hpp
+	tree.hpp \
+    firma.hpp
+
 
 FORMS    += startingwindow.ui \
     loginform.ui \

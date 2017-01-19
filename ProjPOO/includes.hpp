@@ -8,4 +8,7 @@
 #include "loghandler.hpp"
 #include "fileOperations.hpp"
 #include "tree.hpp"
+#include "administrator.hpp"
+#include "firma.hpp"
+
 #endif

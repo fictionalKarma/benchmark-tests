@@ -32,8 +32,12 @@ public:
 		return boss;
 	}
 	void traverse();
+    Node* traverse(QString);
+    void find(QString);
 	void traverse(Node* n);
+    Node* traverse(Node* n , QString name,int * ceva);
     void internAdd(Node* n,Node* father,QString boss);
-	void add(Node* n , QString boss);
+    void add(Node* n , QString boss);
+    std::vector<Node*> getChildren();
 };
 #endif

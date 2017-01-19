@@ -4,13 +4,17 @@
 #include <QString>
 #include <QObject>
 
+class Firma;
+class Tree;
 class User : public QObject {
     Q_OBJECT
 
 public:
     User(QString);
     User(QString,QString);
+    User(QString ,Firma* ,QString);
     User();
+
     QString getUserName(){
         return username;
     }
@@ -23,6 +27,13 @@ public:
     void setBoss(QString q){
         boss = q;
     }
+    int getLevel(){
+        return level;
+    }
+    Firma* getFirma(){
+        return firma;
+    }
+
     void operator= (User &other){
         this->setBoss(other.getBoss());
         this->setUserName(other.getUserName());
@@ -40,6 +51,9 @@ signals:
 
 private:
     QString username , boss;
+    Firma* firma;
+protected:
+    int level;
 };
 
 #endif // USER_H
