@@ -10,5 +10,6 @@
 #include "tree.hpp"
 #include "administrator.hpp"
 #include "firma.hpp"
+#include <typeinfo>
 
 #endif

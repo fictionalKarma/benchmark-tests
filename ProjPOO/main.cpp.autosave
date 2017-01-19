@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
     f.add(eee,"Vasile");
     f.add(ddd,"GICA");
     f.add(dddd,"IOCLA");
+    
+    
     //qDebug() << f1.traverse("Georgica")->user.getUserName();
    // f8->getTree()->find("GICA")->user.getUserName();
     User u7("VASILON",f8,"GICA");

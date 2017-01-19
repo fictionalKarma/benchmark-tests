@@ -14,7 +14,7 @@ public:
     User(QString,QString);
     User(QString ,Firma* ,QString);
     User();
-
+    virtual void dummyFunction(){}
     QString getUserName(){
         return username;
     }
@@ -49,10 +49,9 @@ public:
 signals:
     void onLogin();
 
-private:
+protected:
     QString username , boss;
     Firma* firma;
-protected:
     int level;
 };
 

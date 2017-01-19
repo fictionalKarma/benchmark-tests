@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     formfeed.cpp \
     fileOperations.cpp \ 
 	tree.cpp \
-    firma.cpp
+    firma.cpp \
+    administrator.cpp
 
 
 
@@ -42,7 +43,8 @@ HEADERS  += startingwindow.h \
     fileOperations.hpp \
     includes.hpp \
 	tree.hpp \
-    firma.hpp
+    firma.hpp \
+    administrator.hpp
 
 
 FORMS    += startingwindow.ui \

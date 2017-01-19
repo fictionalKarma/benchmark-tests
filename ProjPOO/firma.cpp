@@ -20,3 +20,9 @@ Firma::Firma(QString q){
 Tree* Firma::getTree(){
     return T;
 }
+void Firma::setBoss( User* u){
+    Node *n = new Node ;
+    n->father = NULL;
+    n->user = *u;
+    T->setBoss(n);
+}

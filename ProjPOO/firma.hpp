@@ -11,6 +11,7 @@ public:
     Firma(User& u);
     Firma(QString q);
     Tree* getTree();
+    void setBoss( User* u);
 private:
     Tree* T ;
 };
