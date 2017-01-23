@@ -4,6 +4,11 @@
 #include <QMainWindow>
 #include <usermanager.h>
 #include <principalform.h>
+#include <administrator.hpp>
+#include <QFile>
+#include <log.hpp>
+#include <tree.hpp>
+#include <firma.hpp>
 
 namespace Ui {
 class LoginForm;
@@ -25,6 +30,7 @@ private:
     Ui::LoginForm *ui;
     QMainWindow *startWindow;
     principalForm *pr;
+    Log *logger;
 };
 
 #endif // LOGINFORM_H

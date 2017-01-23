@@ -6,6 +6,7 @@
 #include <operations.h>
 #include <QDebug>
 #include <QTimer>
+#include <loghandler.hpp>
 
 namespace Ui {
 class RegistrationForm;
@@ -27,6 +28,9 @@ private slots:
 private:
     Ui::RegistrationForm *ui;
     QMainWindow *startWindow;
+    Log logger;
+
+    void sendConfirmationMail();
 };
 
 #endif // REGISTRATIONFORM_H

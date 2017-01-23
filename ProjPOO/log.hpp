@@ -8,19 +8,23 @@
 */
 #include <QString>
 #include <QVector>
-#include "event.hpp"
 #include "error.hpp"
 #include <QDateTime>
 #include <QDebug>
+#include <logstrings.h>
 
 class Log {
 private:
    QVector<QString> logs; // today's logs ,each day
-                                    // a new log file should be created
+                          // a new log file should be created
    QString day , month , year ;
    QString today ;
 public:
-    Log(){}
+    static QVector<Log *> _all_logs;
+    Log(){
+        _all_logs.push_back(this);
+    }
+
     ~Log(){}
     /**
         Prints a list of the day's logs to an output server
@@ -39,7 +43,7 @@ public:
 
         @return Returns whether the Event information has been added or not
     */
-    Error addLog(Event e);
+    Error addLog(QString str);
     /**
         Mostly useless method,since we don't usually want to destroy evidence *giggles*
 
@@ -61,8 +65,7 @@ public:
         @param Position of
         @param Event which shall be used to update
     */
-    Error updateLog(int index,Event e);
-    Error printBasicLog();
+    Error updateLog(int index, QString str);
     QString getTime();
 };
 #endif
