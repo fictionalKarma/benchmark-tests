@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QObject>
+#include "userlevels.h"
 
 class Firma;
 class Tree;
@@ -28,7 +29,7 @@ public:
     void setBoss(QString q){
         boss = q;
     }
-    int getLevel(){
+    UserLevel getLevel(){
         return level;
     }
     Firma* getFirma(){
@@ -64,7 +65,7 @@ protected:
     QString username , boss;
     Firma* firma;
     Tree* copy;
-    int level;
+    UserLevel level;
 };
 
 #endif // USER_H

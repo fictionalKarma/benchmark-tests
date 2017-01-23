@@ -13,19 +13,19 @@ void FileOperations::createFile(QString Path , QString name){
 
 void FileOperations::removeFile(QString Path , QString name){
         QString path = Path+"/"+name;
-		 
-		try
-  		{
+
+        try
+        {
             bool failed = (!QFile::exists(path) == true);
             if (failed)
-    			throw 10;
-    		else
+                throw 10;
+            else
                 QFile::remove(path);
         }
-  		catch ( int e )
-  		{
+        catch ( int e )
+        {
             qDebug() << "Error: could not delete file ! (Error "<<e<<").\n";
- 		}
+        }
 }
 
 bool FileOperations::check(QString Path, QString name){
@@ -42,19 +42,19 @@ void FileOperations::writeToFile(QString Path ,
     {
         bool failed = !(QFile::exists(path) == true);
         if (failed)
-   			throw 11;
+            throw 11;
         else {
             FILE *f = fopen(path.toStdString().c_str(), "a");
             out.open(f, QIODevice::Append);
             out.write(textToFile.toStdString().c_str());
             out.close();
             fclose(f);
-		}
-    			
+        }
+
     }
     catch ( int e )
     {
             qDebug() << "Error: could not delete file ! (Error "<<e<<").\n";
     }
 }
-	
+

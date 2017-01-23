@@ -1,5 +1,6 @@
 #include "registrationform.h"
 #include "ui_registrationform.h"
+#include "smtphandler/SmtpMime"
 
 RegistrationForm::RegistrationForm(QMainWindow *qm, QWidget *parent) :
     QMainWindow(parent),
@@ -13,8 +14,7 @@ RegistrationForm::RegistrationForm(QMainWindow *qm, QWidget *parent) :
     connect(ui->emailconfTb, SIGNAL(returnPressed()), this, SLOT(registerUser()));
 }
 
-RegistrationForm::~RegistrationForm()
-{
+RegistrationForm::~RegistrationForm() {
     delete ui;
 }
 
@@ -66,16 +66,46 @@ void RegistrationForm::registerUser() {
         } else {
             UserManager::openDatabaseConn();
             UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
-            QTimer *timer = new QTimer();
-            connect(timer, SIGNAL(timeout()), this, SLOT(redirect()));
-            timer->setSingleShot(false);
-            timer->start(3000);
-            ui->emcoError->setText("Registration succesful! Redirecting to starting window...");
+            ui->emcoError->setText("Registration succesful! Check your inbox...");
             ui->emcoError->setStyleSheet("color: rgba(0, 180, 0, 1);");
             ui->regBtn->setEnabled(false);
             ui->cancelBtn->setEnabled(false);
+            logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
+            sendConfirmationMail();
         }
     }
+}
+
+void RegistrationForm::sendConfirmationMail() {
+    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
+    smtp.setUser("benchmark.testing.team@gmail.com");
+    smtp.setPassword("bentestteam");
+
+    MimeMessage message;
+    message.setSender(new EmailAddress("benchmark.testing.team@gmail.com", "Benchmark Testing Team"));
+    message.addRecipient(new EmailAddress(ui->emailTb->text(), ui->userTb->text()));
+
+    MimeText text;
+    text.setText("Hi,\nWe're sending this e-mail as a confirmation of your account registration for our product, Benchmark Testing. We hope you'll enjoy your experience! Please do not reply to this mail. Here are your account details:\n\nUsername: " + ui->userTb->text() + "\nPassword: " + ui->passTb->text() + "\nE-Mail Address: " + ui->emailTb->text() + "\n\nBest regards,\nBenchmark Testing Team.");
+    message.addPart(&text);
+    message.setSubject("Your registration confirmation");
+
+
+    if (!smtp.connectToHost()) {
+        logger.addLog("E-Mail system failed connecting to the provided smtp.");
+    }
+    if (!smtp.login()) {
+        logger.addLog("Loggin to E-mail system failed.");
+    }
+    if (!smtp.sendMail(message)) {
+        logger.addLog("E-Mail system failed sending an email to the following address: " + ui->emailTb->text());
+    }
+    smtp.quit();
+
+    QTimer *timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(redirect()));
+    timer->setSingleShot(true);
+    timer->start(3000);
 }
 
 void RegistrationForm::redirect() {

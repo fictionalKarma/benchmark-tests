@@ -10,8 +10,8 @@ public:
     Administrator();
     Administrator(QString , Firma* , QString);
 
-   	void addUser(User &u);
-    void addUser(QString , QString);
+    void addUser(User &u);
+    void addUser(QString, QString, QString);
 private:
 };
 

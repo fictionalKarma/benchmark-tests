@@ -2,7 +2,8 @@
 #define PRINCIPALFORM_H
 
 #include <QMainWindow>
-#include <conferintaform.h>
+#include "user.h"
+#include "administrator.hpp"
 
 namespace Ui {
 class principalForm;
@@ -14,6 +15,8 @@ class principalForm : public QMainWindow
 
 public:
     explicit principalForm(QWidget *parent = 0);
+    explicit principalForm(User *u, QWidget *parent = 0);
+    explicit principalForm(Administrator *a, QWidget *parent = 0);
     ~principalForm();
 
 private slots:
@@ -21,7 +24,8 @@ private slots:
 
 private:
     Ui::principalForm *ui;
-    conferintaForm *conf;
+    User currentUser;
+    Administrator admin;
 };
 
 #endif // PRINCIPALFORM_H
