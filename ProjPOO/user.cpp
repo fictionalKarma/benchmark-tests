@@ -1,23 +1,24 @@
 #include "user.h"
 
+
 User::User(QString name)
 {
-    level = UserLevel::User;
+    level = 0;
     this->username = name;
     emit onLogin();
 }
 User::User(QString name, QString bosss){
-    level = UserLevel::User;
+    level = 0 ;
     this->setUserName(name);
     this->setBoss(bosss);
     emit onLogin();
 }
 User::User(){
-    level = UserLevel::User;
+    level = 0;
     emit onLogin();
 }
 User::User(QString name ,Firma* f1 ,QString boss){
-    level = UserLevel::User;
+    level = 0;
     this->username = name;
     firma = f1 ;
     this->boss = boss;

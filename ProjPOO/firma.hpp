@@ -6,7 +6,7 @@
 
 class Firma {
 public:
-    Firma();
+	Firma();
     Firma(Tree* t);
     Firma(User& u);
     Firma(QString q);

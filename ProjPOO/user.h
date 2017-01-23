@@ -3,7 +3,6 @@
 
 #include <QString>
 #include <QObject>
-#include "userlevels.h"
 
 class Firma;
 class Tree;
@@ -29,7 +28,7 @@ public:
     void setBoss(QString q){
         boss = q;
     }
-    UserLevel getLevel(){
+    int getLevel(){
         return level;
     }
     Firma* getFirma(){
@@ -49,6 +48,8 @@ public:
     void operator= (User &other){
         this->setBoss(other.getBoss());
         this->setUserName(other.getUserName());
+        firma = other.getFirma();
+        copy = other.copy ;
     }
     bool operator==(User &other){
         int i ;
@@ -65,7 +66,7 @@ protected:
     QString username , boss;
     Firma* firma;
     Tree* copy;
-    UserLevel level;
+    int level;
 };
 
 #endif // USER_H

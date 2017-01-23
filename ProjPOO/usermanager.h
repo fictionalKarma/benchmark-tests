@@ -3,18 +3,15 @@
 
 #include <QDebug>
 #include "operations.h"
-#include "userlevels.h"
 #include <QSqlDatabase>
 #include <QSqlRecord>
 #include <QSqlQuery>
-#include <log.hpp>
 #define DBNAME "C:\\Users\\cosmi\\Desktop\\users.db"
 
 class UserManager
 {
 private:
     static QSqlDatabase my_db;
-    static Log logger;
 
 public:
     static Error openDatabaseConn();
@@ -22,9 +19,6 @@ public:
     static Error removeUser(QString username);
     static Error findUserByName(QString username);
     static Error findUserByMail(QString mail);
-    static Error setUserLevel(QString username, UserLevel level);
-    static Error setUserName(QString username, QString newName);
-    static UserLevel getUserLevel(QString username);
     static QString getUserData(QString username);
 };
 

@@ -18,39 +18,39 @@ public:
             dir.mkdir(PATH_TO_LOGS);
         }
     }
-        /**
-                Retrieves a log from the logs file of the system
+	/**
+		Retrieves a log from the logs file of the system
 
-        @param string pointing towards the date of the log we want to retrieve
-        @return returns the container of the log file
-        */
+	@param string pointing towards the date of the log we want to retrieve
+	@return returns the container of the log file
+	*/
         Log getLog(QString date);
 
-        /**
-        Returns the path to logs file
-        */
+	/**
+	Returns the path to logs file
+	*/
         QString getPath() { return PATH_TO_LOGS ;}
-        /**
-                Updates the log file
+	/**
+		Updates the log file 
 
-        @param the date of the log file we wish to modify
-        @param the logs in question
-        @param stream pointing towards the file we need to modify
-        @return return whether the log update has been succesful or not
-        */
-        Error updateLog(QString date, Log *log );
-        /**
-                Checks wheter a log exists or not
+	@param the date of the log file we wish to modify
+	@param the logs in question 
+	@param stream pointing towards the file we need to modify
+	@return return whether the log update has been succesful or not 
+	*/
+        Error updateLog(QString date, Log log );
+	/**
+		Checks wheter a log exists or not
 
-        @param the date in which we wish to know whether there exists any logs
-        @return returns @true if log date exists , else returns @false
-        */
+	@param the date in which we wish to know whether there exists any logs
+	@return returns @true if log date exists , else returns @false
+	*/
         bool exists(QString date);
-        /**
-                Returns the local time
+	/**
+		Returns the local time 
 
-                @return returns a string containing the date in the format : year-month-day
-        */
+		@return returns a string containing the date in the format : year-month-day
+	*/
         QString getTime();
         QString getFullTime();
 };

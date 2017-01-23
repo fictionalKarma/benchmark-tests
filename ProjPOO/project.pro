@@ -1,10 +1,9 @@
 QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-QMAKE_CXXFLAGS += -std=c++0x
-TARGET = ProjPoo
+TARGET = ProjPOO
 TEMPLATE = app
-
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
         startingwindow.cpp \
@@ -12,15 +11,19 @@ SOURCES += main.cpp\
     registrationform.cpp \
     operations.cpp \
     usermanager.cpp \
-    conferintaform.cpp \
     principalform.cpp \
     user.cpp \
-    event.cpp \ 
+    event.cpp \
     event_queue.cpp \
     log.cpp \
     logHandler.cpp \
     formfeed.cpp \
-    fileOperations.cpp
+    fileOperations.cpp \ 
+	tree.cpp \
+    firma.cpp \
+    administrator.cpp
+
+
 
 HEADERS  += startingwindow.h \
     loginform.h \
@@ -28,7 +31,6 @@ HEADERS  += startingwindow.h \
     error.hpp \
     operations.h \
     usermanager.h \
-    conferintaform.h \
     principalform.h \
     user.h \
     event.hpp \
@@ -37,11 +39,13 @@ HEADERS  += startingwindow.h \
     logHandler.hpp \
     formfeed.hpp \
     fileOperations.hpp \
-    includes.hpp
+    includes.hpp \
+	tree.hpp \
+    firma.hpp \
+    administrator.hpp
+
 
 FORMS    += startingwindow.ui \
     loginform.ui \
     registrationform.ui \
-    conferintaform.ui \
     principalform.ui
-

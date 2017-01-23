@@ -5,7 +5,7 @@ bool Operations::isValidEmail(QString mail) {
         return false;
     if (mail.contains(' '))
         return false;
-    if (!mail.contains('@') && !mail.contains('.com'))
+    if (!mail.contains('@') && !mail.contains(".com"))
         return false;
     for(QChar c : mail) {
         if (c > 122) return false;
