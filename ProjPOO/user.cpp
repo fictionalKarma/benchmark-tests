@@ -1,5 +1,5 @@
 #include "user.h"
-#define DATABASE_NAME "C:\\Users\\cosmi\\Desktop\\users.db"
+#define DATABASE_NAME "users.db"
 struct pers
 {
     QString text[7];
@@ -8,7 +8,7 @@ struct pers
 
 User::User(QString name)
 {
-    level = 0;
+    level = UserLevel::User;
     this->username = name;
     QString tableName="PERSONAL";
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -18,7 +18,7 @@ User::User(QString name)
     emit onLogin();
 }
 User::User(QString name, QString bosss){
-    level = 0 ;
+    level = UserLevel::User;
     this->setUserName(name);
     this->setBoss(bosss);
     QString tableName="PERSONAL";
@@ -28,7 +28,7 @@ User::User(QString name, QString bosss){
     emit onLogin();
 }
 User::User(){
-    level = 0;
+    level = UserLevel::User;
     QString tableName="PERSONAL";
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
@@ -36,7 +36,7 @@ User::User(){
     emit onLogin();
 }
 User::User(QString name ,Firma* f1 ,QString boss){
-    level = 0;
+    level = UserLevel::User;
     this->username = name;
     firma = f1 ;
     this->boss = boss;
@@ -84,61 +84,18 @@ void User::decode(QString c)
 }
 void User::readFromDatabase(QString name)
 {
-    int count = 0;
-
-    QSqlQuery query2;
-    QString sql2 = "SELECT * FROM PERSONAL;";
-    query2.exec(sql2);
-    while(query2.next())
-            count++;
-
-    int index,i,ok=0,l;
-    QString tmp;
-    for(int j=0;j<count;j++){
-    index=j;
-
-        QString tableName="PERSONAL";
-        QSqlQuery query;
-        QString sql = "SELECT * FROM " + tableName + " WHERE CRT = " + QVariant(index).toString() +" ;";
-        query.exec(sql);
-
-
-        //qDebug()<<sql;
-        tmp ="";
-        int i=1;
-        int n = query.record().count();
-
-
-            while(query.next() && i<n-1){
-            for( i=1; i<n; i++){
-                if(query.record().value(i).type() == query.record().value(1).type()){
-                    if(i < n-1){
-                        tmp = tmp + "'" + query.record().value(i).toString() +"',";
-                    }
-                    else{
-                        tmp = tmp + "'" + query.record().value(i).toString() +"'";
-                    }
-                }
-                else{
-                    if(i < n-1){
-                        tmp = tmp + query.record().value(i).toString() +",";
-                    }
-                    else{
-                        tmp = tmp + query.record().value(i).toString();
-                    }
-                }
-            }
+    QSqlQuery query;
+    query.exec("SELECT * FROM PERSONAL WHERE nume=\'"+name+"'\;");
+    QStringList userData;
+    if (query.next()) {
+        int fieldNumber = query.record().count();
+        int i = 0;      // pornim de la field 1, fiindca 0 este CRT
+        while (i++ < fieldNumber+1) {     // i se incrementeaza dupa ce se compara cu fieldNumber
+           userData.append(query.record().value(i).toString());
+           qDebug() << userData[i] << " ";
         }
-
-
-    QString connection;
-    connection = db.connectionName();
-    db.close();
-    db = QSqlDatabase();
-    db.removeDatabase(connection);
-
-    decode(tmp);
-
+    }
+/*
     if(decod.text[1].size()==name.size())
     {
         for(l=0;l<name.size();l++)
@@ -186,6 +143,7 @@ void User::readFromDatabase(QString name)
     }
     if(ok==0)
         qDebug()<<"Nu s-a gasit";
+        */
 
 }
 

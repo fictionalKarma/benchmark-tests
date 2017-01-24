@@ -3,15 +3,13 @@
 #include <QMessageBox>
 #include <string>
 
-personal::personal(QRect q ,QWidget *parent) :
+personal::personal(QPoint location, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::personal)
 {
     ui->setupUi(this);
-    //p = geometry();
+    this->setGeometry(location.x(), location.y(), width(), height());
 
-    QPoint p12 = this->mapToGlobal(this->pos());
-    qDebug() << p12.x() <<" " <<p12.y();
     Personal.createTable("PERSONAL", "CNP TEXT, NUME TEXT, EMAIL TEXT, FACULTATE TEXT, FILIALA TEXT, CALITATE INT, SALARIU TEXT, MONEDA INT, DEPARTAMENT INT, ADRESA TEXT, T_AERIAN INT, T_MARITIM INT, T_RUTIER INT, T_FEROVIAR INT, T_INTERNATIONAL INT, T_DOMESTIC INT, DEPOZITARE INT, CORMECIAL INT, ACHIZITII INT, MAN_ECHIPA INT, ANALIZA_DATELOR INT, PREZETARE INT, LUARE_DECIZII INT, COMUNICARE INT, MAN_PROIECTE INT, MAN_TIMP INT, LEAN_MAN INT, CENTURA_SIXSIGMA INT, T_ADR INT, T_IATA INT, SIST_INFORMATIC INT, STANDARDE_LUCRU INT");
 }
 personal::~personal()
@@ -20,16 +18,6 @@ personal::~personal()
 }
 void personal::on_pushButton_clicked()
 {
-    //testare v v v
-    /*QString filename=(qApp->applicationDirPath() + "personal.txt");
-    QFile personal(filename);
-    personal.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
-    QTextStream persout(&personal);
-    QString filename_edit=(qApp->applicationDirPath() + "personal_edit.txt");
-    QFile personal_edit(filename_edit);
-    personal_edit.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
-    QTextStream persout_edit(&personal_edit);*/
-    //testare ^ ^ ^
     QString input,test,test2;
     int testsize,adaugat=0,j;
     input+='\'';
@@ -108,15 +96,14 @@ void personal::on_pushButton_clicked()
     input+=QVariant(ui->checkBox_8->checkState()).toString();
     input+=',';
     input+=QVariant(ui->checkBox_9->checkState()).toString();
-    //testare v v v
-    //persout<<input<<endl;
-    //testare ^ ^ ^
+
     //Se introduce functia care preia QString input si adauga informatia in baza de date
     if(editare==0)
     {
         Personal.tableSize("PERSONAL");
         Personal.insertQuery("PERSONAL", input);
     }
+
     if(editare==1)
     {
         for(int i=0;i<nrStr;i++)
@@ -159,6 +146,8 @@ void personal::on_pushButton_clicked()
         widget->setChecked(false);
     }
 }
+
+
 void personal::on_pushButton_2_clicked()
 {
    foreach(QTextEdit *widget, this->findChildren<QTextEdit*>())

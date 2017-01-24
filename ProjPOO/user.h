@@ -7,6 +7,7 @@
 #include <QSqlRecord>
 #include <QSqlQuery>
 #include <QDebug>
+#include "userlevels.h"
 
 class Firma;
 class Tree;
@@ -34,7 +35,7 @@ public:
     void setBoss(QString q){
         boss = q;
     }
-    int getLevel(){
+    UserLevel getLevel(){
         return level;
     }
     Firma* getFirma(){
@@ -56,6 +57,36 @@ public:
         this->setUserName(other.getUserName());
         firma = other.getFirma();
         copy = other.copy ;
+        salariu=other.getSalariu();
+        moneda=other.getMoneda();
+        cnp=other.getCnp();
+        email=other.getEmail();
+        numeFirma=other.getNumeFirma();
+        adresa=other.getAddress();
+        dep=other.getDepartment();
+        compAerian=other.getCompAerian();
+        compMaritim=other.getCompMaritim();
+        compRutier=other.getCompRutier();
+        compFeroviar=other.getCompFeroviar();
+        compInternat=other.getCompInternational();
+        compDomestic=other.getCompDomestic();
+        depozitare=other.getDepozitare();
+        comercial=other.getComercial();
+        achizitii=other.getAchizitii();
+        manageEchipa=other.getManageEchipa();
+        analiza=other.getAnaliza();
+        decizii=other.getDecizii();
+        prezentare=other.getPrezentare();
+        comunicare=other.getComunicare();
+        manageProiect=other.getManageProiect();
+        manageTimp=other.getManageTimp();
+        leanManage=other.getLeanManage();
+        sixSigma=other.getSixSigma();
+        tADR=other.getTADR();
+        tIATA=other.getTIATA();
+        sisInfo=other.getSisInfo();
+        standardLucru=other.getStandardLucru();
+
     }
     bool operator==(User &other){
         int i ;
@@ -66,6 +97,96 @@ public:
     }
     QString getEmail(){
         return this->email;
+    }
+    QString getCnp(){
+        return cnp;
+    }
+    QString getNumeFirma(){
+        return numeFirma;
+    }
+    QString getSef(){
+        return sef;
+    }
+    QString getAddress(){
+        return adresa;
+    }
+    int getSalariu(){
+        return salariu;
+    }
+    int getMoneda(){
+        return moneda;
+    }
+    int getDepartment(){
+        return dep;
+    }
+    int getCompAerian(){
+        return compAerian;
+    }
+    int getCompMaritim(){
+        return compMaritim;
+    }
+    int getCompFeroviar(){
+        return compFeroviar;
+    }
+    int getCompInternational(){
+        return compInternat;
+    }
+    int getCompDomestic(){
+        return compDomestic;
+    }
+    int getDepozitare(){
+        return depozitare;
+    }
+    int getComercial(){
+        return comercial;
+    }
+    int getAchizitii(){
+        return achizitii;
+    }
+    int getManageEchipa(){
+        return manageEchipa;
+    }
+    int getAnaliza(){
+        return analiza;
+    }
+    int getDecizii(){
+        return decizii;
+    }
+    int getPrezentare(){
+        return prezentare;
+    }
+    int getComunicare(){
+        return comunicare;
+    }
+    int getCompRutier()
+    {
+        return compRutier;
+    }
+
+    int getManageProiect(){
+        return manageProiect;
+    }
+    int getManageTimp(){
+        return manageTimp;
+    }
+    int getLeanManage(){
+        return leanManage;
+    }
+    int getSixSigma(){
+        return sixSigma;
+    }
+    int getTADR(){
+        return tADR;
+    }
+    int getTIATA(){
+        return tIATA;
+    }
+
+    int getSisInfo(){
+        return sisInfo;
+    }
+    int getStandardLucru(){
+        return standardLucru;
     }
 
 signals:
@@ -80,9 +201,9 @@ protected:
     int salariu ;
     int moneda;
     int dep;
-    int level;
+    UserLevel level;
     int compAerian;
-    int compMaritm;
+    int compMaritim;
     int compRutier;
     int compFeroviar;
     int compInternat;

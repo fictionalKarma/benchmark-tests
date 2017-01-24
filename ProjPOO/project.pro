@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ProjPOO
@@ -13,8 +13,6 @@ SOURCES += main.cpp\
     usermanager.cpp \
     principalform.cpp \
     user.cpp \
-    event.cpp \
-    event_queue.cpp \
     log.cpp \
     logHandler.cpp \
     fileOperations.cpp \ 
@@ -24,7 +22,20 @@ SOURCES += main.cpp\
     buget.cpp \
     procesop.cpp \
     personal.cpp \
-    table.cpp
+    table.cpp \
+    smtphandler/emailaddress.cpp \
+    smtphandler/mimeattachment.cpp \
+    smtphandler/mimecontentformatter.cpp \
+    smtphandler/mimefile.cpp \
+    smtphandler/mimehtml.cpp \
+    smtphandler/mimeinlinefile.cpp \
+    smtphandler/mimemessage.cpp \
+    smtphandler/mimemultipart.cpp \
+    smtphandler/mimepart.cpp \
+    smtphandler/mimetext.cpp \
+    smtphandler/quotedprintable.cpp \
+    smtphandler/smtpclient.cpp \
+    userinfo.cpp
 
 
 HEADERS  += startingwindow.h \
@@ -35,8 +46,6 @@ HEADERS  += startingwindow.h \
     usermanager.h \
     principalform.h \
     user.h \
-    event.hpp \
-    event_queue.hpp \
     log.hpp \
     logHandler.hpp \
     fileOperations.hpp \
@@ -47,7 +56,25 @@ HEADERS  += startingwindow.h \
     buget.h \
     procesop.h \
     personal.h \
-    table.h
+    table.h \
+    application.h \
+    userlevels.h \
+    logstrings.h \
+    smtphandler/emailaddress.h \
+    smtphandler/mimeattachment.h \
+    smtphandler/mimecontentformatter.h \
+    smtphandler/mimefile.h \
+    smtphandler/mimehtml.h \
+    smtphandler/mimeinlinefile.h \
+    smtphandler/mimemessage.h \
+    smtphandler/mimemultipart.h \
+    smtphandler/mimepart.h \
+    smtphandler/mimetext.h \
+    smtphandler/quotedprintable.h \
+    smtphandler/smtpclient.h \
+    smtphandler/smtpexports.h \
+    smtphandler/SmtpMime \
+    userinfo.h
 
 
 FORMS    += startingwindow.ui \
@@ -56,5 +83,6 @@ FORMS    += startingwindow.ui \
     principalform.ui \
     buget.ui \
     procesop.ui \
-    personal.ui
+    personal.ui \
+    userinfo.ui
 

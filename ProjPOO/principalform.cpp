@@ -7,15 +7,14 @@ principalForm::principalForm(User *u,QWidget *parent) :
     ui(new Ui::principalForm)
 {
     user = *u;
-    qDebug()<< u->getEmail()<<"AICI";
+    qDebug()<< u->getEmail()<<" AICI";
     marker = 1;
     ui->setupUi(this);
     ui->previous_button->setEnabled(false);
     ui->boss_frame->setFrameShadow(QFrame::Sunken);
     ui->children_frame->setFrameShadow(QFrame::Sunken);
     ui->username_label->setText(user.getUserName());//get nume_user from database
-
-
+    isUserFormShown=false;
 
     actualBoss= user.getTree()->getNode() ;//name=getNameofUser();
     childrenUser = user.getTree()->getChildren();
@@ -23,10 +22,13 @@ principalForm::principalForm(User *u,QWidget *parent) :
     //get names and put in a vector: and defines the variable "actualBoss"
 
 
-    //-----just tests
-    childrenNames <<"andrei"<<"catalin"<<"silviu"<<"mircea"<<"victor";
+    ui->info_button->setText("About "+actualBoss->user.getUserName());
     createBossButton();
     createButons();
+    //----CREATE INFOFORM
+    infoForm = new userinfo(actualBoss->user
+                            ,QPoint(this->pos().x()+this->width()+70,this->pos().y()));
+
     setWindowTitle("Principal Window");
 
 
@@ -138,6 +140,7 @@ void principalForm::handleButton()
   update_childrenNames();
    delete ui->children_frame->layout();
   createButons();
+   ui->info_button->setText("About "+actualBoss->user.getUserName());
   QWidget::update();
   QMessageBox mb;
   mb.setText(/*actualBoss*/QString("%1").arg(btnCopii.count()));
@@ -219,7 +222,7 @@ void principalForm::on_previous_button_clicked()
 
     btnPrincipal->setText(actualBoss->user.getUserName());
     btnPrincipal->setObjectName(actualBoss->user.getUserName());
-
+    ui->info_button->setText("About "+actualBoss->user.getUserName());
      QListIterator <QPushButton*> iter(btnCopii);
      while(iter.hasNext())
      {
@@ -256,3 +259,17 @@ void principalForm::on_pushButton_2_clicked(bool vari)
 
 }
 void principalForm::on_pushButton_4_clicked(){}
+
+void principalForm::on_info_button_clicked()
+{
+    if(isUserFormShown)
+    {
+        infoForm->hide();
+        isUserFormShown=false;
+    }
+    else{
+            infoForm->show();
+            isUserFormShown=true;
+        }
+
+}

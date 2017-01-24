@@ -9,6 +9,7 @@ struct
     QString text[19];
     QString n[25];
 }decod;
+
 int Table::createTable(QString tbName, QString columnValues) {
 
     if (!db.isOpen()) {

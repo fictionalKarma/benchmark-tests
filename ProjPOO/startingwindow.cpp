@@ -11,6 +11,8 @@ StartingWindow::StartingWindow(QWidget *parent) :
     connect(ui->loginBtn, SIGNAL(clicked()), this, SLOT(launchLoginForm()));
     connect(ui->signupBtn, SIGNAL(clicked()), this, SLOT(launchSignUp()));
     setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+    log = new LoginForm(this);
+    reg = new RegistrationForm(this);
 }
 
 StartingWindow::~StartingWindow()
@@ -19,13 +21,11 @@ StartingWindow::~StartingWindow()
 }
 
 void StartingWindow::launchLoginForm() {
-    log = new LoginForm(this);
     log->show();
     this->close();
 }
 
 void StartingWindow::launchSignUp() {
-    reg = new RegistrationForm(this);
     reg->show();
     this->close();
 }

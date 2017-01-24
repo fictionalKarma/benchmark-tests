@@ -1,5 +1,6 @@
 #include "registrationform.h"
 #include "ui_registrationform.h"
+#include "smtphandler/SmtpMime"
 
 RegistrationForm::RegistrationForm(QMainWindow *qm, QWidget *parent) :
     QMainWindow(parent),
@@ -8,27 +9,13 @@ RegistrationForm::RegistrationForm(QMainWindow *qm, QWidget *parent) :
     ui->setupUi(this);
     connect(ui->cancelBtn, SIGNAL(clicked()), this, SLOT(cancelButton()));
     startWindow = qm;
-
-    position = geometry();
-    QPoint p12 = this->mapToGlobal(this->pos());
-    qDebug() << p12.x() <<" " <<p12.y();
-    /*QRect p1 = QApplication::desktop()->availableGeometry(this);
-    QPoint center = p1.center();
-
-    move(center.x() - width()*0.5,center.y() - height()*0.5);*/
-    /*this->setGeometry(personalForm->p.x()
-                      + personalForm->p.width(),
-                      personalForm->p.y() ,
-                      this->width(),
-                      this->height());*/
-    //this->setGeometry(personalForm->p.)
     setFixedSize(this->size());
     connect(ui->regBtn, SIGNAL(clicked()), this, SLOT(registerUser()));
     connect(ui->emailconfTb, SIGNAL(returnPressed()), this, SLOT(registerUser()));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(openPersonal()));
 }
 
-RegistrationForm::~RegistrationForm()
-{
+RegistrationForm::~RegistrationForm() {
     delete ui;
 }
 
@@ -80,16 +67,46 @@ void RegistrationForm::registerUser() {
         } else {
             UserManager::openDatabaseConn();
             UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
-            QTimer *timer = new QTimer();
-            connect(timer, SIGNAL(timeout()), this, SLOT(redirect()));
-            timer->setSingleShot(true);
-            timer->start(3000);
-            ui->emcoError->setText("Registration succesful! Redirecting to starting window...");
+            ui->emcoError->setText("Registration succesful! Check your inbox...");
             ui->emcoError->setStyleSheet("color: rgba(0, 180, 0, 1);");
             ui->regBtn->setEnabled(false);
             ui->cancelBtn->setEnabled(false);
+            logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
+            sendConfirmationMail();
         }
     }
+}
+
+void RegistrationForm::sendConfirmationMail() {
+    SmtpClient smtp("smtp.gmail.com", 465, SmtpClient::SslConnection);
+    smtp.setUser("benchmark.testing.team@gmail.com");
+    smtp.setPassword("bentestteam");
+
+    MimeMessage message;
+    message.setSender(new EmailAddress("benchmark.testing.team@gmail.com", "Benchmark Testing Team"));
+    message.addRecipient(new EmailAddress(ui->emailTb->text(), ui->userTb->text()));
+
+    MimeText text;
+    text.setText("Hi,\nWe're sending this e-mail as a confirmation of your account registration for our product, Benchmark Testing. We hope you'll enjoy your experience! Please do not reply to this mail. Here are your account details:\n\nUsername: " + ui->userTb->text() + "\nPassword: " + ui->passTb->text() + "\nE-Mail Address: " + ui->emailTb->text() + "\n\nBest regards,\nBenchmark Testing Team.");
+    message.addPart(&text);
+    message.setSubject("Your registration confirmation");
+
+
+    if (!smtp.connectToHost()) {
+        logger.addLog(FAILED_CONNECTION_EMAILHOST);
+    }
+    if (!smtp.login()) {
+        logger.addLog(FAILED_LOGIN_EMAILHOST);
+    }
+    if (!smtp.sendMail(message)) {
+        logger.addLog(FAILED_EMAIL_SEND(ui->emailTb->text()));
+    }
+    smtp.quit();
+
+    QTimer *timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(redirect()));
+    timer->setSingleShot(true);
+    timer->start(3000);
 }
 
 void RegistrationForm::redirect() {
@@ -97,8 +114,7 @@ void RegistrationForm::redirect() {
     this->close();
 }
 
-void RegistrationForm::on_pushButton_clicked()
-{
-    personalForm=new personal(position);
-    personalForm->show();
+void RegistrationForm::openPersonal() {
+    pers = new personal(QPoint(this->pos().x() + this->width(), this->pos().y()));
+    pers->show();
 }

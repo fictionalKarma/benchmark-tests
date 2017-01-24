@@ -12,8 +12,7 @@ bool LogHandler::exists(QString date) {
     return FileOperations::check(PATH_TO_LOGS, date);
 }
 
-Error LogHandler::updateLog(QString date, Log log ){
-    QVector<QString> logs = log.getLogs();
+Error LogHandler::updateLog(QString date, QString log){
     date = date + ".txt";
 
     if(!QFile::exists(PATH_TO_LOGS + "/" + date)) {
@@ -22,10 +21,8 @@ Error LogHandler::updateLog(QString date, Log log ){
                                                                             + this->getFullTime()
                                                                       + "\n------------------------\n");
     }
-
-    for(QString it : logs) {
-        FileOperations::writeToFile(PATH_TO_LOGS, date, it + "\n");
-    }
+    qDebug() << log;
+    FileOperations::writeToFile(PATH_TO_LOGS, date, log + "\n");
 
     return Error::OK;
 }

@@ -17,7 +17,7 @@ class personal : public QWidget
 
 public:
     QRect p;
-    explicit personal(QRect q,QWidget *parent = 0);
+    explicit personal(QPoint location, QWidget *parent = 0);
     ~personal();
     struct pers
     {

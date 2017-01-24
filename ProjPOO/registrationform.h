@@ -6,8 +6,8 @@
 #include <operations.h>
 #include <QDebug>
 #include <QTimer>
-#include<personal.h>
-#include <QDesktopWidget>
+#include <loghandler.hpp>
+#include "personal.h"
 
 namespace Ui {
 class RegistrationForm;
@@ -18,7 +18,6 @@ class RegistrationForm : public QMainWindow
     Q_OBJECT
 
 public:
-    QRect position ;
     explicit RegistrationForm(QMainWindow *qm, QWidget *parent = 0);
     ~RegistrationForm();
 
@@ -26,13 +25,14 @@ private slots:
     void cancelButton();
     void registerUser();
     void redirect();
-
-    void on_pushButton_clicked();
+    void openPersonal();
 
 private:
     Ui::RegistrationForm *ui;
     QMainWindow *startWindow;
-    personal *personalForm;
+    Log logger;
+    personal *pers;
+    void sendConfirmationMail();
 };
 
 #endif // REGISTRATIONFORM_H

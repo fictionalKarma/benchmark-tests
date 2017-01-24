@@ -16,7 +16,7 @@
 #include<QMessageBox>
 #include "tree.hpp"
 #include "user.h"
-
+#include<userinfo.h>
 
 namespace Ui {
 class principalForm;
@@ -53,6 +53,8 @@ private slots:
     bool hasNoChildren_actualBoss();
     void on_previous_button_clicked();
 
+    void on_info_button_clicked();
+
 private:
     Ui::principalForm *ui;
     QLayout *btnLayout;
@@ -66,6 +68,8 @@ private:
     QStack<Node*> bossiStack;
     QPushButton *btnPrincipal;
     QList<QPushButton*> btnCopii;  //copii segfului
+    userinfo *infoForm;
+    bool isUserFormShown;
     //QVector<QPushButton> buttons;
    };
 
