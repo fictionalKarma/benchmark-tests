@@ -2,7 +2,6 @@
 #define PRINCIPALFORM_H
 
 #include <QMainWindow>
-#include "formfeed.hpp"
 //#include "firmewindow.h"
 #include <QDialog>
 #include<QObject>
@@ -60,6 +59,8 @@ private:
     QVector<QString> childrenNames;
     std::vector<Node*> childrenUser;
     Node* actualBoss;
+    Node1* actualBoss1;
+    int marker ;
     User user;
     Administrator administrator;
     QStack<Node*> bossiStack;

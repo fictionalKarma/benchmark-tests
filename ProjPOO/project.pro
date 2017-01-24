@@ -17,12 +17,14 @@ SOURCES += main.cpp\
     event_queue.cpp \
     log.cpp \
     logHandler.cpp \
-    formfeed.cpp \
     fileOperations.cpp \ 
 	tree.cpp \
     firma.cpp \
-    administrator.cpp
-
+    administrator.cpp \
+    buget.cpp \
+    procesop.cpp \
+    personal.cpp \
+    table.cpp
 
 
 HEADERS  += startingwindow.h \
@@ -37,15 +39,22 @@ HEADERS  += startingwindow.h \
     event_queue.hpp \
     log.hpp \
     logHandler.hpp \
-    formfeed.hpp \
     fileOperations.hpp \
     includes.hpp \
 	tree.hpp \
     firma.hpp \
-    administrator.hpp
+    administrator.hpp \
+    buget.h \
+    procesop.h \
+    personal.h \
+    table.h
 
 
 FORMS    += startingwindow.ui \
     loginform.ui \
     registrationform.ui \
-    principalform.ui
+    principalform.ui \
+    buget.ui \
+    procesop.ui \
+    personal.ui
+

@@ -12,6 +12,12 @@ public:
 
    	void addUser(User &u);
     void addUser(QString , QString);
+    void operator= (Administrator &other){
+        this->setBoss(other.getBoss());
+        this->setUserName(other.getUserName());
+        firma = other.getFirma();
+        copy = other.copy ;
+    }
 private:
 };
 

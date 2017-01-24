@@ -3,6 +3,10 @@
 
 #include <QString>
 #include <QObject>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlQuery>
+#include <QDebug>
 
 class Firma;
 class Tree;
@@ -16,6 +20,8 @@ public:
     User(QString ,Firma* ,QString);
     User();
     virtual void dummyFunction(){}
+    void readFromDatabase(QString name);
+    void decode(QString);
     QString getUserName(){
         return username;
     }
@@ -58,15 +64,45 @@ public:
             return true;
         return false;
     }
+    QString getEmail(){
+        return this->email;
+    }
 
 signals:
     void onLogin();
 
 protected:
-    QString username , boss;
+    QSqlDatabase db;
+    QString username , boss ;
+    QString cnp,email,numeFirma,sef , adresa;
     Firma* firma;
     Tree* copy;
+    int salariu ;
+    int moneda;
+    int dep;
     int level;
+    int compAerian;
+    int compMaritm;
+    int compRutier;
+    int compFeroviar;
+    int compInternat;
+    int compDomestic;
+    int depozitare;
+    int comercial;
+    int achizitii;
+    int manageEchipa;
+    int analiza;
+    int decizii;
+    int prezentare;
+    int comunicare;
+    int manageProiect;
+    int manageTimp;
+    int leanManage;
+    int sixSigma;
+    int tADR;
+    int tIATA;
+    int sisInfo;
+    int standardLucru;
 };
 
 #endif // USER_H

@@ -6,6 +6,7 @@ StartingWindow::StartingWindow(QWidget *parent) :
     ui(new Ui::StartingWindow)
 {
     ui->setupUi(this);
+
     setFixedSize(this->size());
     connect(ui->loginBtn, SIGNAL(clicked()), this, SLOT(launchLoginForm()));
     connect(ui->signupBtn, SIGNAL(clicked()), this, SLOT(launchSignUp()));

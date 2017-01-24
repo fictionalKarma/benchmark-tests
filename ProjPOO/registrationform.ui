@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>286</height>
+    <width>433</width>
+    <height>295</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,13 +19,23 @@ background: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop: 0.534091 r
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>267</x>
+      <y>9</y>
+      <width>16</width>
+      <height>377</height>
+     </rect>
+    </property>
+   </widget>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>371</width>
-      <height>271</height>
+      <x>9</x>
+      <y>9</y>
+      <width>251</width>
+      <height>279</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="mainGrid">
@@ -59,25 +69,6 @@ background: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop: 0.534091 r
 	border-radius: 4px;
 	border: 1px solid black;
 }</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QPushButton" name="regBtn">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-	border-radius:5px;
-	background: rgba(200, 200, 200, 1);
- 	height: 25px;
-	border: 1px solid black;
-}
-
-QPushButton:hover {
-	background:rgba(240, 240, 240, 1);
-}</string>
-       </property>
-       <property name="text">
-        <string>Register</string>
        </property>
       </widget>
      </item>
@@ -121,25 +112,6 @@ QPushButton:hover {
        </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QPushButton" name="cancelBtn">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-	border-radius:5px;
-	background: rgba(200, 200, 200, 1);
- 	height: 25px;
-	border: 1px solid black;
-}
-
-QPushButton:hover {
-	background:rgba(240, 240, 240, 1);
-}</string>
-       </property>
-       <property name="text">
-        <string>Cancel</string>
        </property>
       </widget>
      </item>
@@ -199,7 +171,7 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
-     <item row="9" column="0" colspan="2">
+     <item row="11" column="0" colspan="2">
       <widget class="QLabel" name="emcoError">
        <property name="styleSheet">
         <string notr="true">color: rgba(0, 0, 0, 0);</string>
@@ -238,7 +210,58 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
+     <item row="10" column="0">
+      <widget class="QPushButton" name="cancelBtn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius:5px;
+	background: rgba(200, 200, 200, 1);
+ 	height: 25px;
+	border: 1px solid black;
+}
+
+QPushButton:hover {
+	background:rgba(240, 240, 240, 1);
+}</string>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QPushButton" name="regBtn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border-radius:5px;
+	background: rgba(200, 200, 200, 1);
+ 	height: 25px;
+	border: 1px solid black;
+}
+
+QPushButton:hover {
+	background:rgba(240, 240, 240, 1);
+}</string>
+       </property>
+       <property name="text">
+        <string>Register</string>
+       </property>
+      </widget>
+     </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>20</y>
+      <width>111</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Date personale</string>
+    </property>
    </widget>
   </widget>
  </widget>
@@ -248,8 +271,6 @@ QPushButton:hover {
   <tabstop>passcTb</tabstop>
   <tabstop>emailTb</tabstop>
   <tabstop>emailconfTb</tabstop>
-  <tabstop>regBtn</tabstop>
-  <tabstop>cancelBtn</tabstop>
  </tabstops>
  <resources/>
  <connections/>

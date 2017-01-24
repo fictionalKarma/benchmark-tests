@@ -10,7 +10,7 @@ User::User(QString name)
 {
     level = 0;
     this->username = name;
-    QString tableName="PERSONAL";
+    
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
     db.open();

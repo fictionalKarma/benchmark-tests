@@ -7,7 +7,8 @@ principalForm::principalForm(User *u,QWidget *parent) :
     ui(new Ui::principalForm)
 {
     user = *u;
-
+    qDebug()<< u->getEmail()<<"AICI";
+    marker = 1;
     ui->setupUi(this);
     ui->previous_button->setEnabled(false);
     ui->boss_frame->setFrameShadow(QFrame::Sunken);
@@ -31,6 +32,37 @@ principalForm::principalForm(User *u,QWidget *parent) :
 
 }
 
+principalForm::principalForm(Administrator *admin,QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::principalForm)
+{
+    administrator = *admin;
+    marker = 2;
+    ui->setupUi(this);
+    ui->previous_button->setEnabled(false);
+    ui->boss_frame->setFrameShadow(QFrame::Sunken);
+    ui->children_frame->setFrameShadow(QFrame::Sunken);
+    ui->username_label->setText(administrator.getUserName());//get nume_user from database
+
+
+    qDebug() << administrator.getTree()->getNode1()->user->getUserName()<<"AICIIIII";
+    actualBoss1= administrator.getTree()->getNode1() ;//name=getNameofUser();
+    //qDebug()<<administrator.getUserName()<<"AICI!!!!!";
+    childrenUser = administrator.getTree()->getChildren();
+     //for(Node* n : childrenUser)
+        // qDebug()<< n->user.getUserName()<<"AICI !!!!";
+    //std::vector<Node*> children=getChildren();
+    //get names and put in a vector: and defines the variable "actualBoss"
+
+
+    //-----just tests
+    childrenNames <<"andrei"<<"catalin"<<"silviu"<<"mircea"<<"victor";
+    createBossButton();
+    createButons();
+    setWindowTitle("Principal Window");
+
+
+}
 
 principalForm::~principalForm()
 {
@@ -125,20 +157,30 @@ void principalForm::update_childrenNames()
 }
 void principalForm::createBossButton()
 {
+
     btnLayout=new QHBoxLayout(this);
+
+    if(marker == 1){
     btnPrincipal=new QPushButton(actualBoss->user.getUserName());
     btnPrincipal->setStyleSheet("QPushButton{background-color:white; border-style: border; width: 12px}");
     btnLayout->addWidget(btnPrincipal);
-
+    }
+    else{
+        qDebug()<<actualBoss1->user->getUserName()<<"AICI!!!!";
+        btnPrincipal=new QPushButton(actualBoss1->user->getUserName());
+            btnPrincipal->setStyleSheet("QPushButton{background-color:white; border-style: border; width: 12px}");
+            btnLayout->addWidget(btnPrincipal);
+    }
     ui->boss_frame->setLayout(btnLayout);//adaug BUTONUL CU seful
 }
 
 //OBS! FUNCTIA DE CREATE SI UPDATEAZA PRIMII USERI
 void principalForm::createButons()
 {
-
+    qDebug() << "AICI!!!!";
     btnLayout=new QHBoxLayout(this);
 
+    if(marker == 1)
     for( Node* n :actualBoss->children)
     {
         QPushButton *btn=new QPushButton( n->user.getUserName());
@@ -149,6 +191,19 @@ void principalForm::createButons()
         QObject::connect(btn,SIGNAL(clicked()),this,SLOT(handleButton()));
         btnLayout->addWidget(btn);
         btn->show();
+    }
+    else{
+        for( Node* n :actualBoss1->children)
+        {
+            QPushButton *btn=new QPushButton( n->user.getUserName());
+            btn->setObjectName( n->user.getUserName());
+            btnCopii.append(btn);
+            btn->setStyleSheet("QPushButton{background-color:grey; border-style: border; width: 12px; } QPushButton:hover{background-color:black; color:white; }");
+
+            QObject::connect(btn,SIGNAL(clicked()),this,SLOT(handleButton()));
+            btnLayout->addWidget(btn);
+            btn->show();
+        }
     }
 
     ui->children_frame->setLayout(btnLayout);//adaug butoanele cu copii

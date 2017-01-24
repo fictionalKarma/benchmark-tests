@@ -8,6 +8,20 @@ RegistrationForm::RegistrationForm(QMainWindow *qm, QWidget *parent) :
     ui->setupUi(this);
     connect(ui->cancelBtn, SIGNAL(clicked()), this, SLOT(cancelButton()));
     startWindow = qm;
+
+    position = geometry();
+    QPoint p12 = this->mapToGlobal(this->pos());
+    qDebug() << p12.x() <<" " <<p12.y();
+    /*QRect p1 = QApplication::desktop()->availableGeometry(this);
+    QPoint center = p1.center();
+
+    move(center.x() - width()*0.5,center.y() - height()*0.5);*/
+    /*this->setGeometry(personalForm->p.x()
+                      + personalForm->p.width(),
+                      personalForm->p.y() ,
+                      this->width(),
+                      this->height());*/
+    //this->setGeometry(personalForm->p.)
     setFixedSize(this->size());
     connect(ui->regBtn, SIGNAL(clicked()), this, SLOT(registerUser()));
     connect(ui->emailconfTb, SIGNAL(returnPressed()), this, SLOT(registerUser()));
@@ -81,4 +95,10 @@ void RegistrationForm::registerUser() {
 void RegistrationForm::redirect() {
     startWindow->show();
     this->close();
+}
+
+void RegistrationForm::on_pushButton_clicked()
+{
+    personalForm=new personal(position);
+    personalForm->show();
 }

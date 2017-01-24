@@ -43,7 +43,7 @@ public:
 	}
     Tree (Node1* b){
         boss1 = new Node1;
-        boss1->user = (b->user);
+        boss1->user = b->user;
         boss1->children = b->children;
        // boss->user = b->a;
         marker = 2;
@@ -52,6 +52,10 @@ public:
 	Node* getNode(){
 		return boss;
 	}
+    Node1* getNode1(){
+        return boss1;
+    }
+
 	void traverse();
     Node* traverse(QString);
     Node* find(QString);

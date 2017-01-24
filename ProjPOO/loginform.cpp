@@ -6,6 +6,41 @@ template<typename Base, typename T>
        return dynamic_cast<const Base*>(ptr) != NULL;
    }
 
+/*Tree* readTreeFromDatabase(QString firma){
+    std::vector<Node*> coada ;
+
+    Node1* newNode = new Node1 ;
+    Node* nNode;
+
+    newNode->user = new Administrator("nume administrator");
+    Tree *f = new Tree(newNode);
+
+
+
+    while(readAdministratorChildrenFromDatabase){
+        nNode = new Node;
+
+        nNode->user = administratorChild ;
+        coada.push_back(nNode);
+        f->add(nNode,newNode->user->getUserName());
+    }
+
+    for (Node* n:coada){
+        //daca s-au citit copii din baza de date
+        //adauga-i pe toti
+        if(copii cititi din baza de date){
+        nNode = new Node;
+        nNode->user = readNChildFromDatabase;
+        nNode->father = n;
+        f->add(nNode,n->user.getUserName());
+        coada.push_back(nNode);
+        }
+        //
+
+    }
+    return f;
+}*/
+
 LoginForm::LoginForm(QMainWindow *qm, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::LoginForm)
