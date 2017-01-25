@@ -57,9 +57,11 @@ public:
     }
 
 	void traverse();
+    void traverse(int&);
     Node* traverse(QString);
     Node* find(QString);
 	void traverse(Node* n);
+    void traverse(int& , Node*);
     Node* traverse(Node* n , QString name,int * ceva);
     void internAdd(Node* n,Node* father,QString boss);
     void add(Node* n , QString boss);
@@ -68,7 +70,9 @@ public:
     void setBoss(Node *n);
     void setBoss(Node1 *n);
     std::vector<Node*> getChildren();
-
+    void setMarker(int i){
+        marker = i;
+    }
 
 };
 #endif

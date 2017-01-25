@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     smtphandler/mimetext.cpp \
     smtphandler/quotedprintable.cpp \
     smtphandler/smtpclient.cpp \
-    userinfo.cpp
+    userinfo.cpp \
+    objective.cpp
 
 
 HEADERS  += startingwindow.h \
@@ -74,7 +75,8 @@ HEADERS  += startingwindow.h \
     smtphandler/smtpclient.h \
     smtphandler/smtpexports.h \
     smtphandler/SmtpMime \
-    userinfo.h
+    userinfo.h \
+    objective.hpp
 
 
 FORMS    += startingwindow.ui \

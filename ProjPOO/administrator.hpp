@@ -16,6 +16,7 @@ public:
         this->setBoss(other.getBoss());
         this->setUserName(other.getUserName());
         firma = other.getFirma();
+
         copy = other.copy ;
     }
 private:

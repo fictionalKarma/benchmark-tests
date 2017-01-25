@@ -56,12 +56,15 @@ bool LoginForm::checkAuth() {
             }
 
             else {
+
                 // SUCCESSFULL LOGIN
                 ui->wrongLbl->setStyleSheet("color:rgba(0, 180, 0, 1);");
                 ui->wrongLbl->setText("Login Succesful!!!!");
 
                 // Here comes main program...
-                UserLevel level = UserManager::getUserLevel(ui->nameTb->text());
+                UserLevel level = UserLevel::User;
+               //UserLevel level = UserLevel::Administrator;
+                //UserLevel level = UserManager::getUserLevel(ui->nameTb->text());
                 if (level == UserLevel::User) {
                     User u("Georgica") , u2("Vasile","Georgica") ,
                                         u3("Ionel","Georgica"), u4("GICA","Vasile");
@@ -97,23 +100,81 @@ bool LoginForm::checkAuth() {
                                         f.add(dddd,"IOCLA");
 
 
+                                        Objective buget("Bugetul pe luna curenta",120, 160);
+                                        Objective cifra("Cifra de afaceri",16241,25554);
+                                        Objective destinatie("Produse ajunse la destinatie",0.66,1);
+                                        Objective plecare("Produse plecate spre destinatie",0.80,1);
+                                        Objective ocupare("Gradul de ocupare al depozitului",40,100);
+
+                                        /*qDebug()<<buget.toString();
+                                        buget.addToValue(20);
+                                        qDebug()<<buget.passed();
+                                        qDebug()<<buget.toString();*/
                                         Firma *f8 = new Firma(&f);
+                                        f8->setObjective(&buget);
+                                        f8->setObjective(&cifra);
+                                        f8->setObjective(&destinatie);
+                                        f8->setObjective(&plecare);
+                                        f8->setObjective(&ocupare);
+                                        f8->printObjectives();
+                                        qDebug()<<" ";
+                                        for(Objective* o: f8->getObjectives())
+                                            o->addToValue(20);
+
+                                        f8->updateObjectives();
+                                        f8->printObjectivesPassed();
+                                        qDebug()<<" ";
+                                        f8->printObjectives();
                                         u1->setFirma(f8);
                                         u1->setTree(new Tree(u1->getFirma()->getTree()->find(u1->getUserName())));
-                                        u1->getTree()->traverse();
+                                        //u1->getTree()->traverse();
+                                        int count = 0;
+                                        f8->getTree()->traverse(count);
+                                        qDebug()<<"Numarul de noduri: "<<count;
                                         pr = new principalForm(u1);
                 } else if (level == UserLevel::Manager) {
 
                 } else if (level == UserLevel::Administrator) {
+
+
                     Administrator *a = new Administrator(ui->nameTb->text());
-                    Node *b = new Node;
-                    b->user = *a;
+                    Node1 *b = new Node1;
+                    b->user = a;
                     b->father = NULL;
-                    Tree f(b);
+
+                     Tree f(b);
+
+                     User u2("Vasile",b->user->getUserName()) , u3("Ionel") , u4("GICA","Vasile") , u5("IOCLA"), u6("IOI","IOCLA");
+                     User  u7("Denis","Vasile") , u8("Adi","GICA") , u9("Ali","Denis");
+
+                     Node *c = new Node , *d = new Node , *eee = new Node , *ddd = new Node , *dddd = new Node;
+                     Node *abc = new Node , *abcd = new Node , *abcde = new Node;
+
+                     c->user = u2; d->user = u3; eee->user = u4;ddd->user = u5; dddd->user = u6;
+                     abc->user = u7;abcd->user = u8; abcde->user = u9;
+
+                     f.add(c,b->user->getUserName());
+                     f.add(d,b->user->getUserName());
+                     f.add(eee,"Vasile");
+                     f.add(ddd,"GICA");
+                     f.add(dddd,"IOCLA");
+                     f.add(abc,"GICA");
+                     f.add(abcd,"Denis");
+                     f.add(abcde,"IOCLA");
+                     //f.traverse();
+
+
+
+
+
                     Firma *f8 = new Firma(&f);
+
+
                     a->setFirma(f8);
-                    a->setTree(new Tree(a->getFirma()->getTree()->find(a->getUserName())));
-                    pr = new principalForm(a);
+                    a->setTree(&f);
+                    //a->getTree()->traverse();
+                   // qDebug() << a->getTree()->find("Vasile")->user.getUserName() <<"ACI BOSS";
+                     pr = new principalForm(a);
                 }
 
                 pr->show();

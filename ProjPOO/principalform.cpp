@@ -21,7 +21,7 @@ principalForm::principalForm(User *u,QWidget *parent) :
     //std::vector<Node*> children=getChildren();
     //get names and put in a vector: and defines the variable "actualBoss"
 
-
+    setGeometry(0,0,this->width(),this->height());
     ui->info_button->setText("About "+actualBoss->user.getUserName());
     createBossButton();
     createButons();
@@ -38,7 +38,10 @@ principalForm::principalForm(Administrator *admin,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::principalForm)
 {
+    this->installEventFilter(this);
     administrator = *admin;
+    user = *admin;
+    copy = *admin;
     marker = 2;
     ui->setupUi(this);
     ui->previous_button->setEnabled(false);
@@ -47,18 +50,22 @@ principalForm::principalForm(Administrator *admin,QWidget *parent) :
     ui->username_label->setText(administrator.getUserName());//get nume_user from database
 
 
-    qDebug() << administrator.getTree()->getNode1()->user->getUserName()<<"AICIIIII";
+
+    newNode = new Node; User u1(admin->getUserName());
+    newNode->user = u1;
+    newNode->children = admin->getTree()->getNode1()->children;
+    newNode->user.setTree(admin->getTree());
+    newNode->user.getTree()->setBoss(newNode);
+    qDebug() << newNode->user.getTree()->getNode()->user.getUserName() << "BOSS-UL !!!";
+
+   // qDebug() << newNode->user.getTree()->find("Vasile")->user.getUserName() << " User !!";
+
+    actualBoss = newNode;
     actualBoss1= administrator.getTree()->getNode1() ;//name=getNameofUser();
-    //qDebug()<<administrator.getUserName()<<"AICI!!!!!";
-    childrenUser = administrator.getTree()->getChildren();
-     //for(Node* n : childrenUser)
-        // qDebug()<< n->user.getUserName()<<"AICI !!!!";
-    //std::vector<Node*> children=getChildren();
-    //get names and put in a vector: and defines the variable "actualBoss"
-
-
-    //-----just tests
-    childrenNames <<"andrei"<<"catalin"<<"silviu"<<"mircea"<<"victor";
+    //actualBoss->user.getTree()->traverse();
+    //administrator.getTree()->traverse();
+    //administrator.getTree()->traverse("Denis");
+   //qDebug() << actualBoss->user.getTree()->find("Vasile")->user.getUserName();
     createBossButton();
     createButons();
     setWindowTitle("Principal Window");
@@ -86,6 +93,8 @@ void principalForm::on_pushButton_2_clicked()//buton de afiseaza firma
 
 
 }
+
+
 void principalForm::modifyButtonsTree()
 {
     btnPrincipal->setText(actualBoss->user.getUserName());
@@ -102,22 +111,28 @@ void principalForm::modifyButtonsTree()
 }
 void principalForm::handleButton()
 {
+    //qDebug() << newNode->user.getTree()->getNode1()->user->getUserName();
+    //qDebug() << newNode->user.getTree()->find("Vasile")->user.getUserName() << " User !!";
+    //qDebug() <<newNode->user.getTree()->getNode()->user.getUserName()<<" AICI BOSS";
     if(hasNoChildren_actualBoss())
     {
         QMessageBox messageBox;
         messageBox.critical(0,"Error","An error has occured !");
         messageBox.exec();
     }
-    else{
+    else {
     //----get the name of the object that the user has clicked on --which is going to be the texton the button/
     //the name of the user
     bossiStack.append(actualBoss);
     ui->previous_button->setEnabled(true);
     QObject *senderObj = sender();
     QString objName=senderObj->objectName();
-
+    //qDebug() << newNode->user.getTree()->find("Vasile")->user.getUserName() << " User !!";
+    if(marker == 1)
     actualBoss = user.getTree()->find(objName);
-    //qDebug() << user.getTree()->find(objName)->user.getUserName()<<"AICI!";
+
+    //actualBoss = newNode->user.getTree()->find(objName);
+    //qDebug() << newNode->user.getTree()->find(objName)->user.getUserName()<<" USER!!";
     btnPrincipal->setText(actualBoss->user.getUserName());
     btnPrincipal->setObjectName(actualBoss->user.getUserName());
 
@@ -147,7 +162,9 @@ void principalForm::handleButton()
   mb.exec();
     }
 
+
 }
+
 void principalForm::update_childrenNames()
 {
     childrenNames.clear();
@@ -158,6 +175,7 @@ void principalForm::update_childrenNames()
     childrenNames.remove(4);
     btnCopii.removeAt(4);*/
 }
+
 void principalForm::createBossButton()
 {
 
@@ -180,12 +198,13 @@ void principalForm::createBossButton()
 //OBS! FUNCTIA DE CREATE SI UPDATEAZA PRIMII USERI
 void principalForm::createButons()
 {
-    qDebug() << "AICI!!!!";
+
     btnLayout=new QHBoxLayout(this);
 
-    if(marker == 1)
+
     for( Node* n :actualBoss->children)
     {
+        qDebug()<<n->user.getUserName();
         QPushButton *btn=new QPushButton( n->user.getUserName());
         btn->setObjectName( n->user.getUserName());
         btnCopii.append(btn);
@@ -195,19 +214,8 @@ void principalForm::createButons()
         btnLayout->addWidget(btn);
         btn->show();
     }
-    else{
-        for( Node* n :actualBoss1->children)
-        {
-            QPushButton *btn=new QPushButton( n->user.getUserName());
-            btn->setObjectName( n->user.getUserName());
-            btnCopii.append(btn);
-            btn->setStyleSheet("QPushButton{background-color:grey; border-style: border; width: 12px; } QPushButton:hover{background-color:black; color:white; }");
 
-            QObject::connect(btn,SIGNAL(clicked()),this,SLOT(handleButton()));
-            btnLayout->addWidget(btn);
-            btn->show();
-        }
-    }
+
 
     ui->children_frame->setLayout(btnLayout);//adaug butoanele cu copii
     update();

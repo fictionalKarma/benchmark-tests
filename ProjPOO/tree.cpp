@@ -36,20 +36,46 @@ void Tree::traverse(){
         traverse(boss);
 	qDebug() <<"\n";
 }
-Node* Tree::traverse(QString name){
-    int i = 0;
+void Tree::traverse(int& count){
+    //Node *b  = boss ;
     if(marker == 2){
         Node *b = new Node;
-        b->children = boss1->children;
+        b->children = boss1->children ;
         b->user.setUserName(boss1->user->getUserName());
+        traverse(count,b);
+    }
+    else
+        traverse(count,boss);
+    qDebug() <<"\n";
+}
+void Tree::traverse(int& count,Node *n){
+
+    Node *b = n ;
+
+    for( std::vector<Node*>::iterator it = n->children.begin(); it != n->children.end(); ++it){
+        //for (Node* it : children) {
+            Tree::traverse(count,*it );
+        }
+    count++;
+}
+Node* Tree::traverse(QString name){
+    int i = 0;
+
+    if(marker == 2){
+
+        Node *b = new Node;
+        b->children = boss1->children ;
+        b->user.setUserName(boss1->user->getUserName());
+        //traverse(b);
         if( b->user.getUserName()==name){
-            qDebug ()<< boss->user.getUserName() ;
+            //qDebug ()<< boss->user.getUserName() ;
             return b;
         }
+
         else{
+
             Node *b1;
             b1 = traverse(b,name,&i);
-           // qDebug ()<< b->user.getUserName();
             return b1;
         }
     }
@@ -82,22 +108,23 @@ Node* Tree::traverse(Node *n,QString name , int* i){
     Node *b ;
     if(n->user.getUserName() == name){
         *i = 1;
-        //qDebug()<< n->user.getUserName();
+        qDebug()<< n->user.getUserName();
         return n;
     }
     for( std::vector<Node*>::iterator it = n->children.begin(); it != n->children.end(); ++it){
-        //for (Node* it : children) {
-            b = Tree::traverse(*it,name , i );
+        for (Node* it : n->children) {
+            //qDebug() <<"COPIL :"<< it->user.getUserName();
+            b = Tree::traverse(it,name , i );
             if( *i == 1){
-                //qDebug() << b->user.getUserName();
+                //qDebug() << b->user.getUserName()<<" GASIT !!!";
                 return b;
             }
-            else if (b == NULL)
-                return b;
+            //else if (b == NULL)
+                //return NULL;
         }
     if(boss->children.at(boss->children.size()-1) == n)
         return NULL;
-
+    }
 }
 void Tree::add(Node* n , QString sef){
     if( marker == 1){
@@ -120,7 +147,9 @@ void Tree::add(Node* n , QString sef){
 
 Node* Tree::find(QString name){
 
+
      Node *b = traverse(name);
+
      if(b == NULL) qDebug()<<"NULL POINTER";
      return b ;
 }

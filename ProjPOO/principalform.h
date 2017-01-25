@@ -38,6 +38,7 @@ public:
     explicit principalForm(User* u , QWidget *parent = 0);
     explicit principalForm(Administrator* admin , QWidget *parent = 0);
     explicit principalForm(QWidget *parent = 0);
+
     ~principalForm();
 
 private slots:
@@ -60,11 +61,11 @@ private:
     QLayout *btnLayout;
     QVector<QString> childrenNames;
     std::vector<Node*> childrenUser;
-    Node* actualBoss;
+    Node* actualBoss , *newNode;
     Node1* actualBoss1;
     int marker ;
     User user;
-    Administrator administrator;
+    Administrator administrator , copy;
     QStack<Node*> bossiStack;
     QPushButton *btnPrincipal;
     QList<QPushButton*> btnCopii;  //copii segfului

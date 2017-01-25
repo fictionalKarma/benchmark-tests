@@ -3,7 +3,8 @@
 struct pers
 {
     QString text[7];
-    QString n[25];
+    QString n[25];//da faq is n?
+
 }decod;
 
 User::User(QString name)

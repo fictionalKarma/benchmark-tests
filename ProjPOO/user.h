@@ -8,7 +8,6 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include "userlevels.h"
-
 class Firma;
 class Tree;
 struct Node ;
@@ -88,6 +87,7 @@ public:
         standardLucru=other.getStandardLucru();
 
     }
+
     bool operator==(User &other){
         int i ;
         i =  (boss == other.getBoss()) + (username == other.getUserName());
@@ -188,6 +188,101 @@ public:
     int getStandardLucru(){
         return standardLucru;
     }
+
+    void setEmail(QString emm){
+        email= emm;
+    }
+    void setCnp(QString cnn){
+        cnp = cnn;
+    }
+    void setNumeFirma(QString value){
+        numeFirma = value;
+    }
+    void setSef(QString value){
+        sef = value;
+    }
+    void setAddress(QString value){
+        adresa = value;
+    }
+    void setSalariu(int value){
+        salariu = value;
+    }
+    void setMoneda(int value){
+        moneda = value;
+    }
+    void setDepartment(int value){
+        dep = value;
+    }
+    void setCompAerian(int value){
+        compAerian = value;
+    }
+    void setCompMaritim(int value){
+        compMaritim = value;
+    }
+    void setCompFeroviar(int value){
+        compFeroviar = value;
+    }
+    void setCompInternational(int value){
+        compInternat = value;
+    }
+    void setCompDomestic(int value){
+        compDomestic = value;
+    }
+    void setDepozitare(int value){
+        depozitare = value;
+    }
+    void setComercial(int value){
+        comercial = value;
+    }
+    void setAchizitii(int value){
+        achizitii = value;
+    }
+    void setManageEchipa(int value){
+       manageEchipa = value;
+    }
+    void setAnaliza(int value){
+        analiza = value;
+    }
+    void setDecizii(int value){
+        decizii = value;
+    }
+    void setPrezentare(int value){
+        prezentare = value;
+    }
+    void setComunicare(int value){
+        comunicare = value;
+    }
+    void setCompRutier(int value)
+    {
+        compRutier = value;
+    }
+
+    void setManageProiect(int value){
+        manageProiect = value;
+    }
+    void setManageTimp(int value){
+        manageTimp = value;
+    }
+    void setLeanManage(int value){
+        leanManage = value;
+    }
+    void setSixSigma(int value){
+        sixSigma = value;
+    }
+    void setTADR(int value){
+        tADR = value;
+    }
+    void setTIATA(int value){
+        tIATA = value;
+    }
+
+    void setSisInfo(int value){
+        sisInfo = value;
+    }
+    void setStandardLucru(int value){
+        standardLucru = value;
+    }
+
 
 signals:
     void onLogin();
