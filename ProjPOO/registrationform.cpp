@@ -115,6 +115,5 @@ void RegistrationForm::redirect() {
 }
 
 void RegistrationForm::openPersonal() {
-    pers = new personal(QPoint(this->pos().x() + this->width(), this->pos().y()));
-    pers->show();
+
 }

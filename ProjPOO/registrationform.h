@@ -31,7 +31,7 @@ private:
     Ui::RegistrationForm *ui;
     QMainWindow *startWindow;
     Log logger;
-    personal *pers;
+
     void sendConfirmationMail();
 };
 

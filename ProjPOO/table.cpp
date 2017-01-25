@@ -3,69 +3,101 @@
 #include<QFile>
 #include<QTextStream>
 QSqlDatabase Table::db;
-int numOfRows;
+
 struct
 {
     QString text[19];
     QString n[25];
 }decod;
+Table::Table()
+{
+
+
+
+}
 
 int Table::createTable(QString tbName, QString columnValues) {
 
-    if (!db.isOpen()) {
-        db = QSqlDatabase::addDatabase("QSQLITE");
+    if(!QFile::exists( "procese.db" ))
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE","procese.db");
         db.setDatabaseName(DATABASE_NAME);
         db.open();
-        QSqlQuery query;
 
-        QString sql = "CREATE TABLE " +  tbName + " (CRT INT PRIMARY KEY, " + columnValues + ");"; //Se formeaza comanda Sqlite
-        query.exec(sql);
     }
-    QString connection;
-    connection = db.connectionName();
-    db.close();
-    db = QSqlDatabase();
-    db.removeDatabase(connection);
+    if (!db.isOpen()) {
+        connect();
+    }
+
+        //if(db.isOpen())
+          //  qDebug()<<"party";
+        //else qDebug()<<"nu i party";
+        QSqlQuery query(db);
+
+        QString sql = "CREATE TABLE " +  tbName + " (CRT INT PRIMARY KEY NOT NULL , " + columnValues + ");"; //Se formeaza comanda Sqlite
+        qDebug()<<query.exec(sql);
+        db.close();
+
+
+
     return 0;
 }
 int Table::tableSize(QString tableName){
-    if (!db.isOpen()) {
-        db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName(DATABASE_NAME);
-        db.open();
-    QSqlQuery query;
-    QString sql = "SELECT * FROM " +tableName +";";
     int count=0;
-    query.exec(sql);
+    if (!db.isOpen()) {
+        connect();
+
+    //    db.open();
+    }
+    QSqlQuery query(db);
+    QString sql = "SELECT * FROM " +tableName +";";
+
+   // qDebug()<<"Row count sql executed: "<<query.exec(sql);
     while(query.next())
             count++;
     numOfRows=count;
-    }
-    QString connection;
-    connection = db.connectionName();
-    db.close();
-    db = QSqlDatabase();
-    db.removeDatabase(connection);
-    return numOfRows;
-}
 
-int Table::insertQuery(QString tableName, QString rowValues) {
-    if (!db.isOpen()) {
-        db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName(DATABASE_NAME);
-        db.open();
-        QSqlQuery query;
-        //numOfRows=tableSize(tableName);
-        QString sql = "INSERT INTO " + tableName + " VALUES(" + QVariant(numOfRows).toString() + "," + rowValues + ");";
-        query.exec(sql);
-        numOfRows++;
-    }
-    QString connection;
-    connection = db.connectionName();
+
     db.close();
-    db = QSqlDatabase();
-    db.removeDatabase(connection);
-    return 0;
+
+    return count;
+}
+//only for depozitare
+void Table::insertQuery(QString tableName, std::map<QString,QString> stringValues,std::map<QString,float> floatValues,bool value) {
+
+    numOfRows=tableSize(tableName);
+    if (!db.isOpen()) {
+        connect();
+        //db.open();
+    }
+    qDebug()<<numOfRows;
+    numOfRows++;
+    //if(db.isOpen())
+        //qDebug()<<"doubleParty"<<floatValues["dpo"];
+        QSqlQuery query(db);
+        //numOfRows=tableSize(tableName);
+       // QString sql = "INSERT INTO " + tableName + " VALUES('',"  + stringValues['data']+"," + ");";
+       //qDebug()<<query.exec("INSERT INTO " + tableName + " VALUES("+numOfRows+",'"  + stringValues["data"]+"', "+value+", "+floatValues["acuratete_preg_comenzi"]+", "+floatValues["rata_daune"]+", "+floatValues["acuratete_stoc"]+", "+floatValues["grad_ocupare_depozit"]+", "+floatValues["dso"]+", "+floatValues["dpo"] + ");");
+        query.prepare("INSERT INTO " + tableName + " VALUES(:numOfRows,:date, :bool, :acurateteComenzi, :rata_daune, :acuratete_stoc, :grad_ocupare_depozit, :dso, :dpo );");
+        query.bindValue(":numOfRows",numOfRows);
+        query.bindValue(":date",stringValues["data"]);
+        query.bindValue(":bool",value);
+        query.bindValue(":acurateteComenzi",floatValues["acuratete_preg_comenzi"]);
+        query.bindValue(":rata_daune",floatValues["rata_daune"]);
+        query.bindValue(":acuratete_stoc",floatValues["acuratete_stoc"]);
+        query.bindValue(":grad_ocupare_depozit",floatValues["grad_ocupare_depozit"]);
+        query.bindValue(":dso",floatValues["dso"]);
+        query.bindValue(":dpo",floatValues["dpo"]);
+       qDebug()<<query.exec();
+
+        numOfRows++;
+        db.close();
+
+
+
+
+
+    //return 0;
 }
 int Table::deleteQuery(QString tableName, int index){
     if (!db.isOpen()) {
@@ -181,17 +213,30 @@ int Table::updateQuery(QString tableName, QString newRowValues, int index){
     return 0;
 }
 
-QString Table::readQuery(QString tableName, int index){
+void Table::readQuery(QString tableName, int dso){
     if (!db.isOpen()) {
-        db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName(DATABASE_NAME);
-        db.open();
+        db.open();}
+        if(db.isOpen())
+        {
+            QMessageBox msg;
+            msg.setText("e deschis readu");//record.value("DATA").toString());
+            msg.exec();
+        }
+        QSqlQuery query(db);
 
-        QSqlQuery query;
-        QString sql = "SELECT * FROM " + tableName + " WHERE CRT = " + QVariant(index).toString() +" ;";
-        query.exec(sql);
-        qDebug()<<sql;
-        QString tmp ="";
+        query.prepare("SELECT * FROM  DEPOZITARE WHERE DSO =:dso ;");
+       query.bindValue(":dso",(float)dso);
+        qDebug()<<query.exec();
+
+        while(query.next())
+        {
+            QSqlRecord record=query.record();
+           // qDebug()<<"date*: "<<record.value("DATA").toString()<<endl;
+
+
+        }
+
+        /*QString tmp ="";
         int i=1;
 
         int n = query.record().count();
@@ -223,6 +268,12 @@ QString Table::readQuery(QString tableName, int index){
     db = QSqlDatabase();
     db.removeDatabase(connection);
 
-    return tmp;
-}
+    return tmp;*/
+
     }
+void Table::connect()
+{
+    db = QSqlDatabase::addDatabase("QSQLITE","procese.db");
+    db.setDatabaseName(DATABASE_NAME);
+    db.open();
+}

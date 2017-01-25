@@ -6,12 +6,13 @@ procesop::procesop(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::procesop)
 {
+    //Depozitare =new Table;
     ui->setupUi(this);
-    Rutier.createTable("RUTIER", "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI, RATA_KM_PARCURSI TEXT, GRAD_INCARCARE_DISTRIBUTIE TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
-    Depozitare.createTable("DEPOZITARE", "DATA TEXT, RESPECTARE_LIMITE_COMANDA TEXT, ACURATETE_PREGATIRE_COMENZI TEXT, RATA_DAUNE_LIPSURI TEXT, ACURATETE_STOC TEXT, GRAD_OCUPARE_DEPOZIT TEXT, DSO TEXT, DPO TEXT");
-    Maritim.createTable("MARITIM", "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
-    Aerian.createTable("AERIAN",   "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
-    Feroviar.createTable("FEROVIAR", "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI, RATA_KM_PARCURSI TEXT, GRAD_INCARCARE_DISTRIBUTIE TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
+    //Rutier.createTable("RUTIER", "DATA BLOB, RESPECTARE_INCARCARE BOOLEAN, RESPECTARE_DESCARCARE BOOLEAN, RATA_DAUNE_LIPSURI REAL, CONFORMITATE_EXHIPAMENT BOOLEAN, RATA_ANUNT_INTARZIERI REAL, NR_DOSARE_TRANSPORT_PERSOANE_ZI INT, RATA_KM_PARCURSI INT, GRAD_INCARCARE_DISTRIBUTIE INT, PROFIT_BRUT REAL, RATA_SUCCES_LICITATII REAL, DSO REAL, DPO REAL");
+    Depozitare.createTable("DEPOZITARE", "DATA TEXT, RESPECTARE_LIMITE_COMANDA BOOLEAN, ACURATETE_PREGATIRE_COMENZI REAL, RATA_DAUNE_LIPSURI REAL, ACURATETE_STOC REAL, GRAD_OCUPARE_DEPOZIT REAL, DSO REAL, DPO REAL");
+    //Maritim.createTable("MARITIM", "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
+    //Aerian.createTable("AERIAN",   "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
+    //Feroviar.createTable("FEROVIAR", "DATA TEXT, RESPECTARE_INCARCARE TEXT, RESPECTARE_DESCARCARE TEXT, RATA_DAUNE_LIPSURI TEXT, CONFORMITATE_EXHIPAMENT TEXT, RATA_ANUNT_INTARZIERI TEXT, NR_DOSARE_TRANSPORT_PERSOANE_ZI, RATA_KM_PARCURSI TEXT, GRAD_INCARCARE_DISTRIBUTIE TEXT, PROFIT_BRUT TEXT, RATA_SUCCES_LICITATII TEXT, DSO TEXT, DPO TEXT");
 }
 
 
@@ -22,120 +23,42 @@ procesop::~procesop()
 
 void procesop::on_pushButton_2_clicked()
 {
-    ui->pushButton_4->setEnabled(0);
-    ui->pushButton_3->setEnabled(0);
+    //ui->pushButton_4->setEnabled(0);
+    //ui->pushButton_3->setEnabled(0);
     editare=0;
     close();
 }
 void procesop::on_pushButton_clicked()
 {
-    QString input,test,test2;
-    int choice = 0,proc;
-    int testsize,adaugat=0,j;
+    //QString input,test,test2;
+    //int choice = 0,proc;
+    //int testsize,adaugat=0,j;
     if(ui->comboBox->currentIndex()==1)
     {
-        input+='\'';
-        input+=ui->textEdit_19->toPlainText();
-        input+='.';
-        input+=QVariant(ui->comboBox_2->currentIndex()).toString();
-        input+='\'';
-        //input+=QVariant(ui->comboBox->currentIndex()).toString();
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_11->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_12->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_13->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_14->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_15->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_16->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_17->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_18->toPlainText();
-        input+='\'';
+
+
+        //PT DEPOZITARE
+        std::map<QString,QString> stringValues;
+        std::map<QString,float> floatValues;
+
+        stringValues.insert(std::pair<QString,QString>("data",ui->dateEdit->text()));
+        bool respectare_limite_comanda=ui->respecatare_termene_preg_check->isChecked();
+        floatValues.insert(std::pair<QString,float>("acuratete_preg_comenzi",ui->acuratete_preg_comenzi_edit->toPlainText().toFloat()));
+        floatValues.insert(std::pair<QString,float>("rata_daune",ui->rata_daune_edit->text().toFloat()));
+        floatValues.insert(std::pair<QString,float>("acuratete_stoc",ui->acuratetete_stoc_edit->toPlainText().toFloat()));
+        floatValues.insert(std::pair<QString,float>("grad_ocupare_depozit",ui->grad_ocupare_depozit_edit->toPlainText().toFloat()));
+        floatValues.insert(std::pair<QString,float>("dso",ui->dso_edit->text().toFloat()));
+        floatValues.insert(std::pair<QString,float>("dpo",ui->dpo_edit->text().toFloat()));
+
+        //---------------
+        //Se introduce functia care preia QString input si adauga informatia in baza de date (proces depozitare)
+        //qDebug()<<stringValues["data"];
+        Depozitare.insertQuery("DEPOZITARE",stringValues,floatValues,respectare_limite_comanda);
+        Depozitare.readQuery("DEPOZITARE",12);
+
+
     }
-    else
-    {
-        choice=0;
-        input+=QVariant(ui->comboBox->currentIndex()).toString();
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_2->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_3->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_4->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_5->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_6->toPlainText();
-        input+='\'';
-        input+=',';
-        if(ui->comboBox->currentIndex()==0||ui->comboBox->currentIndex()==4)
-        {
-            choice=1;
-            input+='\'';
-            input+=ui->textEdit_7->toPlainText();
-            input+='\'';
-            input+=',';
-            input+='\'';
-            input+=ui->textEdit_8->toPlainText();
-            input+='\'';
-            input+=',';
-        }
-        input+='\'';
-        input+=ui->textEdit_9->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_10->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_17->toPlainText();
-        input+='\'';
-        input+=',';
-        input+='\'';
-        input+=ui->textEdit_18->toPlainText();
-        input+='\'';        
-    }
-    if(editare==0)
-    {
-        if(ui->comboBox->currentIndex()==1)
-            //Se introduce functia care preia QString input si adauga informatia in baza de date (proces depozitare)
-            Depozitare.insertQuery("DEPOZITARE", input);
-        if(choice==1)
+       /* if(choice==1)
             if(ui->comboBox->currentIndex()==0)
             {
                 //Se introduce functia care preia QString input si adauga informatia in baza de date (proces rutier)
@@ -256,30 +179,34 @@ void procesop::on_pushButton_clicked()
     {
         widget->clear();
     }
-    ui->comboBox->setCurrentIndex(0);
+    ui->comboBox->setCurrentIndex(0);*/
 }
 
 void procesop::on_comboBox_activated(int index)
 {
     if(index==1)
     {
-        ui->textEdit->setEnabled(0);
-        ui->textEdit_2->setEnabled(0);
-        ui->textEdit_3->setEnabled(0);
-        ui->textEdit_4->setEnabled(0);
-        ui->textEdit_5->setEnabled(0);
-        ui->textEdit_6->setEnabled(0);
-        ui->textEdit_7->setEnabled(0);
-        ui->textEdit_8->setEnabled(0);
-        ui->textEdit_9->setEnabled(0);
-        ui->textEdit_10->setEnabled(0);
-        ui->textEdit_11->setEnabled(1);
-        ui->textEdit_12->setEnabled(1);
-        ui->textEdit_13->setEnabled(1);
-        ui->textEdit_14->setEnabled(1);
-        ui->textEdit_15->setEnabled(1);
-        ui->textEdit_16->setEnabled(1);
+       ui->respecatare_termene_preg_check->setEnabled(true);
+       ui->termene_incaracare_check->setEnabled(false);
+       ui->termene_descarcare_check->setEnabled(false);
+       ui->rata_daune_edit->setEnabled(true);
+       ui->conformitate_echipament_check->setEnabled(false);
+       ui->rata_anunt_intarzieri_edit->setEnabled(false);
+       ui->nr_transport_doasare_edit->setEnabled(false);
+       ui->rata_km_parcursi_edit->setEnabled(false);
+       ui->grad_incarcare_distributie_edit->setEnabled(false);
+       ui->profit_brut_edit->setEnabled(false);
+       ui->rata_succes_licitatii_edit->setEnabled(false);
+       ui->acuratete_preg_comenzi_edit->setEnabled(true);
+       ui->rata_daune_depozit_edit->setEnabled(true);
+       ui->acuratetete_stoc_edit->setEnabled(true);
+       ui->grad_ocupare_depozit_edit->setEnabled(true);
+       ui->disponibilitate_personal_depozit_edit->setEnabled(false);
+       ui->dso_edit->setEnabled(true);
+       ui->dpo_edit->setEnabled(true);
+
     }
+    /*
     else
     {
         ui->textEdit->setEnabled(1);
@@ -306,12 +233,12 @@ void procesop::on_comboBox_activated(int index)
         ui->textEdit_14->setEnabled(0);
         ui->textEdit_15->setEnabled(0);
         ui->textEdit_16->setEnabled(0);
-    }
+    }*/
 }
 
 void procesop::on_pushButton_3_clicked()
 {
-    int k=0;
+   /* int k=0;
     if(indiceIntrare-1==4*strsize-1)
     {indiceIntrare=3*strsize+nrStr4;k=1;}
     if(indiceIntrare+1==3*strsize-1)
@@ -485,12 +412,12 @@ void procesop::on_pushButton_3_clicked()
        ui->textEdit_16->setEnabled(0);
        ui->textEdit_7->setEnabled(1);
        ui->textEdit_8->setEnabled(1);
-   }
+   }*/
 }
 
 void procesop::on_pushButton_4_clicked()
 {
-    int k=0;
+   /* int k=0;
     if(indiceIntrare+1==nrStr1)
     {indiceIntrare=60;k=1;}
     if(indiceIntrare+1==nrStr2+1*strsize)
@@ -664,12 +591,12 @@ void procesop::on_pushButton_4_clicked()
        ui->textEdit_16->setEnabled(0);
        ui->textEdit_7->setEnabled(1);
        ui->textEdit_8->setEnabled(1);
-   }
+   }*/
 }
 
 void procesop::on_pushButton_5_clicked()
 {
-    editare=1;
+   /* editare=1;
     ui->pushButton_4->setEnabled(1);
     ui->pushButton_3->setEnabled(1);
     int k,m,p,size,indici[5]={0,0,0,0,0};
@@ -696,7 +623,7 @@ void procesop::on_pushButton_5_clicked()
     if(j==1)
         c="'CNP2','nume2','email2','facultate2','filiala2',2,'adresa2',1,1,'salariu2',0,1,4,0,1,4,4,2,4,0,3,4,2,4,0,0,2,2,2,2,2,0";*/
     //testare ^ ^ ^
-    if(p<nrStr1)
+   /* if(p<nrStr1)
     {
         //c=functie din baza de date care returneaza sub forma de QString o intrare rutier
         c = Rutier.readQuery("RUTIER", indici[0]);
@@ -797,5 +724,5 @@ void procesop::on_pushButton_5_clicked()
         }
     }
     j=p;
-    }
+    }*/
 }

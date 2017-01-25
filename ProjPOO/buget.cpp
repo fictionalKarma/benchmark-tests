@@ -17,7 +17,7 @@ buget::~buget()
 
 void buget::on_pushButton_clicked()
 {
-    QString input,test,test2;
+    /*QString input,test,test2;
     int testsize,adaugat=0,j,size;
     test+=ui->textEdit->toPlainText();
     test+='.';
@@ -117,10 +117,10 @@ void buget::on_pushButton_clicked()
     foreach(QComboBox *widget, this->findChildren<QComboBox*>())
     {
         widget->setCurrentIndex(0);
-    }
+    }*/
 }
 void buget::on_pushButton_2_clicked()
-{
+{   /*
     foreach(QTextEdit *widget, this->findChildren<QTextEdit*>())
     {
         widget->clear();
@@ -133,10 +133,10 @@ void buget::on_pushButton_2_clicked()
     indiceIntrare=0;
     ui->pushButton_4->setEnabled(0);
     ui->pushButton_3->setEnabled(0);
-    close();
+    close();*/
 }
 void buget::on_pushButton_5_clicked()
-{
+{/*
     editare=1;
     for(int j=0;j<Buget.tableSize("BUGET");j++)
     {
@@ -152,10 +152,10 @@ void buget::on_pushButton_5_clicked()
     //nrStr=functie din baza de date care returneaza numarul de intrari
     //Buget.updateQuery("BUGET","'2013.0',0,'intr1','','','','','','','','','',''",0);
     //nrStr = Buget.tableSize("BUGET");
-    /*QString filename=("D:\\ProjPOO\\personal.txt");
+    QString filename=("D:\\ProjPOO\\personal.txt");
         QFile personal(filename);
         personal.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
-        QTextStream persout(&personal);*/
+        QTextStream persout(&personal);
         //persout<<nrStr<<"size"<<endl;
     nrStr=Buget.tableSize("BUGET");
     for(int j=0;j<nrStr;j++){
@@ -164,10 +164,10 @@ void buget::on_pushButton_5_clicked()
     //QString c=functie din baza de date care returneaza sub forma de QString o intrare
     //testare v v v
     c = Buget.readQuery("BUGET", j);
-    /*if(j==0)
+    if(j==0)
         c="'CNP1','nume1','email1','facultate1','filiala1',1,'adresa1',0,3,'salariu1',2,4,2,4,4,4,2,3,4,4,4,2,4,1,2,0,2,0,0,2,0,0";
     if(j==1)
-        c="'CNP2','nume2','email2','facultate2','filiala2',2,'adresa2',1,1,'salariu2',0,1,4,0,1,4,4,2,4,0,3,4,2,4,0,0,2,2,2,2,2,0";*/
+        c="'CNP2','nume2','email2','facultate2','filiala2',2,'adresa2',1,1,'salariu2',0,1,4,0,1,4,4,2,4,0,3,4,2,4,0,0,2,2,2,2,2,0";
     //testare ^ ^ ^
     size=c.size();
     inputStr[j].n[0]=0;
@@ -213,12 +213,12 @@ void buget::on_pushButton_5_clicked()
             m++;
         }
     }
-    }
+    }*/
 }
 
 void buget::on_pushButton_4_clicked()
 {
-    if(indiceIntrare+1==nrStr)
+   /* if(indiceIntrare+1==nrStr)
         indiceIntrare=nrStr-1;
     else
         indiceIntrare++;
@@ -235,12 +235,12 @@ void buget::on_pushButton_4_clicked()
     ui->textEdit_11->setText(inputStr[indiceIntrare].text[10]);
     ui->textEdit_12->setText(inputStr[indiceIntrare].text[11]);
     ui->comboBox->setCurrentIndex(inputStr[indiceIntrare].n[1]);
-    ui->comboBox_2->setCurrentIndex(inputStr[indiceIntrare].n[0]);    
+    ui->comboBox_2->setCurrentIndex(inputStr[indiceIntrare].n[0]);   */
 }
 
 void buget::on_pushButton_3_clicked()
 {
-    if(indiceIntrare-1==-1)
+   /* if(indiceIntrare-1==-1)
         indiceIntrare=0;
     else
         indiceIntrare--;
@@ -257,7 +257,7 @@ void buget::on_pushButton_3_clicked()
     ui->textEdit_11->setText(inputStr[indiceIntrare].text[10]);
     ui->textEdit_12->setText(inputStr[indiceIntrare].text[11]);
     ui->comboBox->setCurrentIndex(inputStr[indiceIntrare].n[1]);
-    ui->comboBox_2->setCurrentIndex(inputStr[indiceIntrare].n[0]);    
+    ui->comboBox_2->setCurrentIndex(inputStr[indiceIntrare].n[0]);  */
 }
 
 void buget::on_pushButton_8_clicked()
