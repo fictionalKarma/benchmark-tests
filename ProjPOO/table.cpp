@@ -27,15 +27,21 @@ int Table::createTable(QString tbName, QString columnValues) {
     }
     if (!db.isOpen()) {
         connect();
+        //db.open();
     }
 
-        //if(db.isOpen())
-          //  qDebug()<<"party";
-        //else qDebug()<<"nu i party";
+        if(db.isOpen())
+            qDebug()<<"party";
+        else qDebug()<<"nu i party";
         QSqlQuery query(db);
 
-        QString sql = "CREATE TABLE " +  tbName + " (CRT INT PRIMARY KEY NOT NULL , " + columnValues + ");"; //Se formeaza comanda Sqlite
-        qDebug()<<query.exec(sql);
+        //QString sql = "CREATE TABLE :table_name (CRT INT PRIMARY KEY NOT NULL , " + columnValues + ");"; //Se formeaza comanda Sqlite
+        query.prepare("CREATE TABLE RUTIER (CRT INT PRIMARY KEY NOT NULL," + columnValues + ");");
+        //query.bindValue(":table_name",tbName);
+        //query.prepare("DROP TABLE RUTIER");
+        //qDebug()<<query.exec("DROP TABEL RUTIER1000");
+        qDebug()<<query.exec();
+
         db.close();
 
 
@@ -52,7 +58,7 @@ int Table::tableSize(QString tableName){
     QSqlQuery query(db);
     QString sql = "SELECT * FROM " +tableName +";";
 
-   // qDebug()<<"Row count sql executed: "<<query.exec(sql);
+    qDebug()<<"Row count sql executed: "<<query.exec(sql);
     while(query.next())
             count++;
     numOfRows=count;
@@ -63,7 +69,7 @@ int Table::tableSize(QString tableName){
     return count;
 }
 //only for depozitare
-void Table::insertQuery(QString tableName, std::map<QString,QString> stringValues,std::map<QString,float> floatValues,bool value) {
+void Table::insertQuery(QString tableName, QString data,std::map<QString,float> floatValues,bool value) {
 
     numOfRows=tableSize(tableName);
     if (!db.isOpen()) {
@@ -80,7 +86,7 @@ void Table::insertQuery(QString tableName, std::map<QString,QString> stringValue
        //qDebug()<<query.exec("INSERT INTO " + tableName + " VALUES("+numOfRows+",'"  + stringValues["data"]+"', "+value+", "+floatValues["acuratete_preg_comenzi"]+", "+floatValues["rata_daune"]+", "+floatValues["acuratete_stoc"]+", "+floatValues["grad_ocupare_depozit"]+", "+floatValues["dso"]+", "+floatValues["dpo"] + ");");
         query.prepare("INSERT INTO " + tableName + " VALUES(:numOfRows,:date, :bool, :acurateteComenzi, :rata_daune, :acuratete_stoc, :grad_ocupare_depozit, :dso, :dpo );");
         query.bindValue(":numOfRows",numOfRows);
-        query.bindValue(":date",stringValues["data"]);
+        query.bindValue(":date",data);
         query.bindValue(":bool",value);
         query.bindValue(":acurateteComenzi",floatValues["acuratete_preg_comenzi"]);
         query.bindValue(":rata_daune",floatValues["rata_daune"]);
@@ -271,6 +277,48 @@ void Table::readQuery(QString tableName, int dso){
     return tmp;*/
 
     }
+void Table::insertQuery(QString tableName, QString data, std::map<QString, float> floatValues, std::map<QString, bool> boolValues)
+{
+    numOfRows=tableSize(tableName);
+    if (!db.isOpen()) {
+        connect();
+
+        //db.open();
+    }
+    if(db.isOpen())
+        qDebug()<<"is open";
+    qDebug()<<"numberOfrows:"<<numOfRows;
+    numOfRows++;
+    //if(db.isOpen())
+        //qDebug()<<"doubleParty"<<floatValues["dpo"];
+        QSqlQuery query(db);
+        query.prepare("INSERT INTO RUTIER VALUES ( :numOfRows, :date, :respectare_incarcare,"
+    ":respectare_descarcare, :rata_lipsuri, :conformitate_echipament, :rata_anunt_intarzieri,:nr_doasare_transport,"
+     ":rata_km,:grad_incarcare,:profit_brut,:rata_succes_licitatii,:dso,:dpo);");
+
+        query.bindValue(":numOfRows",numOfRows);
+        query.bindValue(":date",data);
+        query.bindValue(":respectare_incarcare",(int)boolValues["respectare_termene_incarcare"]);
+        query.bindValue(":respectare_descarcare",(int)boolValues["respectare_termene_descarcare"]);
+        query.bindValue(":rata_lipsuri",floatValues["rata_daune"]);
+        query.bindValue(":conformitate_echipament",(int)boolValues["conformitate_echipament"]);
+        query.bindValue(":rata_anunt_intarzieri",floatValues["rata_anunt_intarzieri"]);
+        query.bindValue(":nr_doasare_transport",(int)floatValues["nr_dosare"]);
+        query.bindValue(":rata_km",floatValues["rata_km"]);
+        query.bindValue(":grad_incarcare",floatValues["grad_incarcare_distributie"]);
+        query.bindValue(":profit_brut",floatValues["profit_brut"]);
+        query.bindValue(":rata_succes_licitatii",floatValues["rata_succes_licitatii"]);
+        query.bindValue(":dso",floatValues["dso"]);
+        query.bindValue(":dpo",floatValues["dpo"]);
+
+
+       qDebug()<<query.exec();
+
+        numOfRows++;
+        db.close();
+
+}
+
 void Table::connect()
 {
     db = QSqlDatabase::addDatabase("QSQLITE","procese.db");

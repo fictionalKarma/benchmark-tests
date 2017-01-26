@@ -12,7 +12,8 @@ RegistrationForm::RegistrationForm(QMainWindow *qm, QWidget *parent) :
     setFixedSize(this->size());
     connect(ui->regBtn, SIGNAL(clicked()), this, SLOT(registerUser()));
     connect(ui->emailconfTb, SIGNAL(returnPressed()), this, SLOT(registerUser()));
-    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(openPersonal()));
+    connect(ui->depCombo, SIGNAL(currentIndexChanged(QString)), this, SLOT(updateTrans()));
+    initializeComponents();
 }
 
 RegistrationForm::~RegistrationForm() {
@@ -25,50 +26,65 @@ void RegistrationForm::cancelButton() {
 }
 
 void RegistrationForm::registerUser() {
-    ui->userError->setStyleSheet("color: rgba(255, 0, 0, 0);");
-    ui->passError->setStyleSheet("color: rgba(255, 0, 0, 0);");
-    ui->emError->setStyleSheet("color: rgba(255, 0, 0, 0);");
-    ui->confError->setStyleSheet("color: rgba(255, 0, 0, 0);");
-    ui->emcoError->setStyleSheet("color: rgba(255, 0, 0, 0);");
+    ui->errorLbl->setStyleSheet("color: rgba(255, 0, 0, 0);");
 
     if (!Operations::isValidUser(ui->userTb->text())) {
-        ui->userError->setText("Username must have 3+ characters; alphanumerical allowed.");
-        ui->userError->setStyleSheet("color:rgba(255, 0, 0, 1);");
+        ui->errorLbl->setText("Username must have 3+ characters; alphanumerical allowed.");
+        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
     else if (!Operations::isValidPassword(ui->passTb->text())) {
-        ui->passError->setText("Password must be 6+ characters; alphanumerical, minimum a digit.");
-        ui->passError->setStyleSheet("color:rgba(255, 0, 0, 1);");
+        ui->errorLbl->setText("Password must be 6+ characters; alphanumerical, minimum a digit.");
+        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
     else if (ui->passcTb->text() != ui->passTb->text()) {
-        ui->confError->setText("The two passwords are not identical.");
-        ui->confError->setStyleSheet("color:rgba(255, 0, 0, 1);");
+        ui->errorLbl->setText("The two passwords are not identical.");
+        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
     else if (!Operations::isValidEmail(ui->emailTb->text())) {
-        ui->emError->setText("Please insert a valid email address.");
-        ui->emError->setStyleSheet("color:rgba(255, 0, 0, 1);");
+        ui->errorLbl->setText("Please insert a valid email address.");
+        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
         qDebug() << "invalid mail";
     }
 
     else if (ui->emailconfTb->text() != ui->emailTb->text()) {
-        ui->emcoError->setText("The two email addresses must be identical.");
-        ui->emcoError->setStyleSheet("color:rgba(255, 0, 0, 1);");
+        ui->errorLbl->setText("The two email addresses must be identical.");
+        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
+    }
+
+    //  Checks whether the textboxes are empty or not and for correct data input :D trust me
+    else if (ui->fnameTb->text().isEmpty() || ui->lnameTb->text().isEmpty() || ui->cnptb->text().isEmpty()
+            || ui->addressTb->text().isEmpty() || ui->companyTb->text().isEmpty() || ui->salaryTb->text().isEmpty()
+            || ui->bossTb->text().isEmpty() || !Operations::isValidName(ui->fnameTb->text()) ||
+               !Operations::isValidName(ui->lnameTb->text()) || !Operations::isValidName(ui->bossTb->text()) || !ui->salaryTb->text().toInt()
+            || !ui->cnptb->text().toLongLong() || !Operations::isValidName(ui->companyTb->text())) {
+
+            ui->errorLbl->setText("The personal data or business data input is bad.\n\
+- First name must not contain special characters, digits or spaces\n\
+- Last name must not contain special characters, digits or spaces\n\
+- Company must not contain special characters, digits or spaces\n\
+- Salary, CNP must be only digits\n\
+- Supervisor must not contain special characters, digits or spaces\n\
+- Address must respect the placeholder format");
+           ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
     else {
         if (UserManager::findUserByName(ui->userTb->text())) {
-            ui->userError->setText("This username was taken by another user.");
-            ui->userError->setStyleSheet("color: rgba(255, 0, 0, 1);");
+            ui->errorLbl->setText("This username was taken by another user.");
+            ui->errorLbl->setStyleSheet("color: rgba(255, 0, 0, 1);");
         } else if (UserManager::findUserByMail(ui->emailTb->text())) {
-            ui->emError->setText("There is already a user registered with this email.");
-            ui->emError->setStyleSheet("color: rgba(255, 0, 0, 1);");
+            ui->errorLbl->setText("There is already a user registered with this email.");
+            ui->errorLbl->setStyleSheet("color: rgba(255, 0, 0, 1);");
         } else {
             UserManager::openDatabaseConn();
+            getUserData();
             UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
-            ui->emcoError->setText("Registration succesful! Check your inbox...");
-            ui->emcoError->setStyleSheet("color: rgba(0, 180, 0, 1);");
+            UserManager::registerUserData(ui->userTb->text(), userData);
+            ui->errorLbl->setText("Registration succesful! Check your inbox...");
+            ui->errorLbl->setStyleSheet("color: rgba(0, 180, 0, 1);");
             ui->regBtn->setEnabled(false);
             ui->cancelBtn->setEnabled(false);
             logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
@@ -87,7 +103,20 @@ void RegistrationForm::sendConfirmationMail() {
     message.addRecipient(new EmailAddress(ui->emailTb->text(), ui->userTb->text()));
 
     MimeText text;
-    text.setText("Hi,\nWe're sending this e-mail as a confirmation of your account registration for our product, Benchmark Testing. We hope you'll enjoy your experience! Please do not reply to this mail. Here are your account details:\n\nUsername: " + ui->userTb->text() + "\nPassword: " + ui->passTb->text() + "\nE-Mail Address: " + ui->emailTb->text() + "\n\nBest regards,\nBenchmark Testing Team.");
+    QString mailMsg = "Hi, " + ui->fnameTb->text() + "\n\
+We are sending this message to confirm your account creation for our product, Benchmark Testing. We hope you'll enjoy your experience! Please do not reply to this message. Here are your account details, in order to check for mistakes:\n\
+    \n\
+    Name: " + ui->fnameTb->text() + " " + ui->lnameTb->text() + "\n\
+    Username: " + ui->userTb->text() + "\n\
+    CNP: " + ui->cnptb->text() + "\n\
+    Address: " + ui->addressTb->text() + "\n\
+    E-Mail Address: " + ui->emailTb->text() + "\n\
+    Working Place: " + ui->companyTb->text() + "\n\
+    Direct Supervisor: " + ui->bossTb->text() + "\n\
+    \nPlease take note that we're not including your profile information in this message. You may review and edit those stats later in the client's Profile page.\n\
+    \nBest regards,\nBenchmark Testing Team.";
+
+    text.setText(mailMsg);
     message.addPart(&text);
     message.setSubject("Your registration confirmation");
 
@@ -114,6 +143,88 @@ void RegistrationForm::redirect() {
     this->close();
 }
 
-void RegistrationForm::openPersonal() {
+void RegistrationForm::initializeComponents() {
+    ui->depCombo->addItem("Road");
+    ui->depCombo->addItem("Sea");
+    ui->depCombo->addItem("Airway");
+    ui->depCombo->addItem("Railway");
+    ui->depCombo->addItem("International");
+    ui->depCombo->addItem("Domestic");
+    ui->compsLbl->setText("Driving");
 
+    map.insert("Road", "Driving");
+    map.insert("Sea", "Sailing");
+    map.insert("Airway", "Piloting");
+    map.insert("Railway", "Driving");
+    map.insert("International", "Driving");
+    map.insert("Domestic", "Driving");
+
+    //Transport comboBox
+    ui->transCombo->addItem("None");
+    ui->transCombo->addItem("Low");
+    ui->transCombo->addItem("Medium");
+    ui->transCombo->addItem("Advanced");
+    //Negotiation comboBox
+    ui->negCombo->addItem("None");
+    ui->negCombo->addItem("Low");
+    ui->negCombo->addItem("Medium");
+    ui->negCombo->addItem("Advanced");
+    //Teamwork ComboBox
+    ui->teamCombo->addItem("None");
+    ui->teamCombo->addItem("Low");
+    ui->teamCombo->addItem("Medium");
+    ui->teamCombo->addItem("Advanced");
+    //Data Analysis ComboBox
+    ui->dataCombo->addItem("None");
+    ui->dataCombo->addItem("Low");
+    ui->dataCombo->addItem("Medium");
+    ui->dataCombo->addItem("Advanced");
+    //Presentation ComboBox
+    ui->presCombo->addItem("None");
+    ui->presCombo->addItem("Low");
+    ui->presCombo->addItem("Medium");
+    ui->presCombo->addItem("Advanced");
+    //Social ComboBox
+    ui->socialCombo->addItem("None");
+    ui->socialCombo->addItem("Low");
+    ui->socialCombo->addItem("Medium");
+    ui->socialCombo->addItem("Advanced");
+    //Decision ComboBox
+    ui->decCombo->addItem("None");
+    ui->decCombo->addItem("Low");
+    ui->decCombo->addItem("Medium");
+    ui->decCombo->addItem("Advanced");
+    //Time ComboBox
+    ui->timeCombo->addItem("None");
+    ui->timeCombo->addItem("Low");
+    ui->timeCombo->addItem("Medium");
+    ui->timeCombo->addItem("Advanced");
+}
+
+void RegistrationForm::updateTrans() {
+    ui->compsLbl->setText(map[ui->depCombo->currentText()]);
+}
+
+void RegistrationForm::getUserData() {
+    userData.insert("name", ui->fnameTb->text() + " " + ui->lnameTb->text());
+    userData.insert("cnp", ui->cnptb->text());
+    userData.insert("address", ui->addressTb->text());
+    userData.insert("company", ui->companyTb->text());
+    userData.insert("salary", ui->salaryTb->text());
+    userData.insert("boss", ui->bossTb->text());
+    userData.insert("department", ui->depCombo->currentText());
+    userData.insert("drivingComp", ui->transCombo->currentText());
+    userData.insert("teamwork", ui->teamCombo->currentText());
+    userData.insert("negotiation", ui->negCombo->currentText());
+    userData.insert("analysis", ui->dataCombo->currentText());
+    userData.insert("presentation", ui->presCombo->currentText());
+    userData.insert("social", ui->socialCombo->currentText());
+    userData.insert("decision", ui->decCombo->currentText());
+    userData.insert("timemanage", ui->timeCombo->currentText());
+    userData.insert("projmanage", ui->projBox->isChecked() ? "true" : "false");
+    userData.insert("iata", ui->iataBox->isChecked() ? "true" : "false");
+    userData.insert("adr", ui->adrBox->isChecked() ? "true" : "false");
+    userData.insert("sixsigma", ui->sigmaBox->isChecked() ? "true" : "false");
+    userData.insert("itman", ui->itBox->isChecked() ? "true" : "false");
+    userData.insert("timeman", ui->timeBox->isChecked() ? "true" : "false");
 }

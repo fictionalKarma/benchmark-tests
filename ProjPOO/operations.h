@@ -3,7 +3,6 @@
 
 #include <QString>
 #include <QCryptographicHash>
-#include "error.hpp"
 
 class Operations
 {
@@ -11,6 +10,7 @@ public:
    static bool isValidUser(QString name);
    static bool isValidPassword(QString pwd);
    static bool isValidEmail(QString mail);
+   static bool isValidName(QString name);
    static QString encode(QString arg1);
 };
 

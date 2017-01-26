@@ -9,6 +9,7 @@
 #include "administrator.hpp"
 
 class Administrator;
+
 typedef struct Node
 {
     std::vector<Node*> children;
@@ -24,23 +25,23 @@ typedef struct Node1
 
 class Tree {
 private:
-	Node *boss;
+    Node *boss;
     Node1 *boss1;
     int marker;
 public:
-	Tree(){
-		boss = new Node;
-		boss= NULL;
+    Tree(){
+        boss = new Node;
+        boss= NULL;
 
-	}
-	Tree( Node* b){
+    }
+    Tree( Node* b){
         //qDebug () << "AICI\n";
-		boss = new Node ;
-		boss->user = b->user;
-		boss->father = NULL;
+        boss = new Node ;
+        boss->user = b->user;
+        boss->father = NULL;
         boss->children = b->children;
         marker = 1;
-	}
+    }
     Tree (Node1* b){
         boss1 = new Node1;
         boss1->user = b->user;
@@ -49,18 +50,18 @@ public:
         marker = 2;
     }
 
-	Node* getNode(){
-		return boss;
-	}
+    Node* getNode(){
+        return boss;
+    }
     Node1* getNode1(){
         return boss1;
     }
 
-	void traverse();
+    void traverse();
     void traverse(int&);
     Node* traverse(QString);
     Node* find(QString);
-	void traverse(Node* n);
+    void traverse(Node* n);
     void traverse(int& , Node*);
     Node* traverse(Node* n , QString name,int * ceva);
     void internAdd(Node* n,Node* father,QString boss);

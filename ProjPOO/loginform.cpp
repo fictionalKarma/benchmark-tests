@@ -42,11 +42,9 @@ bool LoginForm::checkAuth() {
         ui->wrongLbl->setText("Username not found.");
         return false;
     } else {
-        QString userData = UserManager::getUserData(ui->nameTb->text());
-        if (userData != "404") {
-            QStringList dataArr = userData.split(",");
+        QMap<QString, QString> userData = UserManager::getUserData(ui->nameTb->text());
             QString encPass = Operations::encode(ui->passTb->text());
-            if (ui->nameTb->text() != dataArr[0] || encPass != dataArr[1]) {
+            if (ui->nameTb->text() != userData["username"] || encPass != userData["password"]) {
 
                ui->wrongLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
                ui->wrongLbl->setText("Username or password incorrect.");
@@ -99,7 +97,7 @@ bool LoginForm::checkAuth() {
                                         f.add(ddd,"GICA");
                                         f.add(dddd,"IOCLA");
 
-
+                                       // qDebug()<<f.getNode()->user.getUserName()<<"AICI BOSS";
                                         Objective buget("Bugetul pe luna curenta",120, 160);
                                         Objective cifra("Cifra de afaceri",16241,25554);
                                         Objective destinatie("Produse ajunse la destinatie",0.66,1);
@@ -127,7 +125,10 @@ bool LoginForm::checkAuth() {
                                         f8->printObjectives();
                                         u1->setFirma(f8);
                                         u1->setTree(new Tree(u1->getFirma()->getTree()->find(u1->getUserName())));
+                                       //qDebug() << u1->getTree()->find("Denis")->user.getEmail()<<"EMAIL-UL";
                                         //u1->getTree()->traverse();
+                                        //qDebug() << u7.getEmail() << "EMAIL-UL";
+                                        //qDebug()<< eeee->user.getEmail()<<"EMAIL-UL";
                                         int count = 0;
                                         f8->getTree()->traverse(count);
                                         qDebug()<<"Numarul de noduri: "<<count;
@@ -183,6 +184,6 @@ bool LoginForm::checkAuth() {
                 return true;
             }
         }
-    }
+
     return false;
 }

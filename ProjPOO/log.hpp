@@ -8,7 +8,6 @@
 */
 #include <QString>
 #include <QVector>
-#include "error.hpp"
 #include <QDateTime>
 #include <QDebug>
 #include <logstrings.h>
@@ -27,11 +26,11 @@ public:
         return logs;
     }
 
-    Error printCurrentLogs();
-    Error addLog(QString str);
-    Error deleteLog(int index);
-    Error deleteLog(QString checker);
-    Error updateLog(int index, QString str);
+    bool printCurrentLogs();
+    bool addLog(QString str);
+    bool deleteLog(int index);
+    bool deleteLog(QString checker);
+    bool updateLog(int index, QString str);
     QString getTime();
 };
 #endif

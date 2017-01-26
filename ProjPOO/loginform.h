@@ -9,7 +9,6 @@
 #include <log.hpp>
 #include <tree.hpp>
 #include <firma.hpp>
-#include "objective.hpp"
 
 namespace Ui {
 class LoginForm;

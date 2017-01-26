@@ -16,8 +16,8 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>20</y>
+     <x>10</x>
+     <y>10</y>
      <width>731</width>
      <height>511</height>
     </rect>
@@ -99,7 +99,7 @@
      <rect>
       <x>290</x>
       <y>370</y>
-      <width>111</width>
+      <width>71</width>
       <height>16</height>
      </rect>
     </property>
@@ -138,7 +138,7 @@
      <rect>
       <x>290</x>
       <y>460</y>
-      <width>101</width>
+      <width>71</width>
       <height>16</height>
      </rect>
     </property>
@@ -446,7 +446,7 @@
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>410</x>
       <y>340</y>
       <width>91</width>
       <height>22</height>
@@ -486,7 +486,7 @@
      <rect>
       <x>410</x>
       <y>370</y>
-      <width>101</width>
+      <width>91</width>
       <height>22</height>
      </rect>
     </property>
@@ -978,7 +978,7 @@
    <widget class="QCheckBox" name="checkBox_2">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>660</x>
       <y>60</y>
       <width>70</width>
       <height>17</height>

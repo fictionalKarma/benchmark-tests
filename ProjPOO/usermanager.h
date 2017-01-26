@@ -17,15 +17,17 @@ private:
     static Log logger;
 
 public:
-    static Error openDatabaseConn();
-    static Error registerUser(QString username, QString password, QString email);
-    static Error removeUser(QString username);
-    static Error findUserByName(QString username);
-    static Error findUserByMail(QString mail);
-    static Error setUserLevel(QString username, UserLevel level);
-    static Error setUserName(QString username, QString newName);
+    static bool openDatabaseConn();
+    static bool registerUser(QString username, QString password, QString email);
+    static bool registerUserData(QString username, QMap<QString, QString> stringList);
+    static bool removeUser(QString username);
+    static bool findUserByName(QString username);
+    static bool findUserByMail(QString mail);
+    static bool setUserLevel(QString username, UserLevel level);
+    static bool setUserName(QString username, QString newName);
+    static void setUserData(QString username, QMap<QString, QString> newData);
     static UserLevel getUserLevel(QString username);
-    static QString getUserData(QString username);
+    static QMap<QString, QString> getUserData(QString username);
 };
 
 #endif // USERMAN_H

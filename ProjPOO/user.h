@@ -5,320 +5,285 @@
 #include <QObject>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QSqlQuery>
 #include <QDebug>
-#include "userlevels.h"
+#include "usermanager.h"
+
 class Firma;
 class Tree;
 struct Node ;
+
 class User : public QObject {
     Q_OBJECT
-
 public:
     User(QString);
     User(QString,QString);
     User(QString ,Firma* ,QString);
     User();
-    virtual void dummyFunction(){}
     void readFromDatabase(QString name);
-    void decode(QString);
-    QString getUserName(){
-        return username;
-    }
-    QString getBoss(){
-        return boss;
-    }
-    void setUserName(QString q){
-        username = q;
-    }
-    void setBoss(QString q){
-        boss = q;
-    }
-    UserLevel getLevel(){
-        return level;
-    }
     Firma* getFirma(){
         return firma;
     }
     void setFirma(Firma *f){
         firma = f;
     }
-
     void setTree(Tree *k){
         copy = k;
     }
     Tree* getTree(){
         return copy;
     }
-
     void operator= (User &other){
-        this->setBoss(other.getBoss());
+        this->setBossName(other.getBossName());
         this->setUserName(other.getUserName());
         firma = other.getFirma();
-        copy = other.copy ;
-        salariu=other.getSalariu();
-        moneda=other.getMoneda();
-        cnp=other.getCnp();
-        email=other.getEmail();
-        numeFirma=other.getNumeFirma();
-        adresa=other.getAddress();
-        dep=other.getDepartment();
-        compAerian=other.getCompAerian();
-        compMaritim=other.getCompMaritim();
-        compRutier=other.getCompRutier();
-        compFeroviar=other.getCompFeroviar();
-        compInternat=other.getCompInternational();
-        compDomestic=other.getCompDomestic();
-        depozitare=other.getDepozitare();
-        comercial=other.getComercial();
-        achizitii=other.getAchizitii();
-        manageEchipa=other.getManageEchipa();
-        analiza=other.getAnaliza();
-        decizii=other.getDecizii();
-        prezentare=other.getPrezentare();
-        comunicare=other.getComunicare();
-        manageProiect=other.getManageProiect();
-        manageTimp=other.getManageTimp();
-        leanManage=other.getLeanManage();
-        sixSigma=other.getSixSigma();
-        tADR=other.getTADR();
-        tIATA=other.getTIATA();
-        sisInfo=other.getSisInfo();
-        standardLucru=other.getStandardLucru();
+        this->data = other.data;
 
+        copy = other.copy;
     }
-
     bool operator==(User &other){
         int i ;
-        i =  (boss == other.getBoss()) + (username == other.getUserName());
+        i =  (data["boss"] == other.getBossName()) + (data["username"] == other.getUserName());
         if( i == 2)
             return true;
         return false;
     }
-    QString getEmail(){
-        return this->email;
+
+    // Getters
+    QString getName() {
+        return data["name"];
     }
-    QString getCnp(){
-        return cnp;
+    QString getCnp() {
+        return data["cnp"];
     }
-    QString getNumeFirma(){
-        return numeFirma;
+    QString getAddress() {
+        return data["address"];
     }
-    QString getSef(){
-        return sef;
+    QString getCompanyName() {
+        return data["company"];
     }
-    QString getAddress(){
-        return adresa;
+    QString getUserName() {
+        return data["username"];
     }
-    int getSalariu(){
-        return salariu;
+    QString getPassword() {
+        return data["password"];
     }
-    int getMoneda(){
-        return moneda;
+    QString getEmail() {
+        return data["email"];
     }
-    int getDepartment(){
-        return dep;
+    UserLevel getLevel() {
+        if (data["level"] == "USER") return UserLevel::User;
+        if (data["level"] == "MANAGER") return UserLevel::Manager;
+        else return UserLevel::Administrator;
     }
-    int getCompAerian(){
-        return compAerian;
+    double getSalary() {
+        return data["salary"].toDouble();
     }
-    int getCompMaritim(){
-        return compMaritim;
+    QString getBossName() {
+        return data["boss"];
     }
-    int getCompFeroviar(){
-        return compFeroviar;
+    QString getDepartment() {
+        return data["department"];
     }
-    int getCompInternational(){
-        return compInternat;
+    QString getTransportCompetence() {
+        return data["transport_comp"];
     }
-    int getCompDomestic(){
-        return compDomestic;
+    QString getTeamWorkCompetence() {
+        return data["teamwork"];
     }
-    int getDepozitare(){
-        return depozitare;
+    QString getNegotiationCompetence() {
+        return data["negotiation"];
     }
-    int getComercial(){
-        return comercial;
+    QString getDataAnalysisCompetence() {
+        return data["analysis"];
     }
-    int getAchizitii(){
-        return achizitii;
+    QString getPresentationCompetence() {
+        return data["presentation"];
     }
-    int getManageEchipa(){
-        return manageEchipa;
+    QString getSocialCompetence() {
+        return data["social"];
     }
-    int getAnaliza(){
-        return analiza;
+    QString getDecisionMakingCompetence() {
+        return data["decision"];
     }
-    int getDecizii(){
-        return decizii;
+    QString getTimeManagementCompetence() {
+        return data["time_management"];
     }
-    int getPrezentare(){
-        return prezentare;
+    bool hasProjectManagementTraining() {
+        return data["project_management"] == "true";
     }
-    int getComunicare(){
-        return comunicare;
+    bool hasIATALicence() {
+        return data["iata_license"] == "true";
     }
-    int getCompRutier()
-    {
-        return compRutier;
+    bool hasADRLicense() {
+        return data["adr_license"] == "true";
+    }
+    bool hasSixSigmaBelt() {
+        return data["sixsigma_belt"] == "true";
+    }
+    bool hasITTraining() {
+        return data["it_management"] == "true";
+    }
+    bool hasTimeManagementTraining() {
+        return data["time_training"] == "true";
     }
 
-    int getManageProiect(){
-        return manageProiect;
+    // Setters
+    void setName(QString name) {
+        if (Operations::isValidName(name)) {
+            data["name"] = name;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    int getManageTimp(){
-        return manageTimp;
+    void setUserName(QString username) {
+        QString oldUser = data["username"];
+        if (Operations::isValidUser(username)) {
+            data["username"] = username;
+            UserManager::setUserData(oldUser, data);
+        }
     }
-    int getLeanManage(){
-        return leanManage;
+    void setUserEmail(QString mail) {
+        if (Operations::isValidEmail(mail)) {
+            data["email"] = mail;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    int getSixSigma(){
-        return sixSigma;
+    void setUserLevel(UserLevel level) {
+        this->level = level;
+        QString v[] = {"USER", "MANAGER", "ADMINISTRATOR"};
+        data["level"] = v[(int)level];
+        UserManager::setUserData(data["username"], data);
     }
-    int getTADR(){
-        return tADR;
+    void setUserCnp(QString cnp) {
+        auto isNumber = [cnp]() {
+            for (QChar c : cnp) {
+                if (c.isDigit()) continue;
+                return false;
+            }
+            return true;
+        }();
+        if (isNumber) {
+            data["cnp"] = cnp;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    int getTIATA(){
-        return tIATA;
+    void setUserAddress(QString address) {
+        data["address"] = address;
+        UserManager::setUserData(data["username"], data);
     }
-
-    int getSisInfo(){
-        return sisInfo;
+    void setCompanyName(QString company) {
+        if (Operations::isValidName(company)) {
+            data["company"] = company;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    int getStandardLucru(){
-        return standardLucru;
+    void setSalary(double salary) {
+        data["salary"] = QString::number(salary);
+        UserManager::setUserData(data["username"], data);
     }
-
-    void setEmail(QString emm){
-        email= emm;
+    void setBossName(QString name) {
+        if (Operations::isValidName(name)) {
+            data["boss"] = name;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setCnp(QString cnn){
-        cnp = cnn;
+    void setDepartment(QString dep) {
+        QStringList vec = {"Road", "Sea", "Railway", "Airway", "International", "Domestic"};
+        if (vec.contains(dep)) {
+            data["department"] = dep;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setNumeFirma(QString value){
-        numeFirma = value;
+    void setTransportCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["transport_comp"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setSef(QString value){
-        sef = value;
+    void setTeamWorkCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["teamwork"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setAddress(QString value){
-        adresa = value;
-    }
-    void setSalariu(int value){
-        salariu = value;
-    }
-    void setMoneda(int value){
-        moneda = value;
-    }
-    void setDepartment(int value){
-        dep = value;
-    }
-    void setCompAerian(int value){
-        compAerian = value;
-    }
-    void setCompMaritim(int value){
-        compMaritim = value;
-    }
-    void setCompFeroviar(int value){
-        compFeroviar = value;
-    }
-    void setCompInternational(int value){
-        compInternat = value;
-    }
-    void setCompDomestic(int value){
-        compDomestic = value;
-    }
-    void setDepozitare(int value){
-        depozitare = value;
-    }
-    void setComercial(int value){
-        comercial = value;
-    }
-    void setAchizitii(int value){
-        achizitii = value;
-    }
-    void setManageEchipa(int value){
-       manageEchipa = value;
-    }
-    void setAnaliza(int value){
-        analiza = value;
-    }
-    void setDecizii(int value){
-        decizii = value;
-    }
-    void setPrezentare(int value){
-        prezentare = value;
-    }
-    void setComunicare(int value){
-        comunicare = value;
-    }
-    void setCompRutier(int value)
-    {
-        compRutier = value;
+    void setNegotiationCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["negotiation"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
 
-    void setManageProiect(int value){
-        manageProiect = value;
+    void setDataAnalysisCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["analysis"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setManageTimp(int value){
-        manageTimp = value;
+    void setPresentationCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["presentation"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setLeanManage(int value){
-        leanManage = value;
+    void setSocializationCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["social"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setSixSigma(int value){
-        sixSigma = value;
+    void setDecisionMakingCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["decision"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setTADR(int value){
-        tADR = value;
+    void setTimeManagementCompetenceLevel(QString compLevel) {
+        QStringList levels = {"None", "Low", "Medium", "Advanced"};
+        if (levels.contains(compLevel)) {
+            data["time_management"] = compLevel;
+            UserManager::setUserData(data["username"], data);
+        }
     }
-    void setTIATA(int value){
-        tIATA = value;
+    void setProjectManagementTraining(bool acquired) {
+        data["project_management"] = acquired ? "true":"false";
+        UserManager::setUserData(data["username"], data);
     }
-
-    void setSisInfo(int value){
-        sisInfo = value;
+    void setIATALicense(bool acquired) {
+        data["iata_license"] = acquired ? "true":"false";
+        UserManager::setUserData(data["username"], data);
     }
-    void setStandardLucru(int value){
-        standardLucru = value;
+    void setADRLicense(bool acquired) {
+        data["adr_license"] = acquired ? "true":"false";
+        UserManager::setUserData(data["username"], data);
     }
-
+    void setSixSigmaBelt(bool acquired) {
+        data["sixsigma_belt"] = acquired ? "true":"false";
+        UserManager::setUserData(data["username"], data);
+    }
+    void setITManagementTraining(bool acquired) {
+        data["it_management"] = acquired ? "true":"false";
+        UserManager::setUserData(data["username"], data);
+    }
+    void setTimeManagementTraining(bool acquired) {
+        data["time_training"] = acquired ? "true":"false";
+        UserManager::setUserData(data["username"], data);
+    }
 
 signals:
     void onLogin();
 
 protected:
     QSqlDatabase db;
-    QString username , boss ;
-    QString cnp,email,numeFirma,sef , adresa;
     Firma* firma;
     Tree* copy;
-    int salariu ;
-    int moneda;
-    int dep;
     UserLevel level;
-    int compAerian;
-    int compMaritim;
-    int compRutier;
-    int compFeroviar;
-    int compInternat;
-    int compDomestic;
-    int depozitare;
-    int comercial;
-    int achizitii;
-    int manageEchipa;
-    int analiza;
-    int decizii;
-    int prezentare;
-    int comunicare;
-    int manageProiect;
-    int manageTimp;
-    int leanManage;
-    int sixSigma;
-    int tADR;
-    int tIATA;
-    int sisInfo;
-    int standardLucru;
+    QMap<QString, QString> data;
 };
 
 #endif // USER_H

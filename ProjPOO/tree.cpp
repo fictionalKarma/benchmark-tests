@@ -8,10 +8,10 @@ std::vector<Node*> Tree::getChildren(){
 void Tree::internAdd(Node* n,Node* fathe,QString sef){
 
     if( fathe->user.getUserName() == sef){
-		n->father = fathe;
-		fathe->children.push_back(n);
-	}
-	else{
+        n->father = fathe;
+        fathe->children.push_back(n);
+    }
+    else{
 
         for( std::vector<Node*>::iterator it = fathe->children.begin(); it != fathe->children.end(); ++it){
         //for (Node* it : children) {
@@ -21,7 +21,7 @@ void Tree::internAdd(Node* n,Node* fathe,QString sef){
 
 
 
-	}
+    }
 }
 
 void Tree::traverse(){
@@ -34,7 +34,7 @@ void Tree::traverse(){
     }
     else
         traverse(boss);
-	qDebug() <<"\n";
+    qDebug() <<"\n";
 }
 void Tree::traverse(int& count){
     //Node *b  = boss ;
@@ -102,7 +102,7 @@ void Tree::traverse(Node *n){
             Tree::traverse(*it );
         }
     qDebug() << n->user.getUserName() << " " ;
-	
+
 }
 Node* Tree::traverse(Node *n,QString name , int* i){
     Node *b ;
@@ -129,8 +129,8 @@ Node* Tree::traverse(Node *n,QString name , int* i){
 void Tree::add(Node* n , QString sef){
     if( marker == 1){
         if( boss == NULL){
-		boss = n ;
-		boss->father = NULL;
+        boss = n ;
+        boss->father = NULL;
         }
         else
             this->Tree::internAdd(n,boss,sef);

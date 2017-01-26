@@ -2,7 +2,6 @@
 #define PRINCIPALFORM_H
 
 #include <QMainWindow>
-//#include "firmewindow.h"
 #include <QDialog>
 #include<QObject>
 #include<QWidget>
@@ -10,13 +9,11 @@
 #include<QStack>
 #include<QTreeWidgetItem>
 #include <QtCore>
-#include "administrator.hpp"
 #include "ui_principalform.h"
 #include <qdebug.h>
 #include<QMessageBox>
 #include "tree.hpp"
-#include "user.h"
-#include<userinfo.h>
+#include <userinfo.h>
 
 namespace Ui {
 class principalForm;

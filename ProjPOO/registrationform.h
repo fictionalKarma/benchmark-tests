@@ -4,10 +4,12 @@
 #include <QMainWindow>
 #include <usermanager.h>
 #include <operations.h>
-#include <QDebug>
 #include <QTimer>
 #include <loghandler.hpp>
-#include "personal.h"
+#include <QLineEdit>
+#include <QLabel>
+#include <QComboBox>
+#include <QCheckBox>
 
 namespace Ui {
 class RegistrationForm;
@@ -25,14 +27,21 @@ private slots:
     void cancelButton();
     void registerUser();
     void redirect();
-    void openPersonal();
+    void updateTrans();
 
 private:
     Ui::RegistrationForm *ui;
     QMainWindow *startWindow;
     Log logger;
-
+    QLineEdit *textBoxes;
+    QLabel *tbLabels;
+    QComboBox *combos;
+    QCheckBox *checks;
+    QMap<QString, QString> map;
+    QMap<QString, QString> userData;
     void sendConfirmationMail();
+    void initializeComponents();
+    void getUserData();
 };
 
 #endif // REGISTRATIONFORM_H

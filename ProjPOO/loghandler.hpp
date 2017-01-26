@@ -4,7 +4,6 @@
 #include <QString>
 #include <QDir>
 #include "log.hpp"
-#include "error.hpp"
 #include "fileOperations.hpp"
 
 class LogHandler {
@@ -38,7 +37,7 @@ public:
 	@param stream pointing towards the file we need to modify
 	@return return whether the log update has been succesful or not 
 	*/
-        Error updateLog(QString date, QString log );
+        bool updateLog(QString date, QString log );
 	/**
 		Checks wheter a log exists or not
 

@@ -3,25 +3,25 @@
 
 Objective::Objective(QString S){
 
-	targetInformation = S;
-	value = 0.0;
-	target = 0.0;
+    targetInformation = S;
+    value = 0.0;
+    target = 0.0;
     lastValue = 0.0;
 }
 Objective::Objective(QString S , double value){
-	targetInformation = S;
-	this->value = value;
+    targetInformation = S;
+    this->value = value;
     lastValue = 0.0;
-	target =0.0;
+    target =0.0;
 }
 Objective::Objective(QString S , double value , double tar){
-	targetInformation = S;
-	this->value = value ;
+    targetInformation = S;
+    this->value = value ;
     lastValue = 0.0;
-	target = tar;
+    target = tar;
 }
 void Objective::resetTarget(){
-	target = 0.0;
+    target = 0.0;
 }
 void Objective::setTarget(double tar){
     target  = tar ;
@@ -31,26 +31,26 @@ void Objective::setTarget(int tar){
 }
 
 double Objective::getTarget(){
-	return target;
+    return target;
 }
 void Objective::resetValue(){
     lastValue = 0.0;
-	value = 0.0;
+    value = 0.0;
 }
 void Objective::setValue(double val){
-	value = val ;
+    value = val ;
 }
 double Objective::getValue(){
-	return value;
+    return value;
 }
 void Objective::addToValue(double val){
     lastValue = value;
-	value += val ;
+    value += val ;
 }
 bool Objective::pass(){
-	if(value > target)
-		return true;
-	return false;
+    if(value > target)
+        return true;
+    return false;
 }
 QString Objective::toString(){
     QString tar = targetInformation;

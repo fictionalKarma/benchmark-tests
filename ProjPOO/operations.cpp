@@ -53,6 +53,19 @@ bool Operations::isValidUser(QString name) {
     return true;
 }
 
+bool Operations::isValidName(QString name) {
+    if (name.length() < 3)
+        return false;
+    name = name.trimmed();
+
+    for(QChar c : name) {
+        if (c.isLetter() || c.isSpace()) continue;
+        else return false;
+    }
+
+    return true;
+}
+
 QString Operations::encode(QString arg1) {
     return QString(QCryptographicHash::hash(arg1.toUtf8(), QCryptographicHash::Md5).toHex());
 }

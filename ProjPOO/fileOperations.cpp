@@ -24,7 +24,7 @@ void FileOperations::removeFile(QString Path , QString name){
         }
   		catch ( int e )
   		{
-            qDebug() << "Error: could not delete file ! (Error "<<e<<").\n";
+            qDebug() << "bool: could not delete file ! (bool "<<e<<").\n";
  		}
 }
 
@@ -54,7 +54,7 @@ void FileOperations::writeToFile(QString Path ,
     }
     catch ( int e )
     {
-            qDebug() << "Error: could not delete file ! (Error "<<e<<").\n";
+            qDebug() << "bool: could not delete file ! (bool "<<e<<").\n";
     }
 }
 	

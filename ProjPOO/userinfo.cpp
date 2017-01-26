@@ -13,54 +13,31 @@ userinfo::userinfo(User& person, QPoint location, QWidget *parent) :
     updateForm();
 }
 void userinfo::updateForm(){
-    QString departament;
-    switch (anotherUser.getDepartment()) {
-    case 0:
-        departament="Rutier";
-        break;
-    case 1:
-        departament="Depozitare";
-        break;
-    case 2:
-        departament="Maritim";
-        break;
-    case 3:
-        departament="Aerian";
-        break;
-    default:
-        departament="Feroviar";
-        break;
-
-    }
+    QString department = anotherUser.getDepartment();
 
 
 
 ui->info_edit->setHtml("<b><u>About "+anotherUser.getUserName()+"</u></b><br /><br />"
                        "<b>EMAIL: </b>"+anotherUser.getEmail()+"<br />"
-                       "<b>FIRMA: </b>"+anotherUser.getNumeFirma()+"<br />"
+                       "<b>COMPANY: </b>"+anotherUser.getCompanyName()+"<br />"
                        "<b>CNP: </b>"+anotherUser.getCnp()+"<br />"
-                       "<b>SALARIU: </b>"+QString::number(anotherUser.getSalariu())+"<br />"
-                       "<b>ADRESA </b>"+anotherUser.getAddress()+"<br />"
-                       "<b>DEPARTAMENT: </b>"+departament+"<br />"
-                       "<b>Competemte: </b><br />");
-ui->info_edit->moveCursor(QTextCursor::End);
-if(anotherUser.getManageProiect())
-ui->info_edit->insertHtml("<i>Managementul proiectelor</i><br />");
-if(anotherUser.getManageTimp())
+                       "<b>SALARY: </b>"+QString::number(anotherUser.getSalary())+"<br />"
+                       "<b>ADDRESS: </b>"+anotherUser.getAddress()+"<br />"
+                       "<b>DEPARTMENT: </b>"+department+"<br />"
+                       "<b>Competences: </b><br />");
+    ui->info_edit->moveCursor(QTextCursor::End);
+if(anotherUser.hasProjectManagementTraining())
+    ui->info_edit->insertHtml("<i>Managementul proiectelor</i><br />");
+if(anotherUser.hasTimeManagementTraining())
     ui->info_edit->insertHtml("<i>Managementul timpului</i><br />");
-if(anotherUser.getLeanManage())
-    ui->info_edit->insertHtml("<i>Lean Management</i><br />");
-if(anotherUser.getSixSigma())
+if(anotherUser.hasSixSigmaBelt())
     ui->info_edit->insertHtml("<i>Centura SixSigma</i><br />");
-if(anotherUser.getTADR())
+if(anotherUser.hasADRLicense())
     ui->info_edit->insertHtml("<i>Transport ADR</i><br />");
-if(anotherUser.getTIATA())
+if(anotherUser.hasIATALicence())
     ui->info_edit->insertHtml("<i>Transport IATA</i><br />");
-if(anotherUser.getSisInfo()==0)
+if(anotherUser.hasITTraining())
     ui->info_edit->insertHtml("<i>Sistem informatic</i><br />");
-if(anotherUser.getStandardLucru())
-    ui->info_edit->insertHtml("<i>Standarde de lucru</i><br />");
-
 
 }
 

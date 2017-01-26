@@ -1,5 +1,5 @@
 QT       += core gui sql network
-QT      +=sql
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ProjPOO
 TEMPLATE = app
@@ -41,7 +41,6 @@ SOURCES += main.cpp\
 HEADERS  += startingwindow.h \
     loginform.h \
     registrationform.h \
-    error.hpp \
     operations.h \
     usermanager.h \
     principalform.h \
@@ -83,5 +82,6 @@ FORMS    += startingwindow.ui \
     principalform.ui \
     buget.ui \
     procesop.ui \
+    personal.ui \
     userinfo.ui
 

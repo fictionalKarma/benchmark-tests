@@ -8,17 +8,17 @@ QVector<QString> Log::_all_logs;
 
 Log::Log() {}
 
-Error Log::printCurrentLogs(){
+bool Log::printCurrentLogs(){
     QString str;
     for(QString it : logs){
         str = QString::fromUtf8(QByteArray(it.toUtf8()));
         qDebug() << str;
     }
-    return Error::OK;
+    return true;
 }
 
-Error Log::addLog(QString str) {
+bool Log::addLog(QString str) {
     logs.push_back(this->getTime() + str);
     _all_logs.push_back(str);
-    return OK;
+    return true;
 }

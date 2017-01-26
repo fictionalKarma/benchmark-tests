@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>295</height>
+    <width>492</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,191 +29,296 @@ background: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop: 0.534091 r
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>251</width>
-      <height>279</height>
+      <x>5</x>
+      <y>8</y>
+      <width>482</width>
+      <height>433</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="mainGrid">
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="passTb">
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAsNeeded</enum>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>-211</y>
+       <width>463</width>
+       <height>642</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <layout class="QGridLayout" name="mainGrid">
+        <item row="24" column="1">
+         <widget class="QComboBox" name="decCombo"/>
+        </item>
+        <item row="23" column="3">
+         <widget class="QComboBox" name="socialCombo"/>
+        </item>
+        <item row="24" column="2">
+         <widget class="QLabel" name="label_23">
+          <property name="text">
+           <string>Time Manage.</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_4">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="23" column="2">
+         <widget class="QLabel" name="label_21">
+          <property name="text">
+           <string>Socialization</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="20" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_7">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="23" column="0">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Presentation</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="25" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_8">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="24" column="0">
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>Decision Making</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="3">
+         <widget class="QLineEdit" name="bossTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
 	border-radius: 4px;
 	border: 1px solid black;
-}</string>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Password</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Password</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QLineEdit" name="emailconfTb">
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="2">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Supervisor</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QLabel" name="label_11">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string>     Personal Data</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <property name="indent">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="4">
+         <widget class="QLabel" name="label_12">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>     Account Information</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="0" colspan="4">
+         <widget class="QLabel" name="label_13">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>     Business Identity</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>Address</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="3">
+         <widget class="QLineEdit" name="addressTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
 	border-radius: 4px;
 	border: 1px solid black;
-}</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Username</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Confirm Pass.</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="userTb">
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>Str. Somewhere, No. 13, MyCity, MyCountry</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="fnameTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
 	border-radius: 4px;
 	border: 1px solid black;
-}</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="passcTb">
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
-	border-radius: 4px;
-	border: 1px solid black;
-}</string>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Password</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>E-Mail</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Confirm E-Mail</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="emailTb">
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
-	border-radius: 4px;
-	border: 1px solid black;
-}</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="userError">
-       <property name="styleSheet">
-        <string notr="true">color: rgba(0, 0, 0, 0);</string>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0" colspan="2">
-      <widget class="QLabel" name="passError">
-       <property name="styleSheet">
-        <string notr="true">color: rgba(0, 0, 0, 0);</string>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0" colspan="2">
-      <widget class="QLabel" name="emcoError">
-       <property name="styleSheet">
-        <string notr="true">color: rgba(0, 0, 0, 0);</string>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0" colspan="2">
-      <widget class="QLabel" name="emError">
-       <property name="styleSheet">
-        <string notr="true">color: rgba(0, 0, 0, 0);</string>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" colspan="2">
-      <widget class="QLabel" name="confError">
-       <property name="styleSheet">
-        <string notr="true">color: rgba(0, 0, 0, 0);</string>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QPushButton" name="cancelBtn">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>John</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>First Name</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="35" column="1" colspan="3">
+         <widget class="QPushButton" name="regBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	border-radius:5px;
 	background: rgba(200, 200, 200, 1);
  	height: 25px;
@@ -223,16 +328,182 @@ background: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop: 0.534091 r
 QPushButton:hover {
 	background:rgba(240, 240, 240, 1);
 }</string>
-       </property>
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QPushButton" name="regBtn">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+          </property>
+          <property name="text">
+           <string>Register</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1">
+         <widget class="QLineEdit" name="emailTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>email@example.com</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="3">
+         <widget class="QLineEdit" name="passcTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="2">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Confirm Pass.</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="3">
+         <widget class="QLineEdit" name="emailconfTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>email@example.com</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLineEdit" name="passTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>E-Mail</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="2">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Confirm E-Mail</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Company</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="0">
+         <widget class="QLabel" name="salary">
+          <property name="text">
+           <string>Salary</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="1">
+         <widget class="QLineEdit" name="salaryTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly|Qt::ImhPreferLatin</set>
+          </property>
+          <property name="placeholderText">
+           <string>~ RON</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Password</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Username</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="35" column="0">
+         <widget class="QPushButton" name="cancelBtn">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
 	border-radius:5px;
 	background: rgba(200, 200, 200, 1);
  	height: 25px;
@@ -242,35 +513,551 @@ QPushButton:hover {
 QPushButton:hover {
 	background:rgba(240, 240, 240, 1);
 }</string>
-       </property>
-       <property name="text">
-        <string>Register</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+          </property>
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="33" column="0" colspan="4">
+         <widget class="QLabel" name="label_24">
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>50</weight>
+            <italic>true</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>* Information written here will be kept private. We will never share this information with any
+ third party.</string>
+          </property>
+         </widget>
+        </item>
+        <item row="23" column="1">
+         <widget class="QComboBox" name="presCombo"/>
+        </item>
+        <item row="29" column="2">
+         <widget class="QCheckBox" name="adrBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 15px;
+}</string>
+          </property>
+          <property name="text">
+           <string>ADR License</string>
+          </property>
+         </widget>
+        </item>
+        <item row="28" column="2">
+         <widget class="QCheckBox" name="iataBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 15px;
+}</string>
+          </property>
+          <property name="text">
+           <string>IATA License</string>
+          </property>
+         </widget>
+        </item>
+        <item row="28" column="0" colspan="2">
+         <widget class="QCheckBox" name="projBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 30px;
+}</string>
+          </property>
+          <property name="text">
+           <string>Project Management</string>
+          </property>
+          <property name="tristate">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="29" column="0" colspan="2">
+         <widget class="QCheckBox" name="sigmaBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 30px;
+}</string>
+          </property>
+          <property name="text">
+           <string>SixSigma Belt</string>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="1" colspan="3">
+         <widget class="QLineEdit" name="companyTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>s.a.</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_3">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="styleSheet">
+           <string notr="true">QComboBox {
+	border-radius: 4px;
+}</string>
+          </property>
+          <property name="text">
+           <string>Department:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="1">
+         <widget class="QComboBox" name="depCombo">
+          <property name="currentText">
+           <string/>
+          </property>
+          <property name="currentIndex">
+           <number>-1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="22" column="0">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>Team work</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="24" column="3">
+         <widget class="QComboBox" name="timeCombo"/>
+        </item>
+        <item row="21" column="2">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>Negotiation</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="22" column="2">
+         <widget class="QLabel" name="label_19">
+          <property name="text">
+           <string>Data Analysis</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="22" column="3">
+         <widget class="QComboBox" name="dataCombo"/>
+        </item>
+        <item row="9" column="1" colspan="3">
+         <widget class="QLineEdit" name="userTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>applejuice9172</string>
+          </property>
+         </widget>
+        </item>
+        <item row="34" column="0" colspan="4">
+         <widget class="QLabel" name="label_26">
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>50</weight>
+            <italic>true</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;* All information is required. Please fill up every field before hitting register.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Last Name</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLineEdit" name="lnameTb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>Doe</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" colspan="3">
+         <widget class="QLineEdit" name="cnptb">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+	border-radius: 4px;
+	border: 1px solid black;
+}
+
+QLineEdit:focus {
+	background: rgba(210, 255, 249, 1);
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>SYYMMDDXXXXXX</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>CNP</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="21" column="3">
+         <widget class="QComboBox" name="negCombo">
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+          <property name="currentText">
+           <string/>
+          </property>
+          <property name="currentIndex">
+           <number>-1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="22" column="1">
+         <widget class="QComboBox" name="teamCombo"/>
+        </item>
+        <item row="21" column="1">
+         <widget class="QComboBox" name="transCombo"/>
+        </item>
+        <item row="19" column="0" colspan="4">
+         <widget class="QLabel" name="label_16">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>     Competences</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+        <item row="21" column="0">
+         <widget class="QLabel" name="compsLbl">
+          <property name="text">
+           <string>Driving</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_5">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="30" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_10">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="29" column="3">
+         <widget class="QCheckBox" name="timeBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 20px;
+}</string>
+          </property>
+          <property name="text">
+           <string>Time Management</string>
+          </property>
+          <property name="tristate">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="28" column="3">
+         <widget class="QCheckBox" name="itBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 20px;
+}</string>
+          </property>
+          <property name="text">
+           <string>IT Management</string>
+          </property>
+         </widget>
+        </item>
+        <item row="18" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_6">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="32" column="0" colspan="4">
+         <widget class="QLabel" name="errorLbl">
+          <property name="styleSheet">
+           <string notr="true">color: rgba(0, 0, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_2">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="27" column="0" colspan="4">
+         <widget class="QLabel" name="aaaBar_9">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>1</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+	background: qlineargradient(spread:reflect, x1:0.489, y1:0.466045, x2:1, y2:0.46, stop:0 rgba(195, 195, 195, 255), stop:1 rgba(255, 255, 255, 0))
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="26" column="0" colspan="4">
+         <widget class="QLabel" name="label_25">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>     Expertise</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>20</y>
-      <width>111</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Date personale</string>
-    </property>
-   </widget>
+   <zorder>widget</zorder>
+   <zorder>scrollArea</zorder>
+   <zorder>gridLayoutWidget</zorder>
   </widget>
  </widget>
  <tabstops>
+  <tabstop>fnameTb</tabstop>
+  <tabstop>lnameTb</tabstop>
+  <tabstop>cnptb</tabstop>
+  <tabstop>addressTb</tabstop>
   <tabstop>userTb</tabstop>
   <tabstop>passTb</tabstop>
   <tabstop>passcTb</tabstop>
   <tabstop>emailTb</tabstop>
   <tabstop>emailconfTb</tabstop>
+  <tabstop>companyTb</tabstop>
+  <tabstop>salaryTb</tabstop>
+  <tabstop>bossTb</tabstop>
+  <tabstop>depCombo</tabstop>
+  <tabstop>transCombo</tabstop>
+  <tabstop>negCombo</tabstop>
+  <tabstop>teamCombo</tabstop>
+  <tabstop>dataCombo</tabstop>
+  <tabstop>presCombo</tabstop>
+  <tabstop>socialCombo</tabstop>
+  <tabstop>decCombo</tabstop>
+  <tabstop>timeCombo</tabstop>
+  <tabstop>projBox</tabstop>
+  <tabstop>iataBox</tabstop>
+  <tabstop>itBox</tabstop>
+  <tabstop>sigmaBox</tabstop>
+  <tabstop>adrBox</tabstop>
+  <tabstop>regBtn</tabstop>
+  <tabstop>timeBox</tabstop>
+  <tabstop>cancelBtn</tabstop>
+  <tabstop>scrollArea</tabstop>
  </tabstops>
  <resources/>
  <connections/>

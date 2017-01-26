@@ -15,7 +15,8 @@ class Table
 public:
 
     int createTable(QString tableName, QString ColumnValues);
-    void insertQuery(QString tableName, std::map<QString,QString> stringValues, std::map<QString,float> floatValues, bool value);
+    void insertQuery(QString tableName, QString data, std::map<QString,float> floatValues, bool value);
+    void insertQuery(QString tableName,QString data,std::map<QString,float> floatValues, std::map<QString,bool> boolValues);
     int deleteQuery(QString tableName, int index);
     int updateQuery(QString tableName, QString newRowValues, int index);
     int tableSize(QString tableName);

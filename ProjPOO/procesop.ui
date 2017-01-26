@@ -305,21 +305,6 @@
      <string>Depozitare</string>
     </property>
    </item>
-   <item>
-    <property name="text">
-     <string>Maritim</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Aerian</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Feroviar</string>
-    </property>
-   </item>
   </widget>
   <widget class="QTextEdit" name="acuratete_preg_comenzi_edit">
    <property name="enabled">
@@ -571,6 +556,9 @@
    </property>
   </widget>
   <widget class="QCheckBox" name="respecatare_termene_preg_check">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>630</x>

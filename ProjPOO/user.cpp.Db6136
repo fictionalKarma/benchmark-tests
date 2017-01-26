@@ -1,10 +1,16 @@
 #include "user.h"
 #define DATABASE_NAME "users.db"
+struct pers
+{
+    QString text[7];
+    QString n[25];//da faq is n?
+
+}decod;
 
 User::User(QString name)
 {
     level = UserLevel::User;
-    data["username"] = name;
+    this->username = name;
     QString tableName="PERSONAL";
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
@@ -15,12 +21,11 @@ User::User(QString name)
 User::User(QString name, QString bosss){
     level = UserLevel::User;
     this->setUserName(name);
-    this->setBossName(bosss);
+    this->setBoss(bosss);
     QString tableName="PERSONAL";
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
     db.open();
-    readFromDatabase(name);
     emit onLogin();
 }
 User::User(){
@@ -33,18 +38,16 @@ User::User(){
 }
 User::User(QString name ,Firma* f1 ,QString boss){
     level = UserLevel::User;
-    data["username"] = name;
+    this->username = name;
     firma = f1 ;
-    this->setBossName(boss);
+    this->boss = boss;
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
     db.open();
-    readFromDatabase(name);
     emit onLogin();
 }
-
 void User::readFromDatabase(QString name) {
-    data = UserManager::getUserData(name);
+
 }
 
