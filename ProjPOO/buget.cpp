@@ -6,7 +6,7 @@ buget::buget(QWidget *parent) :
     ui(new Ui::buget)
 {
     ui->setupUi(this);
-    Buget.createTable("BUGET","DATA CHAR(7), BUGET INT, CIFRA_AFACERI TEXT, COST_CUMPARARE TEXT, PERSONAL TEXT, TEHNOLOGIE TEXT, INFRASTRUCTURA TEXT, INVESTITII TEXT, COST_RUTIER TEXT, COST_DEPOZITARE TEXT, COST_MARITIM TEXT, COST_AERIAN TEXT, COST_FEROVIAR TEXT");
+   // Buget.createTable("BUGET","DATA TEXT, BUGET TEXT, CIFRA_AFACERI REAL, COST_CUMPARARE REAL, COST_PERSONAL REAL, COST_TEHNOLOGIE REAL, COST_INFRASTRUCTURA REAL, COST_INVESTITII REAL, COST_RUTIER REAL, COST_DEPOZITARE REAL");
   //  Buget.tableSize("BUGET");
 }
 
@@ -17,111 +17,24 @@ buget::~buget()
 
 void buget::on_pushButton_clicked()
 {
-    /*QString input,test,test2;
-    int testsize,adaugat=0,j,size;
-    test+=ui->textEdit->toPlainText();
-    test+='.';
-    test+=QVariant(ui->comboBox_2->currentIndex()).toString();
-    input+='\'';
-    input+=ui->textEdit->toPlainText();
-    input+='.';
-    input+=QVariant(ui->comboBox_2->currentIndex()).toString();
-    input+='\'';
-    input+=',';
-    input+=QVariant(ui->comboBox->currentIndex()).toString();
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_2->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_3->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_4->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_5->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_6->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_7->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_8->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_9->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_10->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_11->toPlainText();
-    input+='\'';
-    input+=',';
-    input+='\'';
-    input+=ui->textEdit_12->toPlainText();
-    input+='\'';
-    //Se introduce functia care preia QString input si adauga informatia in baza de date
-    if(editare==0)
-    {
-        Buget.tableSize("BUGET");
-        Buget.insertQuery("BUGET", input);
-    }
-    if(editare==1)
-    {
-        adaugat=0;
-        size=Buget.tableSize("BUGET");
-        for(int i=0;i<size;i++)
-        {
-            test2="";
-            test2+=inputStr[i].text[0];
-            test2+='.';
-            test2+=QVariant(inputStr[i].n[0]).toString();
-            //persout<<test2<<" "<<test<<endl;
-            if(test.size()==test2.size())
-            {
-                testsize=test.size();
-                for(j=0;j<testsize;j++)
-                {
-                    if(test[j]!=test2[j])
-                        break;
-                }
-                if(j==testsize)
-                {
-                    adaugat=1;
-                    //update query
-                    Buget.updateQuery("BUGET",input,i);
-                    break;
-                }
-             }
-        }
-        if(adaugat==0)
-            Buget.insertQuery("BUGET", input);
-    }
-    foreach(QTextEdit *widget, this->findChildren<QTextEdit*>())
-    {
-        widget->clear();
-    }
-    foreach(QComboBox *widget, this->findChildren<QComboBox*>())
-    {
-        widget->setCurrentIndex(0);
-    }*/
+    std::map<QString,float> floatValues;
+    floatValues.insert(std::pair<QString,float>("ca",ui->ca_edit->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costCumparare",ui->cc_edit->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costPersonal",ui->costuri_personal_edit->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costTehnologie",ui->costuri_tehnologie_edit->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costInfrastructura",ui->costuri_infrastructura_edit->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costInvestitii",ui->costuri_infrastructura_edit->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costRutier",ui->cost_procesRutier->toPlainText().toFloat()));
+    floatValues.insert(std::pair<QString,float>("costDepozitare",ui->costProces_depozitare->toPlainText().toFloat()));
+
+    Buget.insertQuery(floatValues,ui->dateEdit->text(),ui->buget_combo->currentText());
+
 }
 void buget::on_pushButton_2_clicked()
-{   /*
-    foreach(QTextEdit *widget, this->findChildren<QTextEdit*>())
+{
+    delete ui;
+    this->close();
+   /* foreach(QTextEdit *widget, this->findChildren<QTextEdit*>())
     {
         widget->clear();
     }
@@ -136,8 +49,8 @@ void buget::on_pushButton_2_clicked()
     close();*/
 }
 void buget::on_pushButton_5_clicked()
-{/*
-    editare=1;
+{
+   /* editare=1;
     for(int j=0;j<Buget.tableSize("BUGET");j++)
     {
         for(int i=0;i<12;i++)

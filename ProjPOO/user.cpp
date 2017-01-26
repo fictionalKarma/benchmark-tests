@@ -4,16 +4,21 @@
 User::User(QString name)
 {
     level = UserLevel::User;
+    isAdmin = false;
     data["username"] = name;
     QString tableName="PERSONAL";
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
     db.open();
     readFromDatabase(name);
+    if(data["isAdmin"]=="true")
+    {isAdmin=true;}
+
     emit onLogin();
 }
 User::User(QString name, QString bosss){
     level = UserLevel::User;
+    isAdmin = false;
     this->setUserName(name);
     this->setBossName(bosss);
     QString tableName="PERSONAL";
@@ -21,10 +26,14 @@ User::User(QString name, QString bosss){
     db.setDatabaseName(DATABASE_NAME);
     db.open();
     readFromDatabase(name);
+    if(data["isAdmin"]=="true")
+        isAdmin=true;
+
     emit onLogin();
 }
 User::User(){
     level = UserLevel::User;
+    isAdmin = false;
     QString tableName="PERSONAL";
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(DATABASE_NAME);
@@ -33,6 +42,7 @@ User::User(){
 }
 User::User(QString name ,Firma* f1 ,QString boss){
     level = UserLevel::User;
+    isAdmin = false;
     data["username"] = name;
     firma = f1 ;
     this->setBossName(boss);
@@ -41,6 +51,8 @@ User::User(QString name ,Firma* f1 ,QString boss){
     db.setDatabaseName(DATABASE_NAME);
     db.open();
     readFromDatabase(name);
+    if(data["isAdmin"]=="true")
+        isAdmin=true;
     emit onLogin();
 }
 

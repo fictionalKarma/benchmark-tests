@@ -48,9 +48,9 @@ background: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop: 0.534091 r
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-211</y>
-       <width>463</width>
-       <height>642</height>
+       <y>-353</y>
+       <width>534</width>
+       <height>769</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -236,6 +236,9 @@ QLineEdit:focus {
            <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
           </property>
          </widget>
+        </item>
+        <item row="23" column="1">
+         <widget class="QComboBox" name="presCombo"/>
         </item>
         <item row="13" column="0" colspan="4">
          <widget class="QLabel" name="label_13">
@@ -535,9 +538,6 @@ QPushButton:hover {
           </property>
          </widget>
         </item>
-        <item row="23" column="1">
-         <widget class="QComboBox" name="presCombo"/>
-        </item>
         <item row="29" column="2">
          <widget class="QCheckBox" name="adrBox">
           <property name="layoutDirection">
@@ -619,6 +619,16 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
+        <item row="17" column="1">
+         <widget class="QComboBox" name="depCombo">
+          <property name="currentText">
+           <string/>
+          </property>
+          <property name="currentIndex">
+           <number>-1</number>
+          </property>
+         </widget>
+        </item>
         <item row="8" column="0" colspan="4">
          <widget class="QLabel" name="aaaBar_3">
           <property name="maximumSize">
@@ -652,15 +662,8 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="17" column="1">
-         <widget class="QComboBox" name="depCombo">
-          <property name="currentText">
-           <string/>
-          </property>
-          <property name="currentIndex">
-           <number>-1</number>
-          </property>
-         </widget>
+        <item row="24" column="3">
+         <widget class="QComboBox" name="timeCombo"/>
         </item>
         <item row="22" column="0">
          <widget class="QLabel" name="label_18">
@@ -672,8 +675,8 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="24" column="3">
-         <widget class="QComboBox" name="timeCombo"/>
+        <item row="22" column="3">
+         <widget class="QComboBox" name="dataCombo"/>
         </item>
         <item row="21" column="2">
          <widget class="QLabel" name="label_17">
@@ -694,9 +697,6 @@ QLineEdit:focus {
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
-        </item>
-        <item row="22" column="3">
-         <widget class="QComboBox" name="dataCombo"/>
         </item>
         <item row="9" column="1" colspan="3">
          <widget class="QLineEdit" name="userTb">
@@ -777,16 +777,6 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>CNP</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="21" column="3">
          <widget class="QComboBox" name="negCombo">
           <property name="editable">
@@ -802,6 +792,16 @@ QLineEdit:focus {
         </item>
         <item row="22" column="1">
          <widget class="QComboBox" name="teamCombo"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>CNP</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
         </item>
         <item row="21" column="1">
          <widget class="QComboBox" name="transCombo"/>
@@ -856,7 +856,7 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
-        <item row="30" column="0" colspan="4">
+        <item row="31" column="0" colspan="4">
          <widget class="QLabel" name="aaaBar_10">
           <property name="maximumSize">
            <size>
@@ -892,6 +892,21 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
+        <item row="28" column="3">
+         <widget class="QCheckBox" name="itBox">
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QCheckBox {
+	margin-right: 20px;
+}</string>
+          </property>
+          <property name="text">
+           <string>IT Management</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0" colspan="4">
          <widget class="QLabel" name="aaaBar">
           <property name="maximumSize">
@@ -907,21 +922,6 @@ QLineEdit:focus {
           </property>
           <property name="text">
            <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="28" column="3">
-         <widget class="QCheckBox" name="itBox">
-          <property name="layoutDirection">
-           <enum>Qt::RightToLeft</enum>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QCheckBox {
-	margin-right: 20px;
-}</string>
-          </property>
-          <property name="text">
-           <string>IT Management</string>
           </property>
          </widget>
         </item>
@@ -1017,14 +1017,18 @@ QLineEdit:focus {
           </property>
          </widget>
         </item>
+        <item row="30" column="0">
+         <widget class="QCheckBox" name="admin_check">
+          <property name="text">
+           <string>ADMIN</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
     </widget>
    </widget>
-   <zorder>widget</zorder>
-   <zorder>scrollArea</zorder>
-   <zorder>gridLayoutWidget</zorder>
   </widget>
  </widget>
  <tabstops>

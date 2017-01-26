@@ -89,7 +89,7 @@ QMap<QString, QString> UserManager::getUserData(QString username) {
         result.insert("level", query.record().value(3).toString());
     }
 
-    query.prepare("SELECT name, cnp, address, company, salary, boss, department FROM PERSONAL WHERE username=(:name);");
+    query.prepare("SELECT name, cnp, address, company, salary, boss, department  FROM PERSONAL WHERE username=(:name);");
     query.bindValue(":name", username);
     query.exec();
     if (query.next()) {
@@ -100,6 +100,7 @@ QMap<QString, QString> UserManager::getUserData(QString username) {
         result.insert("salary", query.record().value(4).toString());
         result.insert("boss", query.record().value(5).toString());
         result.insert("department", query.record().value(6).toString());
+
     }
 
     query.prepare("SELECT transport_comp, teamwork, negotiation, analysis, presentation, social, decision, timemanage FROM COMPETENCES WHERE name=(:name);");
@@ -116,7 +117,7 @@ QMap<QString, QString> UserManager::getUserData(QString username) {
         result.insert("time_management", query.record().value(7).toString());
     }
 
-    query.prepare("SELECT project_man, iata_lic, adr_lic, sixsigma, it_manage, time_manage FROM EXPERTISE WHERE name=(:name);");
+    query.prepare("SELECT project_man, iata_lic, adr_lic, sixsigma, it_manage, time_manage, admin FROM EXPERTISE WHERE name=(:name);");
     query.bindValue(":name", result["name"]);
     query.exec();
     if (query.next()) {
@@ -126,6 +127,8 @@ QMap<QString, QString> UserManager::getUserData(QString username) {
         result.insert("sixsigma_belt", query.record().value(3).toString());
         result.insert("it_management", query.record().value(4).toString());
         result.insert("time_training", query.record().value(5).toString());
+        result.insert("isAdmin",query.record().value(6).toString());
+        //qDebug()<<"this user is admin"<<result["isAdmin"];
     }
     my_db.close();
     return result;
@@ -222,7 +225,7 @@ bool UserManager::registerUserData(QString username, QMap<QString, QString> stri
         query.exec(sql);
         sql = "CREATE TABLE COMPETENCES (id integer primary key, name text, transport_comp text, teamwork text, negotiation text, analysis text, presentation text, social text, decision text, timemanage text);";
         query.exec(sql);
-        sql = "CREATE TABLE EXPERTISE (id integer primary key, name text, project_man text, iata_lic text, adr_lic text, sixsigma text, it_manage text, time_manage text);";
+        sql = "CREATE TABLE EXPERTISE (id integer primary key, name text, project_man text, iata_lic text, adr_lic text, sixsigma text, it_manage text, time_manage text, admin text);";
         query.exec(sql);
     }
 
@@ -253,7 +256,7 @@ bool UserManager::registerUserData(QString username, QMap<QString, QString> stri
     query.bindValue(":time", stringList["timemanage"]);
     query.exec();
           // Expertise
-    sql = "INSERT INTO EXPERTISE (name, project_man, iata_lic, adr_lic, sixsigma, it_manage, time_manage) VALUES (:name, :proj, :iata, :adr, :sigma, :itm, :time_man)";
+    sql = "INSERT INTO EXPERTISE (name, project_man, iata_lic, adr_lic, sixsigma, it_manage, time_manage,admin) VALUES (:name, :proj, :iata, :adr, :sigma, :itm, :time_man,:admin)";
     query.prepare(sql);
     query.bindValue(":name", stringList["name"]);
     query.bindValue(":proj", stringList["projmanage"]);
@@ -262,7 +265,8 @@ bool UserManager::registerUserData(QString username, QMap<QString, QString> stri
     query.bindValue(":sigma", stringList["sixsigma"]);
     query.bindValue(":itm", stringList["itman"]);
     query.bindValue(":time_man", stringList["timeman"]);
-    query.exec();
+    query.bindValue(":admin",stringList["admin"]);
+    qDebug()<<query.exec();
 
     my_db.close();
     return true;
@@ -270,4 +274,45 @@ bool UserManager::registerUserData(QString username, QMap<QString, QString> stri
 
 void UserManager::setUserData(QString username, QMap<QString, QString> newData) {
 
+}
+bool UserManager::checkExistance(QString numeFirma){
+    if(!my_db.isOpen())
+        openDatabaseConn();
+    QString sql ="SELECT count(*) FROM "+numeFirma+";";
+    QSqlQuery query(my_db);
+    query.prepare(sql);
+    query.exec();
+    my_db.close();
+    if(!query.next())
+    {
+        return false;
+    }
+    return true;
+
+}
+void UserManager::insertIntoFirma(QString angajat,QString boss,QString firma)
+{
+    if(!my_db.isOpen())
+        openDatabaseConn();
+    QString sql="INSERT INTO "+firma+"  (username, boss) VALUES (:username , :boss );";
+    qDebug()<<sql;
+//sql = "INSERT INTO USERS (username, password, email, level) VALUES (:name, :pass, :email, \'USER\');";
+
+    QSqlQuery query(my_db);
+    query.prepare(sql);
+    query.bindValue(":username",angajat);
+    query.bindValue(":boss",boss);
+    qDebug()<<"Introdu angajat "+angajat<<query.exec();
+    my_db.close();
+}
+
+void UserManager::createTableFirma(QString numeFirma){
+    if(!my_db.isOpen())
+        openDatabaseConn();
+    QString sql = "CREATE TABLE "+numeFirma+" ( username TEXT , boss TEXT);";
+    QSqlQuery querry(my_db);
+    querry.prepare(sql);
+
+    qDebug()<<"Querry create table FIRMA "<< querry.exec() ;
+    my_db.close();
 }

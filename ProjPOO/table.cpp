@@ -36,10 +36,10 @@ int Table::createTable(QString tbName, QString columnValues) {
         QSqlQuery query(db);
 
         //QString sql = "CREATE TABLE :table_name (CRT INT PRIMARY KEY NOT NULL , " + columnValues + ");"; //Se formeaza comanda Sqlite
-        query.prepare("CREATE TABLE RUTIER (CRT INT PRIMARY KEY NOT NULL," + columnValues + ");");
+        query.prepare("CREATE TABLE BUGET (CRT INT PRIMARY KEY NOT NULL," + columnValues + ");");
         //query.bindValue(":table_name",tbName);
         //query.prepare("DROP TABLE RUTIER");
-        //qDebug()<<query.exec("DROP TABEL RUTIER1000");
+
         qDebug()<<query.exec();
 
         db.close();
@@ -324,4 +324,31 @@ void Table::connect()
     db = QSqlDatabase::addDatabase("QSQLITE","procese.db");
     db.setDatabaseName(DATABASE_NAME);
     db.open();
+}
+void Table::insertQuery(std::map<QString,float> floatValues,QString data,QString tipBuget)
+{
+    numOfRows=tableSize("BUGET");
+    if(!db.isOpen())
+        connect();
+    if(db.isOpen())
+        qDebug()<<"let s party";
+    numOfRows++;
+   QSqlQuery query(db);
+
+   query.prepare("INSERT INTO BUGET VALUES(:numberOfRows,:data,:buget,:ca,:costCumparare,:cost_personal,:cost_tehnologie,:cost_infrastructura,:cost_investitii,:cost_rutier,:cost_depozitare);");
+   query.bindValue(":numberOfRows",numOfRows);
+   query.bindValue(":data",data);
+   query.bindValue(":buget",tipBuget);
+   query.bindValue(":ca",floatValues["ca"]);
+   query.bindValue(":costCumparare",floatValues["costCumparare"]);
+   query.bindValue(":cost_personal",floatValues["costPersonal"]);
+   query.bindValue("cost_tehnologie",floatValues["costTehnologie"]);
+   query.bindValue(":cost_infrastructura",floatValues["costInfrastructura"]);
+   query.bindValue(":cost_investitii",floatValues["costInvestitii"]);
+   query.bindValue(":cost_rutier",floatValues["costRutier"]);
+   query.bindValue(":cost_depozitare",floatValues["costDepozitare"]);
+   //query.prepare("DROP TABLE BUGET");
+   qDebug()<<query.exec();
+   numOfRows++;
+   db.close();
 }

@@ -28,6 +28,9 @@ public:
     static void setUserData(QString username, QMap<QString, QString> newData);
     static UserLevel getUserLevel(QString username);
     static QMap<QString, QString> getUserData(QString username);
+    static void createTableFirma(QString numeFirma);
+    static bool checkExistance(QString numeFirma);
+    static void insertIntoFirma(QString ,QString,QString );
 };
 
 #endif // USERMAN_H

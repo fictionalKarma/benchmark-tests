@@ -6,6 +6,7 @@ principalForm::principalForm(User *u,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::principalForm)
 {
+
     user = *u;
     qDebug()<< u->getEmail()<<" AICI";
     marker = 1;
@@ -13,7 +14,10 @@ principalForm::principalForm(User *u,QWidget *parent) :
     ui->previous_button->setEnabled(false);
     ui->boss_frame->setFrameShadow(QFrame::Sunken);
     ui->children_frame->setFrameShadow(QFrame::Sunken);
-    ui->username_label->setText(user.getUserName());//get nume_user from database
+    QString welcome = "Welcome,\n   ";
+    welcome.append(user.getUserName());
+    welcome.append(" !");
+    ui->username_label->setText(welcome);//get nume_user from database
     isUserFormShown=false;
 
     actualBoss = user.getTree()->getNode();//name=getNameofUser();
@@ -33,6 +37,13 @@ principalForm::principalForm(User *u,QWidget *parent) :
                             ,QPoint(this->pos().x()+this->width()+70,this->pos().y()));
 
     setWindowTitle("Principal Window");
+    qDebug()<<u->getUserName()<<":"<<u->checkAdmin();
+    qDebug()<<actualBoss->user.getUserName()<<":"<<actualBoss->user.checkAdmin();
+    if(actualBoss->user.checkAdmin()==false)
+    {
+        ui->buget_button->hide();
+        ui->procese_button->hide();
+    }
 
 
 }
@@ -312,4 +323,16 @@ void principalForm::on_info_button_clicked()
             isUserFormShown=true;
         }
 
+}
+
+void principalForm::on_procese_button_clicked()
+{
+    procesForm=new procesop;
+    procesForm->show();
+}
+
+void principalForm::on_buget_button_clicked()
+{
+    bugetForm =new buget;
+    bugetForm->show();
 }

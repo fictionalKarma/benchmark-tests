@@ -71,6 +71,7 @@ void RegistrationForm::registerUser() {
            ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
     }
 
+
     else {
         if (UserManager::findUserByName(ui->userTb->text())) {
             ui->errorLbl->setText("This username was taken by another user.");
@@ -79,16 +80,49 @@ void RegistrationForm::registerUser() {
             ui->errorLbl->setText("There is already a user registered with this email.");
             ui->errorLbl->setStyleSheet("color: rgba(255, 0, 0, 1);");
         } else {
-            UserManager::openDatabaseConn();
-            getUserData();
-            UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
-            UserManager::registerUserData(ui->userTb->text(), userData);
-            ui->errorLbl->setText("Registration succesful! Check your inbox...");
-            ui->errorLbl->setStyleSheet("color: rgba(0, 180, 0, 1);");
-            ui->regBtn->setEnabled(false);
-            ui->cancelBtn->setEnabled(false);
-            logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
-            sendConfirmationMail();
+            if(!UserManager::checkExistance(ui->companyTb->text())){
+                    if(ui->admin_check->isChecked())
+                        {
+                            UserManager::createTableFirma(ui->companyTb->text());
+                            UserManager::insertIntoFirma(ui->userTb->text(),"",ui->companyTb->text());
+                            UserManager::openDatabaseConn();
+                            getUserData();
+                            UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
+                            UserManager::registerUserData(ui->userTb->text(), userData);
+                            ui->errorLbl->setText("Registration succesful! Check your inbox...");
+                            ui->errorLbl->setStyleSheet("color: rgba(0, 180, 0, 1);");
+                            ui->regBtn->setEnabled(false);
+                            ui->cancelBtn->setEnabled(false);
+                            logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
+                            sendConfirmationMail();
+
+                        }
+                    else {
+                        ui->errorLbl->setText("The company is not register in our database. Please wait for the admin to register");
+                        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
+                    }
+
+            }
+            else {
+                if(!ui->admin_check->isChecked()){
+                    UserManager::insertIntoFirma(ui->userTb->text(),ui->bossTb->text(),ui->companyTb->text());
+                    UserManager::openDatabaseConn();
+                    getUserData();
+                    UserManager::registerUser(ui->userTb->text(), ui->passTb->text(), ui->emailTb->text());
+                    UserManager::registerUserData(ui->userTb->text(), userData);
+                    ui->errorLbl->setText("Registration succesful! Check your inbox...");
+                    ui->errorLbl->setStyleSheet("color: rgba(0, 180, 0, 1);");
+                    ui->regBtn->setEnabled(false);
+                    ui->cancelBtn->setEnabled(false);
+                    logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
+                    sendConfirmationMail();
+                }
+                else{
+                    ui->errorLbl->setText("The company has already registered !");
+                    ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
+                }
+            }
+
         }
     }
 }
@@ -227,4 +261,6 @@ void RegistrationForm::getUserData() {
     userData.insert("sixsigma", ui->sigmaBox->isChecked() ? "true" : "false");
     userData.insert("itman", ui->itBox->isChecked() ? "true" : "false");
     userData.insert("timeman", ui->timeBox->isChecked() ? "true" : "false");
+    userData.insert("admin",ui->admin_check->isChecked() ? "true" : "false");
 }
+

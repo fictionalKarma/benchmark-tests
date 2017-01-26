@@ -33,7 +33,7 @@
        </size>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic; font-family:cursive;&quot;&gt;TextLabel&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -139,7 +139,7 @@
      <x>0</x>
      <y>0</y>
      <width>440</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

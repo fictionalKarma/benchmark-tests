@@ -2,6 +2,7 @@
 #define PRINCIPALFORM_H
 
 #include <QMainWindow>
+//#include "firmewindow.h"
 #include <QDialog>
 #include<QObject>
 #include<QWidget>
@@ -9,11 +10,16 @@
 #include<QStack>
 #include<QTreeWidgetItem>
 #include <QtCore>
+#include "administrator.hpp"
 #include "ui_principalform.h"
 #include <qdebug.h>
 #include<QMessageBox>
 #include "tree.hpp"
-#include <userinfo.h>
+#include "user.h"
+#include<userinfo.h>
+#include<procesop.h>
+#include<buget.h>
+
 
 namespace Ui {
 class principalForm;
@@ -53,6 +59,10 @@ private slots:
 
     void on_info_button_clicked();
 
+    void on_procese_button_clicked();
+
+    void on_buget_button_clicked();
+
 private:
     Ui::principalForm *ui;
     QLayout *btnLayout;
@@ -68,6 +78,8 @@ private:
     QList<QPushButton*> btnCopii;  //copii segfului
     userinfo *infoForm;
     bool isUserFormShown;
+    buget *bugetForm;
+    procesop *procesForm;
     //QVector<QPushButton> buttons;
    };
 

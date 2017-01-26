@@ -37,7 +37,7 @@ public:
         this->setUserName(other.getUserName());
         firma = other.getFirma();
         this->data = other.data;
-
+        this->isAdmin = other.checkAdmin();
         copy = other.copy;
     }
     bool operator==(User &other){
@@ -107,6 +107,9 @@ public:
     }
     QString getTimeManagementCompetence() {
         return data["time_management"];
+    }
+    bool checkAdmin(){
+        return isAdmin;
     }
     bool hasProjectManagementTraining() {
         return data["project_management"] == "true";
@@ -283,6 +286,7 @@ protected:
     Firma* firma;
     Tree* copy;
     UserLevel level;
+    bool isAdmin ;
     QMap<QString, QString> data;
 };
 

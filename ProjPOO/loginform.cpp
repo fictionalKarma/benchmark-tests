@@ -88,6 +88,7 @@ bool LoginForm::checkAuth() {
                                         b1->father = NULL;
 
                                         Tree f(b);
+                                        //Tree f(b->getFirma().administrator)
                                         f.add(c,"Georgica");
                                         f.add(d,"Georgica");
                                         f.add(eee,"Vasile");
