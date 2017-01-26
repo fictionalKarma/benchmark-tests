@@ -82,6 +82,5 @@ FORMS    += startingwindow.ui \
     principalform.ui \
     buget.ui \
     procesop.ui \
-    personal.ui \
     userinfo.ui
 
