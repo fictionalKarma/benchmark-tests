@@ -105,6 +105,11 @@ void RegistrationForm::registerUser() {
             }
             else {
                 if(!ui->admin_check->isChecked()){
+                    if(!UserManager::existaSupervisor(ui->bossTb->text(),ui->companyTb->text())){
+                        ui->errorLbl->setText("Your superviser has not registered yet !");
+                        ui->errorLbl->setStyleSheet("color:rgba(255, 0, 0, 1);");
+                    }
+                    else{
                     UserManager::insertIntoFirma(ui->userTb->text(),ui->bossTb->text(),ui->companyTb->text());
                     UserManager::openDatabaseConn();
                     getUserData();
@@ -116,6 +121,7 @@ void RegistrationForm::registerUser() {
                     ui->cancelBtn->setEnabled(false);
                     logger.addLog(SUCCEEDED_REGISTRATION(ui->userTb->text()));
                     sendConfirmationMail();
+                    }
                 }
                 else{
                     ui->errorLbl->setText("The company has already registered !");

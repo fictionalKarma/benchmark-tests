@@ -316,3 +316,47 @@ void UserManager::createTableFirma(QString numeFirma){
     qDebug()<<"Querry create table FIRMA "<< querry.exec() ;
     my_db.close();
 }
+bool UserManager::existaSupervisor(QString boss,QString table){
+    if(!my_db.isOpen())
+    {
+        openDatabaseConn();
+    }
+    QString sql="SELECT COUNT(*) FROM "+table+" WHERE username=:user";
+    QSqlQuery query(my_db);
+    query.prepare(sql);
+    query.bindValue(":user",boss);
+    query.exec();
+    int count=0;
+    if(query.next())
+     count=query.value(0).toInt();
+    qDebug()<<"Verifica supervisor:"<<count;
+    if(count==0)
+        return false;
+    return true;
+}
+QString UserManager::getAdmin(QString firma)
+{
+    if(!my_db.isOpen())
+        openDatabaseConn();
+    QString sql="SELECT username FROM "+firma+" WHERE boss=''";
+    QSqlQuery query(my_db);
+    query.prepare(sql);
+   qDebug()<<"executa query gaseste user "<<query.exec();
+   while(query.next())
+   return query.value(0).toString();
+   //return query.value(0).toString();
+}
+std::vector<QString> UserManager::fetchCopii(QString firma,QString boss)
+{
+    if(!my_db.isOpen())
+        openDatabaseConn();
+    QString sql="SELECT username FROM "+firma+" WHERE boss=:boss";
+    QSqlQuery query(my_db);
+    query.prepare(sql);
+    query.bindValue(":boss",boss);
+    std::vector<QString> vect;
+   qDebug()<<"executa query gaseste user "<<query.exec();
+   while(query.next())
+       vect.push_back(query.value(0).toString());
+   return vect;
+}

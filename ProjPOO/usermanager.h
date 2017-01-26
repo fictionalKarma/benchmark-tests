@@ -17,6 +17,7 @@ private:
     static Log logger;
 
 public:
+    static bool existaSupervisor(QString, QString table);
     static bool openDatabaseConn();
     static bool registerUser(QString username, QString password, QString email);
     static bool registerUserData(QString username, QMap<QString, QString> stringList);
@@ -31,6 +32,9 @@ public:
     static void createTableFirma(QString numeFirma);
     static bool checkExistance(QString numeFirma);
     static void insertIntoFirma(QString ,QString,QString );
+
+    static QString getAdmin(QString company);
+    static std::vector<QString> fetchCopii(QString company , QString boss);
 };
 
 #endif // USERMAN_H
